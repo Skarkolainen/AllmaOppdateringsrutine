@@ -35,6 +35,36 @@
 							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
 						},
 						{
+							"felt": "!TRESLAG_4!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
+							"felt": "!VOLUMPROS_4!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
+							"felt": "!TRESLAG_5!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
+							"felt": "!VOLUMPROS_5!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
+							"felt": "!TRESLAG_6!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
+							"felt": "!VOLUMPROS_6!",
+							"endring": "Blank",
+							"log_beskrivelse":"BER_VOLUMTOT satt til %%"
+						},
+						{
 							"felt": "!TREANT_DAA!",
 							"endring": "Blank",
 							"log_beskrivelse":"TREANT_DAA satt til %%"
@@ -91,7 +121,7 @@
 							"endring": "Funksjon",
 							"verdi": "$NOW_YEAR$",
 							"log_beskrivelse":"FREMSKREVET_AAR satt til %%"
-						}		
+						}
 					]
 				},
 				"betingede_endringer":[
@@ -271,6 +301,16 @@
 		{
 		"tabellnavn": "Tiltaksgruppenavn",
 		"data":{"1":"Hogst","2":"Tynning","3":"Gravearbeider","4":"Foryngelse","5":"Ungskogpleie","6":"Andre tiltak"}
+		},
+		{
+		"tabellnavn": "TreantallEtterForyngelse",
+		"Beskrivelse": "Minimum tetthet ved plantefeltkontroll",
+		"gran":{
+			6:75,8:75,11:120,14:160,17:170,20:190,23:210,26:210,29:210
+		},
+		"furu":{
+			6:100,8:100,11:140,14:170,17:200,20:200,23:200
+		}
 		}
 		]
 }
