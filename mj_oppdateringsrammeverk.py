@@ -20,7 +20,7 @@ if runAsTool:
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
     navn_rutine = u'EDEL_sluttavvirkning'
-    hogstaar = 2019
+    hogstaar = 2020
     hogstmaaned = 3
 
     gdb = u'C:\\allma_effekt\\utsjekk_eidskog_13sept2019.gdb'
