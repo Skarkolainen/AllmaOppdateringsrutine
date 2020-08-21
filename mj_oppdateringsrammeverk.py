@@ -221,7 +221,7 @@ if ant_seleksjon != None:
                                     uttrykk = evaluering_oppdatering.Uttrykk(bet[u'betingelser'],dict_internal,dict_external_write)
                                     beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                     if beregnet[0]:
-                                        if beregnet[0]:
+                                        if beregnet[1]:
                                             pr("Bestandet innfrir folgende betingelser: " + bet[u'betingelser'])
                                             if bet.has_key(u'attributtliste'):
                                                 att_liste = bet[u'attributtliste']
