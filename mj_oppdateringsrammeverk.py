@@ -207,6 +207,14 @@ if ant_seleksjon != None:
                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                             if beregnet[0]:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
+                                        elif att[u'endring'] == u'Tabell':
+                                            pr ("hei")
+                                            pr ("##################################")
+                                            pr ("##################################")
+                                            pr ("##################################")
+
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, [u'verdi'])
+                                            pr ( '!!!!!!!!' + str( oppslag ) + '!!!!!!!!')
 
 
                                         if att.has_key(u'log_beskrivelse'):

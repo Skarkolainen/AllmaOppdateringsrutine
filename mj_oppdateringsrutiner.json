@@ -67,7 +67,8 @@
 						},
 						{
 							"felt": "!TREANT_DAA!",
-							"endring": "Blank",
+							"endring": "Tabell",
+							"verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
 							"log_beskrivelse":"TREANT_DAA satt til %%"
 						},
 						{
@@ -396,18 +397,18 @@
 		},
 		{
 		"tabellnavn": "TreantallEtterForyngelse",
-		"Beskrivelse": "Minimum tetthet ved plantefeltkontroll",
-		"gran":{
+		"Beskrivelse": "Minimum tetthet ved plantefeltkontroll (!BONTRESLAG!,!MARKSLAG!)",
+		"1":{
 			"6":75,"8":75,"11":120,"14":160,"17":170,"20":190,"23":210,"26":210,"29":210
 		},
-		"furu":{
+		"2":{
 			"6":100,"8":100,"11":140,"14":170,"17":200,"20":200,"23":200
 		}
 		},
 		    {
       "tabellnavn": "Hogstklasser",
-      "Beskrivelse": "Innslag for ny hogstklasse på ulike boniteter",
-      "bar": {
+      "Beskrivelse": "Innslag for ny hogstklasse på ulike boniteter ( !BONTRESLAG!, !MARKSLAG!, !HOGSTKLASSE! )",
+      "1": {
         "6": {
           "3": 55,
           "4": 85,
@@ -454,7 +455,54 @@
           "5": 50
         }
       },
-      "lauv": {
+	        "2": {
+        "6": {
+          "3": 55,
+          "4": 85,
+          "5": 120
+        },
+        "8": {
+          "3": 45,
+          "4": 75,
+          "5": 110
+        },
+        "11": {
+          "3": 35,
+          "4": 70,
+          "5": 100
+        },
+        "14": {
+          "3": 30,
+          "4": 60,
+          "5": 90
+        },
+        "17": {
+          "3": 25,
+          "4": 55,
+          "5": 80
+        },
+        "20": {
+          "3": 20,
+          "4": 45,
+          "5": 70
+        },
+        "23": {
+          "3": 20,
+          "4": 40,
+          "5": 60
+        },
+        "26": {
+          "3": 15,
+          "4": 35,
+          "5": 50
+        },
+        "29": {
+          "3": 15,
+          "4": 35,
+          "5": 50
+        }
+      },
+      "3": {
         "6": {
           "3": 55,
           "4": 85,

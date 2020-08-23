@@ -1,39 +1,31 @@
-
-
 import json
 import os
 import copy
 
 jsonFile = u"C:\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
-
 data = json.loads(open(jsonFile).read())
-
 tables = data['tabeller']
 
-tabelloppslagsKode = "TreantallEtterForyngelse;gran;6;hei"
-tabelloppslagsKode = "Hogstklasser;bar;20;5"
+dict_external = {u'!MARKSLAG!': u'17', u'!BONTRESLAG!': u'2', u'!HOGSTKLASSE!': u'4'}
+tabelloppslagsKode = "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!"
+tabelloppslagsKode = "Hogstklasser;!BONTRESLAG!;!MARKSLAG!;!HOGSTKLASSE!"
+
+def getFromDict(dataDict, mapList):
+    for k in mapList: dataDict = dataDict[dict_external[k]]
+    return dataDict
+
 tabellOppslag = tabelloppslagsKode.split(';')
-mapList = tabellOppslag[1:]
-
 tabellnavn = tabellOppslag[0]
-theTable = None
 
+
+theTable = None
 for table in tables:
     if table['tabellnavn'] == tabellnavn:
         theTable = table
 
 
-def getFromDict(dataDict, mapList):
-    for k in mapList: dataDict = dataDict[k]
-    return dataDict
-
-
+mapList = tabellOppslag[1:]
 
 value = getFromDict(theTable, mapList)
 
 print(value)
-
-
-
-
-
