@@ -196,6 +196,53 @@
 								"log_beskrivelse":"REG_VOLUMTOT satt til %%"
 							}
 						]
+					},
+					{
+						"betingelser": "!BONTRESLAG! == 2",
+						"attributtliste":[
+							{
+								"felt":"!GRUNNFLATE!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"GRUNNFLATE satt til %%"
+							},
+							{
+								"felt":"!HOYDE!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"HOYDE satt til %%"
+							},
+							{
+								"felt":"!VOLUMPROS_G!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"VOLUMPROS_G satt til %%"
+							},
+							{
+								"felt":"!VOLUMPROS_F!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"VOLUMPROS_F satt til %%"
+							},
+							{
+								"felt":"!VOLUMPROS_L!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"VOLUMPROS_L satt til %%"
+							},
+							{
+								"felt":"!REG_VOLUMDAA!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"REG_VOLUMDAA satt til %%"
+							},
+							{
+								"felt":"!REG_VOLUMTOT!",
+								"endring": "Absolutt verdi",
+								"verdi":0,
+								"log_beskrivelse":"REG_VOLUMTOT satt til %%"
+							}
+						]
 					}
 				]
 			},
