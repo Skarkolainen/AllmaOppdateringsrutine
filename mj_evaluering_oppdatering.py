@@ -2,6 +2,7 @@
 import re
 import json
 import os
+import copy
 
 hogstaar = 2019
 hogstmaaned = 3
@@ -458,38 +459,33 @@ def evaluerTre(root):
 
 def tabellOppslag(bestandet, oppslagskode ):
 
-
-    jsonFile = u"C:\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
+    jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
     data = json.loads(open(jsonFile).read())
     tables = data['tabeller']
 
-    dict_external = bestandet
-    dict_external = {u'!MARKSLAG!': u'17', u'!BONTRESLAG!': u'2', u'!HOGSTKLASSE!': u'4'}
-
-
-    tabelloppslagsKode = "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!"
-    tabelloppslagsKode = "Hogstklasser;!BONTRESLAG!;!MARKSLAG!;!HOGSTKLASSE!"
-    tabelloppslagsKode = oppslagskode
-
-    def getFromDict(dataDict, mapList):
-        for k in mapList: dataDict = dataDict[dict_external[k]]
-        return dataDict
-
-    tabellOppslag = tabelloppslagsKode.split(';')
-    tabellnavn = tabellOppslag[0]
-
-
+    tabellOppslagskode = oppslagskode.split(';')
+    tabellnavn = tabellOppslagskode[0]
     theTable = None
+
+    #Finn riktig tabell
     for table in tables:
         if table['tabellnavn'] == tabellnavn:
             theTable = table
 
+    dict_external = copy.deepcopy(bestandet)
 
-    mapList = tabellOppslag[1:]
+    for val in dict_external:
+        dict_external[val] = '{}'.format(dict_external[val])
 
+    #Henter verdi fra dict basert på oppslagskoden.
+    def getFromDict(dataDict, mapList):
+        for k in mapList: dataDict = dataDict[dict_external[k]]
+        return dataDict
+
+    mapList = tabellOppslagskode[1:]
     value = getFromDict(theTable, mapList)
-    melding = "halla " + str(bestandet)
-    return(melding + str(value) )
+
+    return value
 
 
 setningasdf = "((28+45)*15)"

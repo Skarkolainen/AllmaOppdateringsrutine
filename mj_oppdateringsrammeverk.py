@@ -208,13 +208,10 @@ if ant_seleksjon != None:
                                             if beregnet[0]:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
                                         elif att[u'endring'] == u'Tabell':
-                                            pr ("hei")
-                                            pr ("##################################")
-                                            pr ("##################################")
-                                            pr ("##################################")
+                                            #TODO Mangler feilhåndtering
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'])
+                                            dict_external_write[att[u'felt']] = oppslag
 
-                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, [u'verdi'])
-                                            pr ( '!!!!!!!!' + str( oppslag ) + '!!!!!!!!')
 
 
                                         if att.has_key(u'log_beskrivelse'):

@@ -365,7 +365,7 @@
             "attributtliste": {
               "": {
                 "felt": "!HOGSTKLASSE!",
-                "endring": "Funksjon",
+                "endring": "Tabell",
                 "verdi": "",
                 "log_beskrivelse": "HOGSTKLASSE satt til %%"
               }
