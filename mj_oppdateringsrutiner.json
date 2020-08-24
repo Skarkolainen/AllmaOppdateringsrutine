@@ -274,12 +274,12 @@
 						"betingelser": "!MARKSLAG! >= 20",
 						"tiltaksliste": [
 							{
-								"type": 204,
+								"type": 202,
 								"prioritet": 2,
 								"aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
 								"status": 1,
 								"arealandel": 100,
-								"kommentar": "Ettersyn, evnt. suppleringsplanting"
+								"kommentar": "Plantefeltkontroll"
 							}
 						]
 					},
@@ -287,12 +287,12 @@
 						"betingelser": "!MARKSLAG! >= 14 && !MARKSLAG! <20",
 						"tiltaksliste": [
 							{
-								"type": 204,
+								"type": 202,
 								"prioritet": 2,
 								"aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+3:$NOW_YEAR$+4",
 								"status": 1,
 								"arealandel": 100,
-								"kommentar": "Ettersyn, evnt. suppleringsplanting"
+								"kommentar": "Plantefeltkontroll"
 							}
 						]
 					},
@@ -300,12 +300,12 @@
 						"betingelser": "!MARKSLAG! <14",
 						"tiltaksliste": [
 							{
-								"type": 204,
+								"type": 202,
 								"prioritet": 2,
 								"aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+4:$NOW_YEAR$+5",
 								"status": 1,
 								"arealandel": 100,
-								"kommentar": "Ettersyn, evnt. suppleringsplanting"
+								"kommentar": "Plantefeltkontroll"
 							}
 						]
 					},
@@ -397,12 +397,12 @@
 		},
 		{
 		"tabellnavn": "TreantallEtterForyngelse",
-		"Beskrivelse": "Minimum tetthet ved plantefeltkontroll (!BONTRESLAG!,!MARKSLAG!)",
+		"Beskrivelse": "Anbefalt tetthet ved planting (!BONTRESLAG!,!MARKSLAG!)",
 		"1":{
-			"6":75,"8":75,"11":120,"14":160,"17":170,"20":190,"23":210,"26":210,"29":210
+			"6":90,"8":90,"11":120,"14":190,"17":210,"20":230,"23":250,"26":250,"29":250
 		},
 		"2":{
-			"6":100,"8":100,"11":140,"14":170,"17":200,"20":200,"23":200
+			"6":170,"8":170,"11":200,"14":210,"17":250,"20":250,"23":250
 		}
 		},
 		    {
