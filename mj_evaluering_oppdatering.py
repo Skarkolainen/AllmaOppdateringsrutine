@@ -472,14 +472,18 @@ def tabellOppslag(bestandet, oppslagskode ):
         if table['tabellnavn'] == tabellnavn:
             theTable = table
 
-    dict_external = copy.deepcopy(bestandet)
+    bestandsEgenskaper = copy.deepcopy(bestandet)
 
-    for val in dict_external:
-        dict_external[val] = '{}'.format(dict_external[val])
+    for key,val in bestandsEgenskaper.items():
+        if key == '!MERK!':
+            # hopp over merknad, oppstår problem med æøå
+            continue
+
+        bestandsEgenskaper[key] = '{}'.format(bestandsEgenskaper[key])
 
     #Henter verdi fra dict basert på oppslagskoden.
     def getFromDict(dataDict, mapList):
-        for k in mapList: dataDict = dataDict[dict_external[k]]
+        for k in mapList: dataDict = dataDict[bestandsEgenskaper[k]]
         return dataDict
 
     mapList = tabellOppslagskode[1:]
