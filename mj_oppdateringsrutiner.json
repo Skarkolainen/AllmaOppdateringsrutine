@@ -364,6 +364,203 @@
         }
       }
     },
+     {
+      "rutinenavn": "EDEL_utført_planting",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! == 1 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
+      "endringer": {
+        "endring_bestand": {
+          "generelle_endringer": {
+            "attributtliste": [
+              {
+                "felt": "!HOGSTKLASSE!",
+                "endring": "Absolutt verdi",
+                "verdi": 2,
+                "log_beskrivelse": "HOGSTKLASSE satt til %%"
+              },
+              {
+                "felt": "!TETTHET!",
+                "endring": "Absolutt verdi",
+                "verdi": 1,
+                "log_beskrivelse": "TETTHET satt til %%"
+              },
+              {
+                "felt": "!ALDER!",
+                "endring": "Absolutt verdi",
+                "verdi": 2,
+                "log_beskrivelse": "ALDER satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA!",
+                "endring": "Tabell",
+                "verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
+                "log_beskrivelse": "TREANT_DAA satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA_FOER!",
+                "endring": "Tabell",
+                "verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
+                "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_L!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_L satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F_L!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+              },
+              {
+                "felt": "!SUNNHET!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "SUNNHET satt til %%"
+              },
+              {
+                "felt": "!SJIKTNING!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "SJIKTNING satt til %%"
+              },
+              {
+                "felt": "!HOYDEBAR!",
+                "endring": "Absolutt verdi",
+                "verdi": 0.2,
+                "log_beskrivelse": "SJIKTNING satt til %%"
+              },
+              {
+                "felt": "!FREMSKREVET_AAR!",
+                "endring": "Funksjon",
+                "verdi": "$NOW_YEAR$",
+                "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+              }
+            ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!BONTRESLAG! == 1",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 100,
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BONTRESLAG! == 2",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 100,
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                }
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": [
+
+            ]
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "!MARKSLAG! >= 20",
+              "tiltaksliste": [
+                {
+                  "type": 202,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+1:$NOW_YEAR$+2",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! >= 14 && !MARKSLAG! <20",
+              "tiltaksliste": [
+                {
+                  "type": 202,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! <14",
+              "tiltaksliste": [
+                {
+                  "type": 202,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+3:$NOW_YEAR$+4",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! >= 17",
+              "tiltaksliste": [
+                {
+                  "type": 260,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+6:$NOW_YEAR$+7",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! < 17 && !MARKSLAG!>=11",
+              "tiltaksliste": [
+                {
+                  "type": 205,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+8:$NOW_YEAR$+9",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ettersyn, evnt. ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! < 11",
+              "tiltaksliste": [
+                {
+                  "type": 205,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+15:$NOW_YEAR$+16",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ettersyn, evnt. ungskogpleie"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
     {
       "rutinenavn": "EDEL_utført_frøtrestilling_UFULLSTENDIG",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4"
