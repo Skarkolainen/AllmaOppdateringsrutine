@@ -16,6 +16,7 @@ if runAsTool:
     hogstaar = int(arcpy.GetParameterAsText(2))
     hogstmaaned = int(arcpy.GetParameterAsText(3))
     gdb = arcpy.GetParameterAsText(4)
+    slettTiltak = arcpy.GetParameter(5)
 
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
@@ -148,7 +149,7 @@ if ant_seleksjon != None:
             data = json.load(json_file)
             rutiner = data[u'oppdateringsrutiner']
             valgt_rutine = rutiner[valg_rutinenummer]
-            arcpy.AddMessage(rutiner[valg_rutinenummer])
+            #arcpy.AddMessage(rutiner[valg_rutinenummer])
             arcpy.AddMessage("Starter gjennomgang")
 
             edit = arcpy.da.Editor(gdb)
@@ -166,6 +167,10 @@ if ant_seleksjon != None:
     ##    dict_external[u'!BER_VOLUDAA!']=5
     ##    dict_external[u'!BER_VOLUMTOT!']=5
     ##    dict_external[u'!ALDER!']=5
+
+                # arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
+
+
 
 
 
@@ -262,10 +267,29 @@ if ant_seleksjon != None:
                     if ant_endringer>0:
                         cur_bestand.updateRow(ut_liste)
 
+
+
+
                     # Tiltak
+                    
+                    #SLETT GAMLE FORESLÅTTE TILTAK
+
+                    if slettTiltak:
+                        pr("Sletter gamle tiltak")
+                        arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
+
+                        #Sletter foreslåtte tiltak uten order-id
+                        with arcpy.da.UpdateCursor(tiltakLYR, ["STATUS", "ORDER_ID", "OBJECTID"]) as cursor:
+                            for row in cursor:
+                                if row[0] == 1 and row[1] == None:
+                                    pr("Sletter tiltak : " + str(row[2]))
+                                    cursor.deleteRow()
                     if valgt_rutine[u'endringer'].has_key(u'nye_tiltak'):
                         liste_nye_tiltak = valgt_rutine[u'endringer'][u'nye_tiltak']
                         arcpy.CreateFeatureclass_management("in_memory","Temp_TILTAK","POLYGON",template=tiltakLYR)
+
+
+
                         #GENERELLE TILTAK
                         if liste_nye_tiltak.has_key(u'generelle_tiltak'):
                             for gen_tiltak in liste_nye_tiltak[u'generelle_tiltak'][u'tiltaksliste']:
@@ -313,6 +337,8 @@ if ant_seleksjon != None:
                         #arcpy.Append_management()
 
                         arcpy.Delete_management(os.path.join("in_memory","Temp_TILTAK"))
+
+
 
             del cur_bestand
 edit.stopOperation()
