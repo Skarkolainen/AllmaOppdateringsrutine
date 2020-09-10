@@ -2,7 +2,7 @@
   "oppdateringsrutiner": [
     {
       "rutinenavn": "EDEL_utført_sluttavvirkning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -75,16 +75,6 @@
                 "felt": "!TREANT_DAA_FOER!",
                 "endring": "Blank",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_G!",
-                "endring": "Blank",
-                "log_beskrivelse": "ANTALLPROS_G satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_F!",
-                "endring": "Blank",
-                "log_beskrivelse": "ANTALLPROS_F satt til %%"
               },
               {
                 "felt": "!ANTALLPROS_L!",
@@ -196,6 +186,17 @@
                   "endring": "Absolutt verdi",
                   "verdi": 0,
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 100,
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
                 }
               ]
             },
@@ -243,6 +244,17 @@
                   "endring": "Absolutt verdi",
                   "verdi": 0,
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 100,
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
                 }
               ]
             }
