@@ -214,7 +214,7 @@ if ant_seleksjon != None:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
                                         elif att[u'endring'] == u'Tabell':
                                             #TODO Mangler feilhåndtering
-                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'])
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'], filnavn_konfig)
                                             dict_external_write[att[u'felt']] = oppslag
 
 

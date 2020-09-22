@@ -457,9 +457,10 @@ def evaluerTre(root):
         #return (str(root.beregnet) + " " + str(root.svar) + " " + str(root.tekststreng))
         return (root.beregnet,root.svar,root.tekststreng)
 
-def tabellOppslag(bestandet, oppslagskode ):
+def tabellOppslag(bestandet, oppslagskode, rutine ):
 
-    jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
+    #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
+    jsonFile = rutine
     data = json.loads(open(jsonFile).read())
     tables = data['tabeller']
 
