@@ -36,6 +36,42 @@
                 "log_beskrivelse": "BER_VOLUMTOT satt til %%"
               },
               {
+                "felt": "!REG_VOLUMDAA!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+              },
+              {
+                "felt": "!REG_VOLUMTOT!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+              },
+              {
+                "felt": "!BEREGNINGSTYPE!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "BEREGNINGSTYPE satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_G!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_G satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_F!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_F satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_L!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_L satt til %%"
+              },
+              {
                 "felt": "!TRESLAG_4!",
                 "endring": "Blank",
                 "log_beskrivelse": "TRESLAG_4 satt til %%"
@@ -77,6 +113,18 @@
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
+                "felt": "!ANTALLPROS_G!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==1?100:0",
+                "log_beskrivelse": "ANTALLPROS_G satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==2?100:0",
+                "log_beskrivelse": "ANTALLPROS_F satt til %%"
+              },
+              {
                 "felt": "!ANTALLPROS_L!",
                 "endring": "Blank",
                 "log_beskrivelse": "ANTALLPROS_L satt til %%"
@@ -95,6 +143,18 @@
                 "felt": "!ANTALLPROS_F_L!",
                 "endring": "Blank",
                 "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+              },
+              {
+                "felt": "!GRUNNFLATE!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "GRUNNFLATE satt til %%"
+              },
+              {
+                "felt": "!HOYDE!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "HOYDE satt til %%"
               },
               {
                 "felt": "!SUNNHET!",
@@ -145,117 +205,11 @@
             {
               "betingelser": "!BONTRESLAG! == 1",
               "attributtliste": [
-                {
-                  "felt": "!GRUNNFLATE!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "GRUNNFLATE satt til %%"
-                },
-                {
-                  "felt": "!HOYDE!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "HOYDE satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_G!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_F!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_F satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_L!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
-                },
-                {
-                  "felt": "!REG_VOLUMDAA!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
-                },
-                {
-                  "felt": "!REG_VOLUMTOT!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_G!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
-                }
               ]
             },
             {
               "betingelser": "!BONTRESLAG! == 2",
               "attributtliste": [
-                {
-                  "felt": "!GRUNNFLATE!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "GRUNNFLATE satt til %%"
-                },
-                {
-                  "felt": "!HOYDE!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "HOYDE satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_G!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_F!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_F satt til %%"
-                },
-                {
-                  "felt": "!VOLUMPROS_L!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
-                },
-                {
-                  "felt": "!REG_VOLUMDAA!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
-                },
-                {
-                  "felt": "!REG_VOLUMTOT!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_G!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
-                }
               ]
             }
           ]
@@ -364,7 +318,7 @@
         }
       }
     },
-     {
+    {
       "rutinenavn": "EDEL_utført_planting",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! == 1 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
       "endringer": {
@@ -475,7 +429,6 @@
         "nye_tiltak": {
           "generelle_tiltak": {
             "tiltaksliste": [
-
             ]
           },
           "betingede_tiltak": [
@@ -681,6 +634,19 @@
         "20": 250,
         "23": 250
       }
+    },
+    {
+      "tabellnavn": "FrotrestillingREGVOLDAA",
+      "Beskrivelse": "Gjenstående vol/daa i frøtrær etter frøtrestilling (!MARKSLAG!)",
+      "6": 0.4,
+      "8": 0.4,
+      "11": 0.5,
+      "14": 0.5,
+      "17": 0.7,
+      "20": 1,
+      "23": 1,
+      "26": 1,
+      "29": 1
     },
     {
       "tabellnavn": "Hogstklasser",
