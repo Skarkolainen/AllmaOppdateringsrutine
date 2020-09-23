@@ -515,8 +515,395 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_frøtrestilling_UFULLSTENDIG",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4"
+      "rutinenavn": "EDEL_utført_frøtrestilling",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
+      "endringer": {
+        "endring_bestand": {
+          "generelle_endringer": {
+            "attributtliste": [
+              {
+                "felt": "!HOGSTKLASSE!",
+                "endring": "Absolutt verdi",
+                "verdi": 1,
+                "log_beskrivelse": "HOGSTKLASSE satt til %%"
+              },
+              {
+                "felt": "!TETTHET!",
+                "endring": "Absolutt verdi",
+                "verdi": 1,
+                "log_beskrivelse": "TETTHET satt til %%"
+              },
+              {
+                "felt": "!ALDER!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "ALDER satt til %%"
+              },
+              {
+                "felt": "!BER_VOLUMDAA!",
+                "endring": "Blank",
+                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+              },
+              {
+                "felt": "!BER_VOLUMTOT!",
+                "endring": "Blank",
+                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+              },
+              {
+                "felt": "!REG_VOLUMDAA!",
+                "endring": "Tabell",
+                "verdi": "FrotrestillingREGVOLDAA;!MARKSLAG!",
+                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+              },
+              {
+                "felt": "!REG_VOLUMTOT!",
+                "endring": "Blank",
+                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+              },
+              {
+                "felt": "!BEREGNINGSTYPE!",
+                "endring": "Absolutt verdi",
+                "verdi": 9,
+                "log_beskrivelse": "BEREGNINGSTYPE satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_G!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==1?100:0",
+                "log_beskrivelse": "VOLUMPROS_G satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_F!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==2?100:0",
+                "log_beskrivelse": "VOLUMPROS_F satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_L!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_L satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_4 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_5 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_6 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA!",
+                "endring": "Tabell",
+                "verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
+                "log_beskrivelse": "TREANT_DAA satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA_FOER!",
+                "endring": "Blank",
+                "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_G!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==1?100:0",
+                "log_beskrivelse": "ANTALLPROS_G satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F!",
+                "endring": "Funksjon",
+                "verdi": "!BONTRESLAG!==2?100:0",
+                "log_beskrivelse": "ANTALLPROS_F satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_L!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_L satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F_G!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F_F!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+              },
+              {
+                "felt": "!ANTALLPROS_F_L!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+              },
+              {
+                "felt": "!GRUNNFLATE!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "GRUNNFLATE satt til %%"
+              },
+              {
+                "felt": "!HOYDE!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "HOYDE satt til %%"
+              },
+              {
+                "felt": "!SUNNHET!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "SUNNHET satt til %%"
+              },
+              {
+                "felt": "!SJIKTNING!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "SJIKTNING satt til %%"
+              },
+              {
+                "felt": "!FREMSKREVET_AAR!",
+                "endring": "Funksjon",
+                "verdi": "$NOW_YEAR$",
+                "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+              },
+              {
+                "felt": "!DIM_U_15!",
+                "endring": "Blank",
+                "log_beskrivelse": "DIM_U_15 satt til %%"
+              },
+              {
+                "felt": "!DIM_15_25!",
+                "endring": "Blank",
+                "log_beskrivelse": "DIM_15_25 satt til %%"
+              },
+              {
+                "felt": "!DIM_O_25!",
+                "endring": "Blank",
+                "log_beskrivelse": "DIM_O_25 satt til %%"
+              },
+              {
+                "felt": "!MIDDELDIAMETER!",
+                "endring": "Blank",
+                "log_beskrivelse": "MIDDELDIAMETER satt til %%"
+              },
+              {
+                "felt": "!ANT_PR_M3!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANT_PR_M3 satt til %%"
+              }
+            ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!BONTRESLAG! == 1",
+              "attributtliste": [
+              ]
+            },
+            {
+              "betingelser": "!BONTRESLAG! == 2",
+              "attributtliste": [
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": [
+            ]
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "!MARKSLAG! < 14",
+              "tiltaksliste": [
+                {
+                  "type": 120,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Markberedning"
+                },
+                {
+                  "type": 130,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Naturlig foryngelse"
+                },
+                {
+                  "type": 140,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Såing"
+                },
+                {
+                  "type": 202,
+                  "prioritet": 1,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+5:$NOW_YEAR$+6",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! < 11",
+              "tiltaksliste": [
+                {
+                  "type": 310,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+16:$NOW_YEAR$+17",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Hogst av frøtrær"
+                },
+                {
+                  "type": 205,
+                  "prioritet": 1,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+17:$NOW_YEAR$+18",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! > 8 && !MARKSLAG! < 14",
+              "tiltaksliste": [
+                {
+                  "type": 310,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+11:$NOW_YEAR$+12",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Hogst av frøtrær"
+                },
+                {
+                  "type": 205,
+                  "prioritet": 1,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+12:$NOW_YEAR$+13",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! > 11",
+              "tiltaksliste": [
+                {
+                  "type": 120,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$:$NOW_YEAR$+1",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Markberedning"
+                },
+                {
+                  "type": 150,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+1:$NOW_YEAR$+2",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Planting"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! < 17 && !MARKSLAG!>11",
+              "tiltaksliste": [
+                {
+                  "type": 310,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+10:$NOW_YEAR$+11",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Hogst av frøtrær"
+                },
+                {
+                  "type": 205,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+9:$NOW_YEAR$+10",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ettersyn, evnt. ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! >= 17",
+              "tiltaksliste": [
+                {
+                  "type": 310,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+6:$NOW_YEAR$+7",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Hogst av frotraer"
+                },
+                {
+                  "type": 260,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+7:$NOW_YEAR$+8",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! >= 20",
+              "tiltaksliste": [
+                {
+                  "type": 202,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            },
+            {
+              "betingelser": "!MARKSLAG! >= 14 && !MARKSLAG! <20",
+              "tiltaksliste": [
+                {
+                  "type": 202,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+3:$NOW_YEAR$+4",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Plantefeltkontroll"
+                }
+              ]
+            }
+          ]
+        }
+      }
     },
     {
       "rutinenavn": "EDEL_utført_tynning_UFULLSTENDIG",
