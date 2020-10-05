@@ -2,7 +2,7 @@
   "oppdateringsrutiner": [
     {
       "rutinenavn": "EDEL_utført_sluttavvirkning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -320,7 +320,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_planting/_flatehogst_og_planting",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <3) && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -657,7 +657,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_frøtrestilling_forTESTING",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && !BONTRESLAG! == 1 || !BONTRESLAG! == 2",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
