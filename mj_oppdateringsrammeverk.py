@@ -196,6 +196,25 @@ if ant_seleksjon != None:
 
 
                 if init_forutsetninger_sjekk:
+
+                    # Lager liste med gjennomførte tiltak
+                    gjennomforteTiltak = []
+
+                    # Finner oversikt over gjennomførte tiltak, kan brukes til betingede endringer/ tiltak
+                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "ORDER_ID", "OBJECTID"]) as cursor:
+                        for row in cursor:
+                            if row[0] == 2 :
+                                pr("Har gjennomfort tiltak")
+                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[2]))
+
+                    pr("#####")
+                    pr(gjennomforteTiltak)
+                    pr("#####")
+
+
+
+
+
                     dict_external_write = copy.deepcopy(dict_external)
                     if valgt_rutine[u'endringer'].has_key(u'endring_bestand'):
                         if valgt_rutine[u'endringer'][u'endring_bestand'].has_key(u'generelle_endringer'):
