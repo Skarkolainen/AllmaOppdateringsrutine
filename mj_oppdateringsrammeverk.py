@@ -196,6 +196,21 @@ if ant_seleksjon != None:
 
 
                 if init_forutsetninger_sjekk:
+
+
+                    # Finner oversikt over gjennomførte tiltak, kan brukes til betingede endringer/ tiltak
+                    # Lager liste med gjennomførte tiltak
+                    gjennomforteTiltak = []
+
+                    arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
+
+                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "OBJECTID"]) as cursor:
+                        for row in cursor:
+                            if row[0] == 2 :
+                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[1]))
+
+                    arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
                     dict_external_write = copy.deepcopy(dict_external)
                     if valgt_rutine[u'endringer'].has_key(u'endring_bestand'):
                         if valgt_rutine[u'endringer'][u'endring_bestand'].has_key(u'generelle_endringer'):
@@ -214,7 +229,8 @@ if ant_seleksjon != None:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
                                         elif att[u'endring'] == u'Tabell':
                                             #TODO Mangler feilhåndtering
-                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'], filnavn_konfig)
+                                            #TODO Sender med gjennomførte tiltak her, kun til bruk i tabelloppslag. Kan etterhvert skrives om så det brukes via "Funksjon"...
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'],gjennomforteTiltak, filnavn_konfig)
                                             dict_external_write[att[u'felt']] = oppslag
 
 
@@ -284,6 +300,9 @@ if ant_seleksjon != None:
                                 if row[0] == 1 and row[1] == None:
                                     pr("Sletter tiltak : " + str(row[2]))
                                     cursor.deleteRow()
+
+                        arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
                     if valgt_rutine[u'endringer'].has_key(u'nye_tiltak'):
                         liste_nye_tiltak = valgt_rutine[u'endringer'][u'nye_tiltak']
                         arcpy.CreateFeatureclass_management("in_memory","Temp_TILTAK","POLYGON",template=tiltakLYR)

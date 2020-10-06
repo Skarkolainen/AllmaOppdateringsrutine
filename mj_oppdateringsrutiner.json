@@ -1142,7 +1142,7 @@
       }
     },
     {
-      "tabellnavn": "TreantallEtterForyngelse",
+      "tabellnavn": "TreantallEtterForyngelse-Markberedt",
       "Beskrivelse": "Anbefalt tetthet ved planting (!BONTRESLAG!,!MARKSLAG!)",
       "1": {
         "6": 90,
@@ -1162,7 +1162,33 @@
         "14": 210,
         "17": 250,
         "20": 250,
-        "23": 250
+        "23": 250,
+        "26": 250
+      }
+    },
+    {
+      "tabellnavn": "TreantallEtterForyngelse-Ikke-Markberedt",
+      "Beskrivelse": "Anbefalt tetthet ved planting uten markberedning (!BONTRESLAG!,!MARKSLAG!)",
+      "1": {
+        "6": 100,
+        "8": 100,
+        "11": 160,
+        "14": 210,
+        "17": 230,
+        "20": 250,
+        "23": 270,
+        "26": 270,
+        "29": 270
+      },
+      "2": {
+        "6": 170,
+        "8": 170,
+        "11": 200,
+        "14": 230,
+        "17": 270,
+        "20": 270,
+        "23": 270,
+        "26": 270
       }
     },
     {

@@ -3,6 +3,7 @@ import re
 import json
 import os
 import copy
+import arcpy
 
 hogstaar = 2019
 hogstmaaned = 3
@@ -457,8 +458,30 @@ def evaluerTre(root):
         #return (str(root.beregnet) + " " + str(root.svar) + " " + str(root.tekststreng))
         return (root.beregnet,root.svar,root.tekststreng)
 
-def tabellOppslag(bestandet, oppslagskode, rutine ):
+def tiltakFinnes(tiltakskode, gjTiltaksliste):
+    #Sjekker om et gitt tiltak eksisterer i liste av tiltak, hvor hvert tiltak er repr. som dictionary.
+    for i in gjTiltaksliste:
+         if tiltakskode == i.get('!TYPE!'):
+             return True
 
+    return False
+
+def velgTabell(tabellnavn, bestandet, gjTiltaksliste, rutine):
+    #brukes i spesialtilfeller for tabeller, feks hvis tabell avhenger av om gitte tiltak er gjennomført
+
+    #Hvis tabellen er treantallEtterForyngelse, velg avhenging av om markberedning er blant gjennomførte tiltak.
+    if tabellnavn == 'TreantallEtterForyngelse':
+        if tiltakFinnes(120, gjTiltaksliste):
+            return 'TreantallEtterForyngelse-Markberedt'
+        else:
+            return 'TreantallEtterForyngelse-Ikke-Markberedt'
+
+    # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
+
+    else:
+        return tabellnavn
+
+def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
     #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
     jsonFile = rutine
     data = json.loads(open(jsonFile).read())
@@ -466,6 +489,11 @@ def tabellOppslag(bestandet, oppslagskode, rutine ):
 
     tabellOppslagskode = oppslagskode.split(';')
     tabellnavn = tabellOppslagskode[0]
+
+    #Henter korrekt tabellnavn
+    # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
+    tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste,rutine)
+
     theTable = None
 
     #Finn riktig tabell
@@ -491,6 +519,7 @@ def tabellOppslag(bestandet, oppslagskode, rutine ):
     value = getFromDict(theTable, mapList)
 
     return value
+
 
 
 setningasdf = "((28+45)*15)"
