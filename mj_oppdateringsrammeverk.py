@@ -197,21 +197,19 @@ if ant_seleksjon != None:
 
                 if init_forutsetninger_sjekk:
 
+
+                    # Finner oversikt over gjennomførte tiltak, kan brukes til betingede endringer/ tiltak
                     # Lager liste med gjennomførte tiltak
                     gjennomforteTiltak = []
 
-                    # Finner oversikt over gjennomførte tiltak, kan brukes til betingede endringer/ tiltak
-
-                    pr( "Antall tiltak: " + str(arcpy.GetCount_management(tiltakLYR) ) )
-
                     arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
-                    pr("Antall tiltak: " + str(arcpy.GetCount_management(tiltakLYR)))
-                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "ORDER_ID", "OBJECTID"]) as cursor:
+
+                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "OBJECTID"]) as cursor:
                         for row in cursor:
                             if row[0] == 2 :
-                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[2]))
+                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[1]))
 
-
+                    arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
 
                     dict_external_write = copy.deepcopy(dict_external)
                     if valgt_rutine[u'endringer'].has_key(u'endring_bestand'):
@@ -225,13 +223,13 @@ if ant_seleksjon != None:
                                         elif att[u'endring'] == u'Blank':
                                             dict_external_write[att[u'felt']] = None
                                         elif att[u'endring'] == u'Funksjon':
-                                            #Send med liste over gjennomførte tiltak her ?
                                             uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write)
                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                             if beregnet[0]:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
                                         elif att[u'endring'] == u'Tabell':
                                             #TODO Mangler feilhåndtering
+                                            #TODO Sender med gjennomførte tiltak her, kun til bruk i tabelloppslag. Kan etterhvert skrives om så det brukes via "Funksjon"...
                                             oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'],gjennomforteTiltak, filnavn_konfig)
                                             dict_external_write[att[u'felt']] = oppslag
 
@@ -302,6 +300,9 @@ if ant_seleksjon != None:
                                 if row[0] == 1 and row[1] == None:
                                     pr("Sletter tiltak : " + str(row[2]))
                                     cursor.deleteRow()
+
+                        arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
                     if valgt_rutine[u'endringer'].has_key(u'nye_tiltak'):
                         liste_nye_tiltak = valgt_rutine[u'endringer'][u'nye_tiltak']
                         arcpy.CreateFeatureclass_management("in_memory","Temp_TILTAK","POLYGON",template=tiltakLYR)

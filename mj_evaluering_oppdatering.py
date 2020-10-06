@@ -468,20 +468,20 @@ def tiltakFinnes(tiltakskode, gjTiltaksliste):
 
 def velgTabell(tabellnavn, bestandet, gjTiltaksliste, rutine):
     #brukes i spesialtilfeller for tabeller, feks hvis tabell avhenger av om gitte tiltak er gjennomført
-    #kan evt. skrives om til switch-case
 
+    #Hvis tabellen er treantallEtterForyngelse, velg avhenging av om markberedning er blant gjennomførte tiltak.
     if tabellnavn == 'TreantallEtterForyngelse':
         if tiltakFinnes(120, gjTiltaksliste):
             return 'TreantallEtterForyngelse-Markberedt'
         else:
             return 'TreantallEtterForyngelse-Ikke-Markberedt'
+
+    # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
+
     else:
         return tabellnavn
 
 def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
-
-    #if tiltakFinnes(120, gjTiltaksliste):
-
     #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
     jsonFile = rutine
     data = json.loads(open(jsonFile).read())
@@ -491,6 +491,7 @@ def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
     tabellnavn = tabellOppslagskode[0]
 
     #Henter korrekt tabellnavn
+    # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
     tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste,rutine)
 
     theTable = None
