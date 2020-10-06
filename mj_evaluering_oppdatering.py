@@ -3,6 +3,7 @@ import re
 import json
 import os
 import copy
+import arcpy
 
 hogstaar = 2019
 hogstmaaned = 3
@@ -457,7 +458,26 @@ def evaluerTre(root):
         #return (str(root.beregnet) + " " + str(root.svar) + " " + str(root.tekststreng))
         return (root.beregnet,root.svar,root.tekststreng)
 
-def tabellOppslag(bestandet, oppslagskode, rutine ):
+def tiltakFinnes(tiltakskode, gjTiltaksliste):
+    #Sjekker om et gitt tiltak eksisterer i liste av tiltak, hvor hvert tiltak er repr. som dictionary.
+    for i in gjTiltaksliste:
+         if tiltakskode == i.get('!TYPE!'):
+             return True
+
+    return False
+
+def velgTabell(tabellnavn, bestandet, gjTiltaksliste, rutine):
+    if tabellnavn == 'TreantallEtterForyngelse':
+        if tiltakFinnes(120, gjTiltaksliste):
+            return 'TreantallEtterForyngelse-Markberedt'
+        else:
+            return 'TreantallEtterForyngelse-Ikke-Markberedt'
+    else:
+        return tabellnavn
+
+def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
+
+    #if tiltakFinnes(120, gjTiltaksliste):
 
     #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
     jsonFile = rutine
@@ -466,6 +486,8 @@ def tabellOppslag(bestandet, oppslagskode, rutine ):
 
     tabellOppslagskode = oppslagskode.split(';')
     tabellnavn = tabellOppslagskode[0]
+    tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste,rutine)
+
     theTable = None
 
     #Finn riktig tabell
@@ -491,6 +513,7 @@ def tabellOppslag(bestandet, oppslagskode, rutine ):
     value = getFromDict(theTable, mapList)
 
     return value
+
 
 
 setningasdf = "((28+45)*15)"

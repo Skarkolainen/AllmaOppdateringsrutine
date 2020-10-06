@@ -201,17 +201,15 @@ if ant_seleksjon != None:
                     gjennomforteTiltak = []
 
                     # Finner oversikt over gjennomførte tiltak, kan brukes til betingede endringer/ tiltak
+
+                    pr( "Antall tiltak: " + str(arcpy.GetCount_management(tiltakLYR) ) )
+
+                    arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
+                    pr("Antall tiltak: " + str(arcpy.GetCount_management(tiltakLYR)))
                     with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "ORDER_ID", "OBJECTID"]) as cursor:
                         for row in cursor:
                             if row[0] == 2 :
-                                pr("Har gjennomfort tiltak")
                                 gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[2]))
-
-                    pr("#####")
-                    pr(gjennomforteTiltak)
-                    pr("#####")
-
-
 
 
 
@@ -227,13 +225,14 @@ if ant_seleksjon != None:
                                         elif att[u'endring'] == u'Blank':
                                             dict_external_write[att[u'felt']] = None
                                         elif att[u'endring'] == u'Funksjon':
+                                            #Send med liste over gjennomførte tiltak her ?
                                             uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write)
                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                             if beregnet[0]:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
                                         elif att[u'endring'] == u'Tabell':
                                             #TODO Mangler feilhåndtering
-                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'], filnavn_konfig)
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'],gjennomforteTiltak, filnavn_konfig)
                                             dict_external_write[att[u'felt']] = oppslag
 
 
