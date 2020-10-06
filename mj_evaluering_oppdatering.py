@@ -467,6 +467,9 @@ def tiltakFinnes(tiltakskode, gjTiltaksliste):
     return False
 
 def velgTabell(tabellnavn, bestandet, gjTiltaksliste, rutine):
+    #brukes i spesialtilfeller for tabeller, feks hvis tabell avhenger av om gitte tiltak er gjennomført
+    #kan evt. skrives om til switch-case
+
     if tabellnavn == 'TreantallEtterForyngelse':
         if tiltakFinnes(120, gjTiltaksliste):
             return 'TreantallEtterForyngelse-Markberedt'
@@ -486,6 +489,8 @@ def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
 
     tabellOppslagskode = oppslagskode.split(';')
     tabellnavn = tabellOppslagskode[0]
+
+    #Henter korrekt tabellnavn
     tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste,rutine)
 
     theTable = None
