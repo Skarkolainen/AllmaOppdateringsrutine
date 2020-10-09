@@ -204,10 +204,10 @@ if ant_seleksjon != None:
 
                     arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
 
-                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "OBJECTID"]) as cursor:
+                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "STATE", "OBJECTID"]) as cursor:
                         for row in cursor:
-                            if row[0] == 2 :
-                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[1]))
+                            if row[0] == 2 and row[1] == 1 :
+                                gjennomforteTiltak.append(hentVerdierBestand(tiltakLYR, row[2]))
 
                     arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
 
