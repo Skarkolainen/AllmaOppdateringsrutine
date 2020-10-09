@@ -463,28 +463,27 @@ def tiltakFinnes(tiltakskode, gjTiltaksliste):
     for i in gjTiltaksliste:
          if tiltakskode == i.get('!TYPE!'):
              return True
-
     return False
 
-def velgTabell(tabellnavn, bestandet, gjTiltaksliste, rutine):
-    #brukes i spesialtilfeller for tabeller, feks hvis tabell avhenger av om gitte tiltak er gjennomført
+def velgTabell(tabellnavn, bestandet, gjTiltaksliste):
+    # FIXME Knotete løsning for å sette planteantall avhengig av om gjennomført markberedning finnes, når planteskriptet kjøres på hkl1.
 
-    #Hvis tabellen er treantallEtterForyngelse, velg avhenging av om markberedning er blant gjennomførte tiltak.
-    if tabellnavn == 'TreantallEtterForyngelse':
-        if tiltakFinnes(120, gjTiltaksliste):
+    #Hvis tabellen er treantallEtterForyngelse, og hogstklasse er 1, velg avhenging av om markberedning er blant gjennomførte tiltak.
+    if tabellnavn == 'TreantallEtterForyngelse' :
+        # TODO få med evt. andre typer markberedningstiltak her
+        if tiltakFinnes(120, gjTiltaksliste) or bestandet["!HOGSTKLASSE!"] != 1 :
             return 'TreantallEtterForyngelse-Markberedt'
         else:
             return 'TreantallEtterForyngelse-Ikke-Markberedt'
 
     # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
-
     else:
         return tabellnavn
 
-def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
+def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutiner ):
     #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
-    jsonFile = rutine
-    data = json.loads(open(jsonFile).read())
+    #jsonFile = rutine
+    data = json.loads(open(rutiner).read())
     tables = data['tabeller']
 
     tabellOppslagskode = oppslagskode.split(';')
@@ -492,7 +491,7 @@ def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutine ):
 
     #Henter korrekt tabellnavn
     # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
-    tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste,rutine)
+    tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste )
 
     theTable = None
 
