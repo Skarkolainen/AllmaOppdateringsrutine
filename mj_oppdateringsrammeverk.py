@@ -291,15 +291,16 @@ if ant_seleksjon != None:
                     #SLETT GAMLE FORESLÅTTE TILTAK
 
                     if slettTiltak:
-                        pr("Sletter gamle tiltak")
+                        #pr("Sletter gamle tiltak")
                         arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
 
                         #Sletter foreslåtte tiltak uten order-id
-                        with arcpy.da.UpdateCursor(tiltakLYR, ["STATUS", "ORDER_ID", "OBJECTID"]) as cursor:
+                        with arcpy.da.UpdateCursor(tiltakLYR, ["STATUS", "ORDER_ID", "STATE", "OBJECTID"]) as cursor:
                             for row in cursor:
                                 if row[0] == 1 and row[1] == None:
-                                    pr("Sletter tiltak : " + str(row[2]))
-                                    cursor.deleteRow()
+                                    pr("Setter tiltak " + str(row[3])+ " state til deleted")
+                                    row[2] = 0
+                                    cursor.updateRow(row)
 
                         arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
 
