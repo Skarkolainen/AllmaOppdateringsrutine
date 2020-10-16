@@ -150,7 +150,7 @@ if ant_seleksjon != None:
             rutiner = data[u'oppdateringsrutiner']
             valgt_rutine = rutiner[valg_rutinenummer]
             #arcpy.AddMessage(rutiner[valg_rutinenummer])
-            arcpy.AddMessage("Starter gjennomgang")
+            arcpy.AddMessage("\n Starter gjennomgang")
 
             edit = arcpy.da.Editor(gdb)
             edit.startEditing(False, True)
@@ -169,9 +169,6 @@ if ant_seleksjon != None:
     ##    dict_external[u'!ALDER!']=5
 
                 # arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
-
-
-
 
 
                 #Kontroller om rutinen kan brukes:
@@ -230,7 +227,7 @@ if ant_seleksjon != None:
                                         elif att[u'endring'] == u'Tabell':
                                             #TODO Mangler feilhåndtering
                                             #TODO Sender med gjennomførte tiltak her, kun til bruk i tabelloppslag. Kan etterhvert skrives om så det brukes via "Funksjon"...
-                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, att[u'verdi'],gjennomforteTiltak, filnavn_konfig)
+                                            oppslag = evaluering_oppdatering.tabellOppslag(dict_external, dict_internal, att[u'verdi'],gjennomforteTiltak, filnavn_konfig)
                                             dict_external_write[att[u'felt']] = oppslag
 
 

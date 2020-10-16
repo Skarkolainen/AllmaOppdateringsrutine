@@ -1051,7 +1051,6 @@
     {
       "rutinenavn": "EDEL_utført_tynning_UFULLSTENDIG",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && (!HOGSTKLASSE!==4 || !HOGSTKLASSE!==3)",
-      "notat": "Hogstklasse ikke med, må ta hensyn til fremskriving",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1063,52 +1062,10 @@
                 "log_beskrivelse": "ALDER satt til %%"
               },
               {
-                "felt": "!VOLUMPROS_G!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_G satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_F!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_F satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_L!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_L satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_4!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_4 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_4!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_5!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_5 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_5!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_6!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_6 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_6!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
+                "felt": "!HOGSTKLASSE!",
+                "endring": "Tabell",
+                "verdi": "Hogstklasser;",
+                "log_beskrivelse": "HOGSTKLASSE satt til %%"
               },
               {
                 "felt": "!TREANT_DAA!",
@@ -1210,11 +1167,10 @@
                 "log_beskrivelse": "ANT_PR_M3 satt til %%"
               }
             ]
-          }
-        },
-        "betingede_endringer": [
+          },
+          "betingede_endringer": [
           {
-            "betingelser": "!BEREGNINGSTYPE! == 0 AND !HOGSTKLASSE! = 3",
+            "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
             "attributtliste": [
               {
                 "felt": "!GRUNNFLATE!",
@@ -1251,7 +1207,7 @@
             ]
           },
           {
-            "betingelser": "!BEREGNINGSTYPE! == 0 AND !HOGSTKLASSE! = 4",
+            "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==4",
             "attributtliste": [
               {
                 "felt": "!GRUNNFLATE!",
@@ -1286,8 +1242,63 @@
                 "log_beskrivelse": "BER_VOLUMTOT satt til %%"
               }
             ]
+          },
+          {
+            "betingelser": "!VOLUMPROS_L! > 5 && !VOLUMPROS_L < 30",
+            "attributtliste": [
+              {
+                "felt": "!VOLUMPROS_G!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_F!>20 && !VOLUMPROS_G!>20? !VOLUMPROS_G! + ((!VOLUMPROS_L!)/2): !VOLUMPROS_G!+!VOLUMPROS_L!+!VOLUMPROS_F",
+                "log_beskrivelse": "VOLUMPROS_G satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_F!",
+                "endring": "!VOLUMPROS_G!>=20 && !VOLUMPROS_G!>=20? !VOLUMPROS_F!+((!VOLUMPROS_L!)/2) : !VOLUMPROS_F!+!VOLUMPROS_L!-!VOLUMPROS_G!",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_F satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_L!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "VOLUMPROS_L satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_4 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_5 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_6 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
+              }
+            ]
           }
         ]
+        }
+
       }
     }
   ],

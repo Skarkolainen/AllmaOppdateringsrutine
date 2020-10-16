@@ -480,7 +480,7 @@ def velgTabell(tabellnavn, bestandet, gjTiltaksliste):
     else:
         return tabellnavn
 
-def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutiner ):
+def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutiner ):
     #jsonFile = u"C:\\Utvikling\\dev-python\\AllmaOppdateringsrutine\\mj_oppdateringsrutiner.json"
     #jsonFile = rutine
     data = json.loads(open(rutiner).read())
@@ -489,9 +489,42 @@ def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutiner ):
     tabellOppslagskode = oppslagskode.split(';')
     tabellnavn = tabellOppslagskode[0]
 
+    #Henter verdi fra dict basert på oppslagskoden.
+    def getFromDict(dataDict, mapList, bestandsEgenskaper):
+        for k in mapList: dataDict = dataDict[bestandsEgenskaper[k]]
+        return dataDict
+
+
     #Henter korrekt tabellnavn
     # TODO Midlertidig løsning for å hente heltall fra kommentar istedenfor tabell kan muligens implementeres her
     tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste )
+    bestandsEgenskaper = copy.deepcopy(bestandet)
+    for key,val in bestandsEgenskaper.items():
+        if key == '!MERK!':
+            # hopp over merknad, oppstår problem med æøå
+            continue
+
+        bestandsEgenskaper[key] = '{}'.format(bestandsEgenskaper[key])
+
+    if tabellnavn == 'Hogstklasser':
+        nyAlder = bestandet[u'!ALDER!'] + dict_internal['$NOW_YEAR$'] - bestandet[u'!FREMSKREVET_AAR!']
+
+        for table in tables:
+            if table['tabellnavn'] == tabellnavn:
+                hogstklasseTabell = table
+                aktuellHogstklasse = bestandet[u'!HOGSTKLASSE!']
+                treslag = str(bestandet[u'!BONTRESLAG!'])
+                bonitet = str(bestandsEgenskaper['!MARKSLAG!'])
+                nyHogstklasse = str(aktuellHogstklasse + 1 )
+                print "alder: "+ bestandsEgenskaper['!ALDER!']
+                nyHogstklasseAlder = (hogstklasseTabell[treslag][bonitet][nyHogstklasse])
+
+        if nyAlder > int(nyHogstklasseAlder):
+            return nyHogstklasse
+        else:
+            return aktuellHogstklasse
+
+
 
     theTable = None
 
@@ -500,22 +533,16 @@ def tabellOppslag(bestandet, oppslagskode, gjTiltaksliste, rutiner ):
         if table['tabellnavn'] == tabellnavn:
             theTable = table
 
-    bestandsEgenskaper = copy.deepcopy(bestandet)
 
-    for key,val in bestandsEgenskaper.items():
-        if key == '!MERK!':
-            # hopp over merknad, oppstår problem med æøå
-            continue
 
-        bestandsEgenskaper[key] = '{}'.format(bestandsEgenskaper[key])
 
-    #Henter verdi fra dict basert på oppslagskoden.
-    def getFromDict(dataDict, mapList):
-        for k in mapList: dataDict = dataDict[bestandsEgenskaper[k]]
-        return dataDict
+
+
+
+
 
     mapList = tabellOppslagskode[1:]
-    value = getFromDict(theTable, mapList)
+    value = getFromDict(theTable, mapList, bestandsEgenskaper)
 
     return value
 
@@ -545,6 +572,6 @@ aaa = Uttrykk(setning5,test_dict_internal_verdier,test_dict_external_verdier)
 
 
 
-print evaluerTre(aaa)
+#print evaluerTre(aaa)
 
-print 3>2 and 2>3 or 3>2
+#print 3>2 and 2>3 or 3>2
