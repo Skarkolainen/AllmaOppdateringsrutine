@@ -342,10 +342,7 @@ if ant_seleksjon != None:
                                     for tilt in bet_tiltak[u'tiltaksliste']:
                                         for att in tilt.keys():
                                             #at_d =gen_tiltak[att]
-                                            pr(tilt[att])
-                                            pr("########################")
-                                            if unicode(tilt[att]).count("?")>0 or unicode(att).count("+")>0 or unicode(att).count("-")>0 or unicode(att).count("/")>0 or unicode(att).count("*")>0 :
-                                                pr(tilt[att])
+                                            if unicode(tilt[att]).count("$") >0 or unicode(tilt[att]).count("?")>0 or unicode(tilt[att]).count("+")>0 or unicode(tilt[att]).count("-")>0 or unicode(tilt[att]).count("/")>0 or unicode(tilt[att]).count("*")>0 :
                                                 uttrykk = evaluering_oppdatering.Uttrykk(tilt[att],dict_internal,dict_external)
                                                 ber_uttrykk = evaluering_oppdatering.evaluerTre(uttrykk)
                                                 if ber_uttrykk[0]:

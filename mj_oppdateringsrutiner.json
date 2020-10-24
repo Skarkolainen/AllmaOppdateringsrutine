@@ -656,7 +656,7 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_frøtrestilling_forTESTING",
+      "rutinenavn": "EDEL_utført_frøtrestilling",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
@@ -1049,8 +1049,8 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_tynning_UFULLSTENDIG",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2",
+      "rutinenavn": "EDEL_utført_tynning_forTESTING",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3 && !BEREGNINGSTYPE! == 0",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1373,28 +1373,28 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "!HOGSTKLASSE! == 3 && !BONTRESLAG! == 2 && !GRUNNFLATE! >= 25",
+              "betingelser": "!HOGSTKLASSE! == 3 && !BONTRESLAG! == 2 && !GRUNNFLATE! >= 39",
               "tiltaksliste": [
                 {
                   "type": 410,
                   "prioritet": 3,
-                  "aarstall": "$NOW_YEAR$ + 10",
+                  "aarstall": "$NOW_YEAR$ +10",
                   "status": 1,
                   "arealandel": 100,
                   "kommentar": "Tynning"
                 }
               ]
             },
-                        {
-              "betingelser": "!HOGSTKLASSE! == 4 && (!MARKSLAG! >= 11 && !MARKSLAG! <= 17  || !MARKSLAG! == 20 && !BONTRESLAG! == 1)" ,
+            {
+              "betingelser": "!HOGSTKLASSE! == 4 && (!MARKSLAG! >= 11 && !MARKSLAG! <= 17  || !MARKSLAG! == 20 && !BONTRESLAG! == 1)",
               "tiltaksliste": [
                 {
-                  "type": 410,
+                  "type": 610,
                   "prioritet": 3,
-                  "aarstall": "$NOW_YEAR$ + 10",
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
                   "status": 1,
                   "arealandel": 100,
-                  "kommentar": "Tynning"
+                  "kommentar": "Gjødsling"
                 }
               ]
             }
