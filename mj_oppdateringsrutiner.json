@@ -656,7 +656,7 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_frøtrestilling_forTESTING",
+      "rutinenavn": "EDEL_utført_frøtrestilling",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
@@ -1049,8 +1049,8 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_tynning_UFULLSTENDIG",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && (!HOGSTKLASSE!==4 || !HOGSTKLASSE!==3)",
+      "rutinenavn": "EDEL_utført_tynning_forTESTING",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3 && !BEREGNINGSTYPE! == 0",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1062,56 +1062,15 @@
                 "log_beskrivelse": "ALDER satt til %%"
               },
               {
-                "felt": "!HOGSTKLASSE!",
-                "endring": "Tabell",
-                "verdi": "Hogstklasser;",
-                "log_beskrivelse": "HOGSTKLASSE satt til %%"
-              },
-              {
                 "felt": "!TREANT_DAA!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Blank",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_G!",
-                "endring": "Funksjon",
-                "verdi": "!BONTRESLAG!==1?100:0",
-                "log_beskrivelse": "ANTALLPROS_G satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_F!",
-                "endring": "Funksjon",
-                "verdi": "!BONTRESLAG!==2?100:0",
-                "log_beskrivelse": "ANTALLPROS_F satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_L!",
-                "endring": "Blank",
-                "log_beskrivelse": "ANTALLPROS_L satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_F_G!",
-                "endring": "Funksjon",
-                "verdi": "!BONTRESLAG!==1?100:0",
-                "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_F_F!",
-                "endring": "Funksjon",
-                "verdi": "!BONTRESLAG!==2?100:0",
-                "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
-              },
-              {
-                "felt": "!ANTALLPROS_F_L!",
-                "endring": "Blank",
-                "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
               },
               {
                 "felt": "!HOYDEBAR!",
@@ -1124,22 +1083,10 @@
                 "log_beskrivelse": "HOYDELAUV satt til %%"
               },
               {
-                "felt": "!SUNNHET!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "SUNNHET satt til %%"
-              },
-              {
                 "felt": "!SJIKTNING!",
                 "endring": "Absolutt verdi",
                 "verdi": 0,
                 "log_beskrivelse": "SJIKTNING satt til %%"
-              },
-              {
-                "felt": "!FREMSKREVET_AAR!",
-                "endring": "Funksjon",
-                "verdi": "$NOW_YEAR$",
-                "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
               },
               {
                 "felt": "!DIM_U_15!",
@@ -1165,104 +1112,6 @@
                 "felt": "!ANT_PR_M3!",
                 "endring": "Blank",
                 "log_beskrivelse": "ANT_PR_M3 satt til %%"
-              }
-            ]
-          },
-          "betingede_endringer": [
-          {
-            "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
-            "attributtliste": [
-              {
-                "felt": "!GRUNNFLATE!",
-                "endring": "Funksjon",
-                "verdi": "!GRUNNFLATE! * 0.7",
-                "log_beskrivelse": "GRUNNFLATE satt til %%"
-              },
-              {
-                "felt": "!HOYDE!",
-                "endring": "Funksjon",
-                "verdi": "!HOYDE!",
-                "log_beskrivelse": "HOYDE satt til %%"
-              },
-              {
-                "felt": "!BER_VOLUMDAA!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
-              },
-              {
-                "felt": "!BER_VOLUMTOT!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMDAA!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMTOT!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
-              }
-            ]
-          },
-          {
-            "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==4",
-            "attributtliste": [
-              {
-                "felt": "!GRUNNFLATE!",
-                "endring": "Funksjon",
-                "verdi": "!GRUNNFLATE! * 0.65",
-                "log_beskrivelse": "GRUNNFLATE satt til %%"
-              },
-              {
-                "felt": "!HOYDE!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "HOYDE satt til %%"
-              },
-              {
-                "felt": "!BER_VOLUMDAA!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
-              },
-              {
-                "felt": "!BER_VOLUMTOT!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMDAA!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMTOT!",
-                "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
-              }
-            ]
-          },
-          {
-            "betingelser": "!VOLUMPROS_L! > 5 && !VOLUMPROS_L < 30",
-            "attributtliste": [
-              {
-                "felt": "!VOLUMPROS_G!",
-                "endring": "Funksjon",
-                "verdi": "!VOLUMPROS_F!>20 && !VOLUMPROS_G!>20? !VOLUMPROS_G! + ((!VOLUMPROS_L!)/2): !VOLUMPROS_G!+!VOLUMPROS_L!+!VOLUMPROS_F",
-                "log_beskrivelse": "VOLUMPROS_G satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_F!",
-                "endring": "!VOLUMPROS_G!>=20 && !VOLUMPROS_G!>=20? !VOLUMPROS_F!+((!VOLUMPROS_L!)/2) : !VOLUMPROS_F!+!VOLUMPROS_L!-!VOLUMPROS_G!",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_F satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_L!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_L satt til %%"
               },
               {
                 "felt": "!TRESLAG_4!",
@@ -1295,10 +1144,262 @@
                 "log_beskrivelse": "VOLUMPROS_6 satt til %%"
               }
             ]
-          }
-        ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "!GRUNNFLATE! * 0.65",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==4",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "!GRUNNFLATE! * 0.70",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
+              "attributtliste": [
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "!GRUNNFLATE! * 0.75",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!VOLUMPROS_F! == 0 && !VOLUMPROS_L! > 5",
+              "attributtliste": [
+                {
+                  "felt": "!VOLUMPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_L! <= 35 ? 95 : !VOLUMPROS_G! + 20",
+                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_L!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_L! <= 35 ? 5 : !VOLUMPROS_L! - 20",
+                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!VOLUMPROS_G! == 0 && !VOLUMPROS_L! > 5",
+              "attributtliste": [
+                {
+                  "felt": "!VOLUMPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_L! <= 35 ? 95 : !VOLUMPROS_F! + 20",
+                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_L!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_L! <= 35 ? 5 : !VOLUMPROS_L - 20",
+                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!VOLUMPROS_G! >= 30 && !VOLUMPROS_F! >= 30 && !VOLUMPROS_L! > 5",
+              "attributtliste": [
+                {
+                  "felt": "!VOLUMPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_G! + (!VOLUMPROS_L! / 2)",
+                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_F! + (!VOLUMPROS_L! / 2)",
+                  "log_beskrivelse": "VOLUMPROS_F satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!VOLUMPROS_F! >= 30 && !VOLUMPROS_G! < 30 && !VOLUMPROS_L! > 5",
+              "attributtliste": [
+                {
+                  "felt": "!VOLUMPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_F! + (!VOLUMPROS_L!-5) ",
+                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 5,
+                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!VOLUMPROS_G! >= 30 && !VOLUMPROS_F! < 30 && !VOLUMPROS_L! > 5",
+              "attributtliste": [
+                {
+                  "felt": "!VOLUMPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!VOLUMPROS_G! + (!VOLUMPROS_L!-5) ",
+                  "log_beskrivelse": "VOLUMPROS_G satt til %%"
+                },
+                {
+                  "felt": "!VOLUMPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 5,
+                  "log_beskrivelse": "VOLUMPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!FREMSKREVET_AAR! < $NOW_YEAR$",
+              "attributtliste": [
+                {
+                  "felt": "!FREMSKREVET_AAR!",
+                  "endring": "Funksjon",
+                  "verdi": "$NOW_YEAR$",
+                  "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+                }
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": []
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "!HOGSTKLASSE! == 3 && !BONTRESLAG! == 2 && !GRUNNFLATE! >= 39",
+              "tiltaksliste": [
+                {
+                  "type": 410,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_YEAR$ +10",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Tynning"
+                }
+              ]
+            },
+            {
+              "betingelser": "!HOGSTKLASSE! == 4 && (!MARKSLAG! >= 11 && !MARKSLAG! <= 17  || !MARKSLAG! == 20 && !BONTRESLAG! == 1)",
+              "tiltaksliste": [
+                {
+                  "type": 610,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Gjødsling"
+                }
+              ]
+            }
+          ]
         }
-
       }
     }
   ],

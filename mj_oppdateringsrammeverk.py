@@ -168,7 +168,7 @@ if ant_seleksjon != None:
     ##    dict_external[u'!BER_VOLUMTOT!']=5
     ##    dict_external[u'!ALDER!']=5
 
-                # arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
+                arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
 
 
                 #Kontroller om rutinen kan brukes:
@@ -259,6 +259,13 @@ if ant_seleksjon != None:
                                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                                             if beregnet[0]:
                                                                 dict_external_write[att[u'felt']] = beregnet[1]
+                                                        elif att[u'endring'] == u'Tabell':
+                                                            # TODO Mangler feilhåndtering
+                                                            # TODO Sender med gjennomførte tiltak her, kun til bruk i tabelloppslag. Kan etterhvert skrives om så det brukes via "Funksjon"...
+                                                            oppslag = evaluering_oppdatering.tabellOppslag(
+                                                                dict_external, dict_internal, att[u'verdi'],
+                                                                gjennomforteTiltak, filnavn_konfig)
+                                                            dict_external_write[att[u'felt']] = oppslag
 
 
                                                         if att.has_key(u'log_beskrivelse'):
@@ -335,7 +342,7 @@ if ant_seleksjon != None:
                                     for tilt in bet_tiltak[u'tiltaksliste']:
                                         for att in tilt.keys():
                                             #at_d =gen_tiltak[att]
-                                            if unicode(tilt[att]).count("?")>0 or unicode(att).count("+")>0 or unicode(att).count("-")>0 or unicode(att).count("/")>0 or unicode(att).count("*")>0 :
+                                            if unicode(tilt[att]).count("$") >0 or unicode(tilt[att]).count("?")>0 or unicode(tilt[att]).count("+")>0 or unicode(tilt[att]).count("-")>0 or unicode(tilt[att]).count("/")>0 or unicode(tilt[att]).count("*")>0 :
                                                 uttrykk = evaluering_oppdatering.Uttrykk(tilt[att],dict_internal,dict_external)
                                                 ber_uttrykk = evaluering_oppdatering.evaluerTre(uttrykk)
                                                 if ber_uttrykk[0]:

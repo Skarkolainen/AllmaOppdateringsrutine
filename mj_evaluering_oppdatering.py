@@ -508,7 +508,7 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
 
     if tabellnavn == 'Hogstklasser':
         nyAlder = bestandet[u'!ALDER!'] + dict_internal['$NOW_YEAR$'] - bestandet[u'!FREMSKREVET_AAR!']
-
+        arcpy.AddMessage("NYALDER" + str(nyAlder))
         for table in tables:
             if table['tabellnavn'] == tabellnavn:
                 hogstklasseTabell = table
@@ -519,7 +519,7 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
                 print "alder: "+ bestandsEgenskaper['!ALDER!']
                 nyHogstklasseAlder = (hogstklasseTabell[treslag][bonitet][nyHogstklasse])
 
-        if nyAlder > int(nyHogstklasseAlder):
+        if nyAlder >= int(nyHogstklasseAlder):
             return nyHogstklasse
         else:
             return aktuellHogstklasse
