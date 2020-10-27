@@ -1062,12 +1062,6 @@
                 "log_beskrivelse": "ALDER satt til %%"
               },
               {
-                "felt": "!TREANT_DAA!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "TREANT_DAA satt til %%"
-              },
-              {
                 "felt": "!TREANT_DAA_FOER!",
                 "endring": "Blank",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
@@ -1168,6 +1162,12 @@
                   "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! * 0.65",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
                   "felt": "!BER_VOLUMDAA!",
                   "endring": "Blank",
                   "log_beskrivelse": "BER_VOLUMDAA satt til %%"
@@ -1211,6 +1211,12 @@
                   "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! * 0.70",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
                   "felt": "!BER_VOLUMDAA!",
                   "endring": "Blank",
                   "log_beskrivelse": "BER_VOLUMDAA satt til %%"
@@ -1240,6 +1246,12 @@
                   "endring": "Funksjon",
                   "verdi": "!GRUNNFLATE! * 0.75",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! * 0.75",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
                   "felt": "!BER_VOLUMDAA!",
