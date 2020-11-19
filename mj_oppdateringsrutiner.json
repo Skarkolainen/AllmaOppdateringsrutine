@@ -1,7 +1,7 @@
 {
   "oppdateringsrutiner": [
     {
-      "rutinenavn": "EDEL_utført_sluttavvirkning",
+      "rutinenavn": "EDEL_utført_flatehogst",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
@@ -104,7 +104,7 @@
               {
                 "felt": "!TREANT_DAA!",
                 "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse-Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "verdi": "TreantallEtterForyngelse_Markberedt;!BONTRESLAG!;!MARKSLAG!",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
@@ -1049,7 +1049,7 @@
       }
     },
     {
-      "rutinenavn": "EDEL_utført_tynning_forTESTING",
+      "rutinenavn": "EDEL_utført_tynning",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3 && !BEREGNINGSTYPE! == 0",
       "endringer": {
         "endring_bestand": {
@@ -1413,6 +1413,486 @@
           ]
         }
       }
+    },
+    {
+      "rutinenavn": "EDEL_utført_ungskogpleie_forTESTING",
+      "forutsetninger": "(($NOW_YEAR$-!FREMSKREVET_AAR!)+!ALDER! < @AlderNesteHogstklasse@) && !HOGSTKLASSE! == 2",
+      "endringer": {
+        "endring_bestand": {
+          "generelle_endringer": {
+            "attributtliste": [
+              {
+                "felt": "!ALDER!",
+                "endring": "Funksjon",
+                "verdi": "!ALDER! + ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                "log_beskrivelse": "ALDER satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA_FOER!",
+                "endring": "Funksjon",
+                "verdi": "!TREANT_DAA!<!TREANT_DAA_FOER! ? !TREANT_DAA!:@TreantallEtterUngskogpleie@",
+                "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
+              },
+              {
+                "felt": "!TREANT_DAA!",
+                "endring": "Funksjon",
+                "verdi": "!TREANT_DAA!<!TREANT_DAA_FOER! ? !TREANT_DAA!:@TreantallEtterUngskogpleie@",
+                "log_beskrivelse": "TREANT_DAA satt til %%"
+              },
+              {
+                "felt": "!HOYDEBAR!",
+                "endring": "Funksjon",
+                "verdi": "!HOYDEBAR! + 0.3 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                "log_beskrivelse": "HOYDEBAR satt til %%"
+              },
+              {
+                "felt": "!FREMSKREVET_AAR!",
+                "endring": "Funksjon",
+                "verdi": "$NOW_YEAR$",
+                "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+              }
+            ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!HOYDELAUV! > 0",
+              "attributtliste": [
+                {
+                  "felt": "!HOYDELAUV!",
+                  "endring": "!HOYDELAUV! + 0.5 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "verdi": "!ANTALLPROS_G!",
+                  "log_beskrivelse": "HOYDELAUV satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! == 100 && !ANTALLPROS_G! + !ANTALLPROS_F! + !ANTALLPROS_L! == 100",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G!",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F!",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_L!",
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! <= 10",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G!",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F!",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_L!",
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 10 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 10 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 10 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 10 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_F! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 10 )",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 10 )",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 10 )",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 10 )",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 10,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 30 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 30 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 30 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 30 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_F! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 30 )",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 30 )",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 30 )",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 30 )",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 30,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! >= 5 && !ANTALLPROS_F! >= 5",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 60 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 60 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 60 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 60 )/ 2 ",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_F! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 60 )",
+                  "log_beskrivelse": "ANTALLPROS_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_G! + (!ANTALLPROS_L! - 60 )",
+                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_F_L satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! == 0",
+              "attributtliste": [
+                {
+                  "felt": "!ANTALLPROS_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 60 )",
+                  "log_beskrivelse": "ANTALLPROS_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_G!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_F!",
+                  "endring": "Funksjon",
+                  "verdi": "!ANTALLPROS_F! + (!ANTALLPROS_L! - 60 )",
+                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
+                },
+                {
+                  "felt": "!ANTALLPROS_F_L!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 60,
+                  "log_beskrivelse": "ANTALLPROS_L satt til %%"
+                }
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": []
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR! <=10 && !MARKSLAG! >= 17",
+              "tiltaksliste": [
+                {
+                  "type": 260,
+                  "prioritet": 1,
+                  "aarstall": "$NOW_YEAR$ - (!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR!) + 15",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR! <=12 && !MARKSLAG! >= 11 && !MARKSLAG! < 17",
+              "tiltaksliste": [
+                {
+                  "type": 260,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$ - (!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR!) + 18",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            },
+            {
+              "betingelser": "!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR! <=18 && !MARKSLAG! < 11",
+              "tiltaksliste": [
+                {
+                  "type": 205,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$ - (!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR!) + 30",
+                  "status": 1,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ],
   "tabeller": [
@@ -1485,7 +1965,7 @@
       }
     },
     {
-      "tabellnavn": "TreantallEtterForyngelse-Markberedt",
+      "tabellnavn": "TreantallEtterForyngelse_Markberedt",
       "Beskrivelse": "Anbefalt tetthet ved planting (!BONTRESLAG!,!MARKSLAG!)",
       "1": {
         "6": 90,
@@ -1510,7 +1990,7 @@
       }
     },
     {
-      "tabellnavn": "TreantallEtterForyngelse-Ikke-Markberedt",
+      "tabellnavn": "TreantallEtterForyngelse_Ikke_Markberedt",
       "Beskrivelse": "Anbefalt tetthet ved planting uten markberedning (!BONTRESLAG!,!MARKSLAG!)",
       "1": {
         "6": 100,
@@ -1550,6 +2030,7 @@
     {
       "tabellnavn": "Hogstklasser",
       "Beskrivelse": "Innslag for ny hogstklasse på ulike boniteter ( !BONTRESLAG!, !MARKSLAG!, !HOGSTKLASSE! )",
+      "oppslagskode": "!BONTRESLAG!; !MARKSLAG!; !HOGSTKLASSE!",
       "1": {
         "6": {
           "3": 55,
@@ -1655,6 +2136,144 @@
           "4": 85,
           "5": 120
         }
+      }
+    },
+    {
+      "tabellnavn": "AlderNesteHogstklasse",
+      "Beskrivelse": "Finner alder for når aktuelt bestand går inn i ny hogstklasse",
+      "oppslagskode": "!BONTRESLAG!; !MARKSLAG!; !HOGSTKLASSE!",
+      "1": {
+        "6": {
+          "2": 55,
+          "3": 85,
+          "4": 120
+        },
+        "8": {
+          "2": 45,
+          "3": 75,
+          "4": 110
+        },
+        "11": {
+          "2": 35,
+          "3": 70,
+          "4": 100
+        },
+        "14": {
+          "2": 30,
+          "3": 60,
+          "4": 90
+        },
+        "17": {
+          "2": 25,
+          "3": 55,
+          "4": 80
+        },
+        "20": {
+          "2": 20,
+          "3": 45,
+          "4": 70
+        },
+        "23": {
+          "2": 20,
+          "3": 40,
+          "4": 60
+        },
+        "26": {
+          "2": 15,
+          "3": 35,
+          "4": 50
+        },
+        "29": {
+          "2": 15,
+          "3": 35,
+          "4": 50
+        }
+      },
+      "2": {
+        "6": {
+          "2": 55,
+          "3": 85,
+          "4": 120
+        },
+        "8": {
+          "2": 45,
+          "3": 75,
+          "4": 110
+        },
+        "11": {
+          "2": 35,
+          "3": 70,
+          "4": 100
+        },
+        "14": {
+          "2": 30,
+          "3": 60,
+          "4": 90
+        },
+        "17": {
+          "2": 25,
+          "3": 55,
+          "4": 80
+        },
+        "20": {
+          "2": 20,
+          "3": 45,
+          "4": 70
+        },
+        "23": {
+          "2": 20,
+          "3": 40,
+          "4": 60
+        },
+        "26": {
+          "2": 15,
+          "3": 35,
+          "4": 50
+        },
+        "29": {
+          "2": 15,
+          "3": 35,
+          "4": 50
+        }
+      },
+      "3": {
+        "6": {
+          "2": 55,
+          "3": 85,
+          "4": 120
+        },
+        "8": {
+          "2": 55,
+          "3": 85,
+          "4": 120
+        }
+      }
+    },
+    {
+      "tabellnavn": "TreantallEtterUngskogpleie",
+      "Beskrivelse": "Treantall etter utført ungskogpleie",
+      "oppslagskode": "!BONTRESLAG!; !MARKSLAG!",
+      "1": {
+        "6": 150,
+        "8": 160,
+        "11": 170,
+        "14": 190,
+        "17": 200,
+        "20": 220,
+        "23": 240,
+        "26": 250,
+        "29": 260
+      },
+      "2": {
+        "6": 170,
+        "8": 180,
+        "11": 190,
+        "14": 210,
+        "17": 230,
+        "20": 230,
+        "23": 230,
+        "26": 230,
+        "29": 230
       }
     }
   ]
