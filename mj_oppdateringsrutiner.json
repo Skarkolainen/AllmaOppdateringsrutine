@@ -237,6 +237,19 @@
           },
           "betingede_tiltak": [
             {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 500,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Flatehogst"
+                }
+              ]
+            },
+            {
               "betingelser": "!MARKSLAG! >= 20",
               "tiltaksliste": [
                 {
@@ -574,6 +587,19 @@
           },
           "betingede_tiltak": [
             {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 150,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Planting"
+                }
+              ]
+            },
+            {
               "betingelser": "!MARKSLAG! >= 20",
               "tiltaksliste": [
                 {
@@ -884,6 +910,19 @@
             ]
           },
           "betingede_tiltak": [
+            {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 520,
+                  "prioritet": 3,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Frøtrestillingshogst"
+                }
+              ]
+            },
             {
               "betingelser": "!MARKSLAG! < 14",
               "tiltaksliste": [
@@ -1385,6 +1424,19 @@
           },
           "betingede_tiltak": [
             {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 410,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Tynning"
+                }
+              ]
+            },
+            {
               "betingelser": "!HOGSTKLASSE! == 3 && !BONTRESLAG! == 2 && !GRUNNFLATE! >= 39",
               "tiltaksliste": [
                 {
@@ -1851,6 +1903,19 @@
             "tiltaksliste": []
           },
           "betingede_tiltak": [
+            {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 260,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Ungskogpleie"
+                }
+              ]
+            },
             {
               "betingelser": "!ALDER! + $NOW_YEAR$ - !FREMSKREVET_AAR! <=10 && !MARKSLAG! >= 17",
               "tiltaksliste": [

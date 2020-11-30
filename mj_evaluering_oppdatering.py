@@ -4,7 +4,7 @@ import json
 import os
 import copy
 import arcpy
-
+import mj_oppdateringsrutine_metoder
 hogstaar = 2019
 hogstmaaned = 3
 
@@ -315,6 +315,13 @@ def isExternalVariable(setning,dict_external_verdier):
     else:
         return None
 
+def isMetode(setning, dict_external_verdier, dict_internal_verdier, gj_Tiltak, tabeller):
+    setning_s = setning.replace(" ","")
+    if setning_s[:2] == '()' and setning_s[-2:] == '()':
+        metode = setning_s[2:-2]
+        return mj_oppdateringsrutine_metoder.metode(metode, dict_internal_verdier, dict_external_verdier, gj_Tiltak, tabeller)
+
+
 def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, tabeller):
     setning_s = setning.replace(" ","")
     setning_s = fjern_paranteser(setning_s)
@@ -380,7 +387,7 @@ def gaa_gjannom(tt):
     return tt
 
 class Uttrykk:
-    def __init__(self,tekststreng,dict_internal_verdier,dict_external_verdier, tabeller, parent=None):
+    def __init__(self,tekststreng,dict_internal_verdier,dict_external_verdier, gj_Tiltak, tabeller, parent=None):
         self.tekststreng = tekststreng
         self.svar = None
         self.fsvar = None
@@ -401,43 +408,43 @@ class Uttrykk:
         kontr_ifelse = isIfElse(self.tekststreng)
         if isinstance(kontr_ifelse,tuple):
             self.optor_type = "ifelse"
-            self.optor = Uttrykk(kontr_ifelse[0],dict_internal_verdier,dict_external_verdier,tabeller,self)
+            self.optor = Uttrykk(kontr_ifelse[0],dict_internal_verdier,dict_external_verdier,gj_Tiltak,tabeller,self)
             self.left_type = "str_eq"
-            self.left = Uttrykk(kontr_ifelse[1],dict_internal_verdier,dict_external_verdier,tabeller,self)
+            self.left = Uttrykk(kontr_ifelse[1],dict_internal_verdier,dict_external_verdier,gj_Tiltak,tabeller,self)
             self.right_type = "str_eq"
-            self.right = Uttrykk(kontr_ifelse[2],dict_internal_verdier,dict_external_verdier,tabeller,self)
+            self.right = Uttrykk(kontr_ifelse[2],dict_internal_verdier,dict_external_verdier,gj_Tiltak,tabeller,self)
             self.beregnet=False
         else:
             kontr_cond = isConditional(self.tekststreng)
             if isinstance(kontr_cond, tuple):
                 self.optor_type = "cond"
-                self.optor = Uttrykk(kontr_cond[0], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                self.optor = Uttrykk(kontr_cond[0], dict_internal_verdier, dict_external_verdier,gj_Tiltak, tabeller, self)
                 self.left_type = "str_eq"
-                self.left = Uttrykk(kontr_cond[1], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                self.left = Uttrykk(kontr_cond[1], dict_internal_verdier, dict_external_verdier, gj_Tiltak,tabeller, self)
                 self.right_type = "str_eq"
-                self.right = Uttrykk(kontr_cond[2], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                self.right = Uttrykk(kontr_cond[2], dict_internal_verdier, dict_external_verdier, gj_Tiltak,tabeller, self)
                 self.beregnet = False
             else:
                 kontr_andor = isLogical(self.tekststreng)
                 if kontr_andor != None:
                     print "isLogical :" + self.tekststreng
                     self.optor_type = "and_or"
-                    self.optor = Uttrykk(kontr_andor[0], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                    self.optor = Uttrykk(kontr_andor[0], dict_internal_verdier, dict_external_verdier, gj_Tiltak,tabeller, self)
                     self.left_type = "and_or"
-                    self.left = Uttrykk(kontr_andor[1], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                    self.left = Uttrykk(kontr_andor[1], dict_internal_verdier, dict_external_verdier,gj_Tiltak, tabeller, self)
                     self.right_type = "and_or"
-                    self.right = Uttrykk(kontr_andor[2], dict_internal_verdier, dict_external_verdier, tabeller, self)
+                    self.right = Uttrykk(kontr_andor[2], dict_internal_verdier, dict_external_verdier,gj_Tiltak, tabeller, self)
                     self.beregnet = False
                 else:
                     kontr_arit = isAritmetrisk(self.tekststreng)
                     if kontr_arit!=None:
                         print "isAritmetrisk :" + str(kontr_arit) +" streng :"+ self.tekststreng
                         self.optor_type="Arit_"+kontr_arit[0]
-                        self.optor = Uttrykk(kontr_arit[0],dict_internal_verdier,dict_external_verdier,tabeller,self)
+                        self.optor = Uttrykk(kontr_arit[0],dict_internal_verdier,dict_external_verdier, gj_Tiltak,tabeller,self)
                         self.left_type = "str_eq"
-                        self.left = Uttrykk(kontr_arit[1],dict_internal_verdier,dict_external_verdier,tabeller,self)
+                        self.left = Uttrykk(kontr_arit[1],dict_internal_verdier,dict_external_verdier, gj_Tiltak,tabeller,self)
                         self.right_type = "str_eq"
-                        self.right = Uttrykk(kontr_arit[2],dict_internal_verdier,dict_external_verdier,tabeller,self)
+                        self.right = Uttrykk(kontr_arit[2],dict_internal_verdier,dict_external_verdier, gj_Tiltak, tabeller,self)
                         self.beregnet=False
                     else:
                         kontr_tall = isNumber(self.tekststreng)
@@ -452,6 +459,7 @@ class Uttrykk:
                                 print "isInternVar :"+ self.tekststreng
                                 self.svar = kontr_intern
                                 self.beregnet=True
+
                             else:
                                 kontr_extern = isExternalVariable(self.tekststreng,dict_external_verdier)
                                 if kontr_extern != None:
@@ -460,17 +468,23 @@ class Uttrykk:
                                     self.beregnet=True
 
                                 else:
-                                    kontr_table = isTableVariable(self.tekststreng,dict_internal_verdier,dict_external_verdier, tabeller)
-                                    if kontr_table != None:
-                                        print "istableVar :" + self.tekststreng
-                                        self.svar = kontr_table
-                                        self.beregnet = True
+                                    kontr_metode = isMetode(self.tekststreng, dict_external_verdier, dict_internal_verdier, gj_Tiltak, tabeller)
+                                    if kontr_metode != None:
+                                        self.svar = kontr_metode
+                                        self.beregnet=True
 
                                     else:
-                                        kontr_operand = isOperand(self.tekststreng)
-                                        if kontr_operand !=None:
-                                            self.svar = kontr_operand
+                                        kontr_table = isTableVariable(self.tekststreng,dict_internal_verdier,dict_external_verdier, tabeller)
+                                        if kontr_table != None:
+                                            print "istableVar :" + self.tekststreng
+                                            self.svar = kontr_table
                                             self.beregnet = True
+
+                                        else:
+                                             kontr_operand = isOperand(self.tekststreng)
+                                             if kontr_operand !=None:
+                                                 self.svar = kontr_operand
+                                                 self.beregnet = True
 
                 #sjekk om det er st?rre eller mindre enn etc.
                 #sjekk om det er et tall

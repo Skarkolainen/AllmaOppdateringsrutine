@@ -6,6 +6,7 @@ import json
 import arcpy
 import os
 import mj_evaluering_oppdatering as evaluering_oppdatering
+import mj_oppdateringsrutine_metoder
 import copy
 
 runAsTool = True
@@ -17,6 +18,7 @@ if runAsTool:
     hogstmaaned = int(arcpy.GetParameterAsText(3))
     gdb = arcpy.GetParameterAsText(4)
     slettTiltak = arcpy.GetParameter(5)
+    settGjTiltak = arcpy.GetParameter(6)
 
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
@@ -118,7 +120,7 @@ def lag_tiltak(fc_tiltak_ut,t_type,t_prio,t_status,t_aar,t_kommentar,t_arealande
 
 
 
-dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned}
+dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutineNavn$":navn_rutine,"$SettGjTiltak$":settGjTiltak}
 
 bestandLYR = 'BESTAND'
 tiltakLYR = 'TILTAK'
@@ -176,7 +178,7 @@ if ant_seleksjon != None:
                 if valgt_rutine.has_key(u'forutsetninger'):
                     init_forutsetninger=False
                     init_forutsetninger = valgt_rutine[u'forutsetninger']
-                    uttrykk_forutsetninger = evaluering_oppdatering.Uttrykk(init_forutsetninger,dict_internal,dict_external, tabeller)
+                    uttrykk_forutsetninger = evaluering_oppdatering.Uttrykk(init_forutsetninger,dict_internal,dict_external, None, tabeller)
                     uttrykk_forutsetninger_eval = evaluering_oppdatering.evaluerTre(uttrykk_forutsetninger)
                     if uttrykk_forutsetninger_eval!=None:
                         if uttrykk_forutsetninger_eval[0]:
@@ -220,7 +222,7 @@ if ant_seleksjon != None:
                                         elif att[u'endring'] == u'Blank':
                                             dict_external_write[att[u'felt']] = None
                                         elif att[u'endring'] == u'Funksjon':
-                                            uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write, tabeller)
+                                            uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write, gjennomforteTiltak, tabeller)
                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                             if beregnet[0]:
                                                 dict_external_write[att[u'felt']] = beregnet[1]
@@ -241,7 +243,7 @@ if ant_seleksjon != None:
                         if valgt_rutine[u'endringer'][u'endring_bestand'].has_key(u'betingede_endringer'):
                             for bet in valgt_rutine[u'endringer'][u'endring_bestand'][u'betingede_endringer']:
                                 if bet.has_key(u'betingelser'):
-                                    uttrykk = evaluering_oppdatering.Uttrykk(bet[u'betingelser'],dict_internal,dict_external_write, tabeller)
+                                    uttrykk = evaluering_oppdatering.Uttrykk(bet[u'betingelser'],dict_internal,dict_external_write, gjennomforteTiltak, tabeller)
                                     beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                     if beregnet[0]:
                                         if beregnet[1]:
@@ -255,7 +257,7 @@ if ant_seleksjon != None:
                                                         elif att[u'endring'] == u'Blank':
                                                             dict_external_write[att[u'felt']] = None
                                                         elif att[u'endring'] == u'Funksjon':
-                                                            uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write, tabeller)
+                                                            uttrykk = evaluering_oppdatering.Uttrykk(unicode(att[u'verdi']),dict_internal,dict_external_write, gjennomforteTiltak, tabeller)
                                                             beregnet = evaluering_oppdatering.evaluerTre(uttrykk)
                                                             if beregnet[0]:
                                                                 dict_external_write[att[u'felt']] = beregnet[1]
@@ -322,7 +324,7 @@ if ant_seleksjon != None:
                                 for att in gen_tiltak.keys():
                                     #at_d =gen_tiltak[att]
                                     if unicode(gen_tiltak[att]).count("?")>0 or unicode(att).count("+")>0 or unicode(att).count("-")>0 or unicode(att).count("/")>0 or unicode(att).count("*")>0 :
-                                        uttrykk = evaluering_oppdatering.Uttrykk(gen_tiltak[att],dict_internal,dict_external, tabeller)
+                                        uttrykk = evaluering_oppdatering.Uttrykk(gen_tiltak[att],dict_internal,dict_external, gjennomforteTiltak, tabeller)
                                         ber_uttrykk = evaluering_oppdatering.evaluerTre(uttrykk)
                                         if ber_uttrykk[0]:
                                             gen_tiltak[att] = ber_uttrykk[1]
@@ -336,21 +338,21 @@ if ant_seleksjon != None:
                         if liste_nye_tiltak.has_key(u'betingede_tiltak'):
                             for bet_tiltak in liste_nye_tiltak[u'betingede_tiltak']:
                                 betingelse = bet_tiltak['betingelser']
-                                uttrykk = evaluering_oppdatering.Uttrykk(betingelse,dict_internal,dict_external, tabeller)
+                                uttrykk = evaluering_oppdatering.Uttrykk(betingelse,dict_internal,dict_external, gjennomforteTiltak, tabeller)
                                 ber_betingelse = evaluering_oppdatering.evaluerTre(uttrykk)
                                 if ber_betingelse[0] and ber_betingelse[1]:
                                     for tilt in bet_tiltak[u'tiltaksliste']:
                                         for att in tilt.keys():
                                             #at_d =gen_tiltak[att]
                                             if unicode(tilt[att]).count("$") >0 or unicode(tilt[att]).count("?")>0 or unicode(tilt[att]).count("+")>0 or unicode(tilt[att]).count("-")>0 or unicode(tilt[att]).count("/")>0 or unicode(tilt[att]).count("*")>0 :
-                                                uttrykk = evaluering_oppdatering.Uttrykk(tilt[att],dict_internal,dict_external, tabeller)
+                                                uttrykk = evaluering_oppdatering.Uttrykk(tilt[att],dict_internal,dict_external, gjennomforteTiltak, tabeller)
                                                 ber_uttrykk = evaluering_oppdatering.evaluerTre(uttrykk)
                                                 if ber_uttrykk[0]:
                                                     tilt[att] = ber_uttrykk[1]
 
                                         #a = lag_tiltak(layer_tiltak,gen_tiltak['type'],gen_tiltak['prioritet'],1,gen_tiltak['aarstall'],"",gen_tiltak['arealandel'],geo)
                                         pr("Lager betinget tiltak i bestand OID: " + str(oid_verdi) + " : " + betingelse + " " +tilt['kommentar'])
-                                        a = lag_tiltak(os.path.join("in_memory","Temp_TILTAK"),tilt['type'],tilt['prioritet'],1,tilt['aarstall'],"",tilt['arealandel'],geo,hovednummer=dict_external_write['!HOVEDNR!'],bestandid=dict_external_write['!BESTAND_ID!'],eiendomid=dict_external_write['!EIENDOM_ID!'])
+                                        a = lag_tiltak(os.path.join("in_memory","Temp_TILTAK"),tilt['type'],tilt['prioritet'],tilt['status'],tilt['aarstall'],"",tilt['arealandel'],geo,hovednummer=dict_external_write['!HOVEDNR!'],bestandid=dict_external_write['!BESTAND_ID!'],eiendomid=dict_external_write['!EIENDOM_ID!'])
                                         #a = lag_tiltak(allma_tiltaklag,gen_tiltak['type'],gen_tiltak['prioritet'],1,2020,"",gen_tiltak['arealandel'],geo)
 
 
