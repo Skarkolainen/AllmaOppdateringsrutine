@@ -322,7 +322,7 @@ def isMetode(setning, dict_external_verdier, dict_internal_verdier, gj_Tiltak, t
         return mj_oppdateringsrutine_metoder.metode(metode, dict_internal_verdier, dict_external_verdier, gj_Tiltak, tabeller)
 
 
-def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, tabeller):
+def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, gj_Tiltak, tabeller):
     setning_s = setning.replace(" ","")
     setning_s = fjern_paranteser(setning_s)
 
@@ -330,10 +330,29 @@ def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, tabel
         verdi = None
         tabellnavn = setning_s.replace('@','')
 
+
+        #Hvis det er treantall etter ungskogpleie, sjekk om det er treantall i kommentarfeltet.
+        if tabellnavn == 'TreantallEtterUngskogpleie':
+            tiltakFinnes = mj_oppdateringsrutine_metoder.tiltakFinnes('Ungskogpleie', gj_Tiltak)
+            # Forutsetter at gjennomført ungskogpleietiltak finnes.
+            if tiltakFinnes[0]:
+                treAntall =  mj_oppdateringsrutine_metoder.finnTreAntall(tiltakFinnes[1])
+
+                if treAntall: #Treantall ble funnet i kommentarfelt, dette benyttes
+                    return treAntall
+                #Treantall ble ikke funnet i tiltaket, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
+                elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
+                    return dict_external_verdier[u'!TREANT_DAA!']
+
+            # Ikke funnet gjennomført tiltak, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
+            elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
+                return dict_external_verdier[u'!TREANT_DAA!']
+
         #finn riktig tabell
         for table in tabeller:
             if table['tabellnavn'] == tabellnavn:
                 theTable = table
+
 
         # Hent oppslagskode fra tabellen
 
@@ -347,7 +366,6 @@ def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, tabel
                     if kode[0] == "!": oppslagsverdier.append(str(dict_external_verdier[kode]))
                     elif kode[0] == "$": oppslagsverdier.append(dict_internal_verdier[kode])
 
-                print "Oppslagskode: " + str(oppslagsverdier)
 
         # Slå opp
                 for i in range (0, len(oppslagsverdier)):
@@ -474,7 +492,7 @@ class Uttrykk:
                                         self.beregnet=True
 
                                     else:
-                                        kontr_table = isTableVariable(self.tekststreng,dict_internal_verdier,dict_external_verdier, tabeller)
+                                        kontr_table = isTableVariable(self.tekststreng,dict_internal_verdier,dict_external_verdier, gj_Tiltak, tabeller)
                                         if kontr_table != None:
                                             print "istableVar :" + self.tekststreng
                                             self.svar = kontr_table

@@ -1482,13 +1482,13 @@
               {
                 "felt": "!TREANT_DAA!",
                 "endring": "Funksjon",
-                "verdi": "!TREANT_DAA!<!TREANT_DAA_FOER! ? !TREANT_DAA!:@TreantallEtterUngskogpleie@",
+                "verdi": "@TreantallEtterUngskogpleie@",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
                 "endring": "Funksjon",
-                "verdi": "!TREANT_DAA!<!TREANT_DAA_FOER! ? !TREANT_DAA!:@TreantallEtterUngskogpleie@",
+                "verdi": "@TreantallEtterUngskogpleie@",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
