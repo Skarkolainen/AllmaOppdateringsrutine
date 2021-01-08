@@ -74,6 +74,9 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
             260,
             265,
             401
+        },
+        "Gjodsling": {
+            610
         }
     }
     tiltakstyper = dictKategori[kategori]
@@ -100,6 +103,8 @@ def settGjTiltak(dict_internal, gjennomforteTiltak):
         return tiltakFinnes('Tynning', gjennomforteTiltak)[0]
     elif dict_internal["$RutineNavn$"] == u'EDEL_utført_ungskogpleie_forTESTING':
         return tiltakFinnes('Ungskogpleie',gjennomforteTiltak)[0]
+    elif dict_internal["$RutineNavn$"] == u'EDEL_utført_gjødsling_forTESTING':
+        return tiltakFinnes('Gjodsling',gjennomforteTiltak)[0]
     else:
         return True # Tiltak skal ikke lages
 

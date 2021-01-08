@@ -18,6 +18,8 @@ if runAsTool:
     hogstmaaned = int(arcpy.GetParameterAsText(3))
     gdb = arcpy.GetParameterAsText(4)
     slettTiltak = arcpy.GetParameter(5)
+    flyttFremTiltak = False
+    flyttTiltakAar = 10
     settGjTiltak = arcpy.GetParameter(6)
 
 else:
@@ -310,11 +312,51 @@ if ant_seleksjon != None:
 
                         arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
 
+                    # FREMSKRIV GAMLE FORESLÅTTE TILTAK. Brukes for gjødsling, viktig at hogst etc. avventer i 10 år etter gjødsling.
+
+
+                    if navn_rutine == u'EDEL_utført_gjødsling_forTESTING' and not slettTiltak:
+                        flyttFremTiltak = True
+                        pr(u"Gjødslingsrutine valgt, sletter foreslåtte tynningstiltak og fremskriver andre foreslåtte tiltak " + str(flyttTiltakAar) + u" år")
+
+                    if flyttFremTiltak:
+                        arcpy.SelectLayerByLocation_management(tiltakLYR, "within", geo, '', 'NEW_SELECTION')
+
+                        #flytter frem foreslåtte tiltak
+                        lavesteAar = 3000
+                        with arcpy.da.SearchCursor(tiltakLYR, ["STATUS","STATE", "AARSTALL"]) as cursor:
+
+                            for row in cursor:
+                                #Finner laveste år for foreslåtte aktive tiltak
+                                if row[0] == 1 and row[1] == 1 and row[2] < lavesteAar:
+                                    lavesteAar = row[2]
+
+                        lavestLovligeAar = hogstaar + flyttTiltakAar #lavest lovlig år er hogstår + gitt antall år frem i tid
+                        fremskrivesAar = lavestLovligeAar - lavesteAar # fremskrives år er antall år tiltak må fremskrives.
+
+
+                        if fremskrivesAar > 0:
+                            with arcpy.da.UpdateCursor(tiltakLYR, ["STATUS","STATE", "AARSTALL","TYPE", "ORDER_ID"]) as cursor:
+                                for row in cursor:
+                                    # Setter foreslåtte aktive tynningstiltak uten order-id til deleted.
+                                    if row[0] == 1 and row[1] == 1 and row[3] == 410 and row[4] == None:
+                                        row[1] = 0
+
+                                    #fremskriver foreslåtte aktive tiltak
+                                    if row[0] == 1 and row[1] == 1:
+
+                                        row[2] = row[2] + fremskrivesAar
+
+                                    cursor.updateRow(row)
+
+                        arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
+
+                    # NYE TILTAK
+
                     if valgt_rutine[u'endringer'].has_key(u'nye_tiltak'):
                         liste_nye_tiltak = valgt_rutine[u'endringer'][u'nye_tiltak']
                         arcpy.CreateFeatureclass_management("in_memory","Temp_TILTAK","POLYGON",template=tiltakLYR)
-
-
 
                         #GENERELLE TILTAK
                         if liste_nye_tiltak.has_key(u'generelle_tiltak'):
@@ -323,7 +365,7 @@ if ant_seleksjon != None:
                                 list_attributter = list()
                                 for att in gen_tiltak.keys():
                                     #at_d =gen_tiltak[att]
-                                    if unicode(gen_tiltak[att]).count("?")>0 or unicode(att).count("+")>0 or unicode(att).count("-")>0 or unicode(att).count("/")>0 or unicode(att).count("*")>0 :
+                                    if unicode(gen_tiltak[att]).count("$") >0 or unicode(gen_tiltak[att]).count("?")>0 or unicode(att).count("+")>0 or unicode(att).count("-")>0 or unicode(att).count("/")>0 or unicode(att).count("*")>0 :
                                         uttrykk = evaluering_oppdatering.Uttrykk(gen_tiltak[att],dict_internal,dict_external, gjennomforteTiltak, tabeller)
                                         ber_uttrykk = evaluering_oppdatering.evaluerTre(uttrykk)
                                         if ber_uttrykk[0]:
@@ -331,7 +373,7 @@ if ant_seleksjon != None:
 
                                 #a = lag_tiltak(layer_tiltak,gen_tiltak['type'],gen_tiltak['prioritet'],1,gen_tiltak['aarstall'],"",gen_tiltak['arealandel'],geo)
                                 pr("Lager generelt tiltak i bestand OID:" + str(oid_verdi) + " : " + gen_tiltak['kommentar'])
-                                a = lag_tiltak(os.path.join("in_memory","Temp_TILTAK"),gen_tiltak['type'],gen_tiltak['prioritet'],1,gen_tiltak['aarstall'],"",gen_tiltak['arealandel'],geo,hovednummer=dict_external_write['!HOVEDNR!'],bestandid=dict_external_write['!BESTAND_ID!'],eiendomid=dict_external_write['!EIENDOM_ID!'])
+                                a = lag_tiltak(os.path.join("in_memory","Temp_TILTAK"),gen_tiltak['type'],gen_tiltak['prioritet'],gen_tiltak['status'],gen_tiltak['aarstall'],"",gen_tiltak['arealandel'],geo,hovednummer=dict_external_write['!HOVEDNR!'],bestandid=dict_external_write['!BESTAND_ID!'],eiendomid=dict_external_write['!EIENDOM_ID!'])
                                 #a = lag_tiltak(allma_tiltaklag,gen_tiltak['type'],gen_tiltak['prioritet'],1,2020,"",gen_tiltak['arealandel'],geo)
 
                         #BETINGEDE TILTAK
@@ -364,7 +406,9 @@ if ant_seleksjon != None:
 
                         arcpy.Delete_management(os.path.join("in_memory","Temp_TILTAK"))
 
-
+            #TODO Lag funksjon for å skrive "e-post-tekst"
+            #Henter teignr via bestandets eiendomsid, så eier via Hovednummer
+            #EKS: " 'HOVEDNR' : Bestandnr x er ajourført med utført 'Tiltak' i teig x.
 
             del cur_bestand
 edit.stopOperation()

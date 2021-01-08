@@ -12,12 +12,12 @@ hogstmaaned = 3
 test_dict_internal_verdier = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned}
 test_dict_external_verdier = {"!MARKSLAG!":20,"!BONTRESLAG!":1}
 
-op_precedence = ["(",")","*","/","+","-","<","<=",">",">=","<>","==","and","or"]
+op_precedence = ["(",")","*","/","+","-","<","<=",">",">=","<>","==","and","or",'cc']
 op_aritmetriske = ["+","-","*","/"]
-op_logiske = ["==","ne",">=","<=",">","<"] # "ne" for "<>" og "!=" gir konflikter med andre operatorer/variabeltegn
+op_logiske = ["==","ne",">=","<=",">","<",'cc'] # "ne" for "<>" og "!=" gir konflikter med andre operatorer/variabeltegn
 op_and_or = ["||","&&"]
 
-ops = {"==":operator.eq,"ne":operator.ne,">":operator.gt,"<":operator.lt,">=":operator.ge,"<=":operator.le,"+":operator.add,"-":operator.sub,"*":operator.mul,"/":operator.div, "||":operator.or_,"&&":operator.and_}
+ops = {"==":operator.eq,"ne":operator.ne,">":operator.gt,"<":operator.lt,">=":operator.ge,"<=":operator.le,"+":operator.add,"-":operator.sub,"*":operator.mul,"/":operator.div, "||":operator.or_,"&&":operator.and_,"cc":operator.concat}
 
 def evaluer_funk(a,b,o):
     return o(a,b)
@@ -307,7 +307,10 @@ def isExternalVariable(setning,dict_external_verdier):
         try:
             if dict_external_verdier.has_key(setning_s):
                 if dict_external_verdier[setning_s] == None:
-                    return 0
+                    if setning_s == '!MERK!':
+                        return ""
+                    else:
+                        return 0
                 else:
                     return dict_external_verdier[setning_s]
         except:
@@ -383,6 +386,39 @@ def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, gj_Ti
             return None
     else:
         return None
+
+def isString(setning, dict_internal_verdier,dict_external_verdier, gj_Tiltak, tabeller):
+    #Brukes for å sette inn kommentar i Bestandet, setning må være formulert innenfor krøllparanteser, med '_' som mellomrom.
+
+    setning_s = setning.strip()
+
+    if setning_s[:1] == '{' and setning_s[-1:] == '}':
+        print "Er inne i isString"
+        tekst = setning_s[1:-1]
+
+
+        regex = re.compile(r'!.+?!|\$.+?\$')
+        # regex = re.compile(r'\$.*?\$')
+        mo = re.findall(regex, tekst)
+
+        if len(mo) > 0:
+            for i in range(len(mo)):
+
+                if mo[i][0] == '!':
+                    tekst = tekst.replace(str(mo[i]), str(dict_external_verdier[str(mo[i])]))
+
+                if mo[i][0] == '$':
+                    tekst = tekst.replace(str(mo[i]), str(dict_internal_verdier[str(mo[i])]))
+
+        tekst.strip()
+        tekst = tekst.replace('_',' ')
+        #if test_dict_external_verdier
+        print tekst
+        return tekst
+
+    else:
+        return None
+
 
 
 def evaluer_hviselse(a,b,o):
@@ -498,11 +534,18 @@ class Uttrykk:
                                             self.svar = kontr_table
                                             self.beregnet = True
 
-                                        else:
-                                             kontr_operand = isOperand(self.tekststreng)
-                                             if kontr_operand !=None:
-                                                 self.svar = kontr_operand
-                                                 self.beregnet = True
+                                        else: #Kun for bruk til tekst inn i !MERK! feltet i BESTAND
+                                            kontr_string = isString(self.tekststreng, dict_internal_verdier, dict_external_verdier, gj_Tiltak, tabeller)
+                                            if kontr_string != None:
+                                                print "isStringVar :" + self.tekststreng
+                                                self.svar = kontr_string
+                                                self.beregnet = True
+
+                                            else:
+                                                 kontr_operand = isOperand(self.tekststreng)
+                                                 if kontr_operand !=None:
+                                                     self.svar = kontr_operand
+                                                     self.beregnet = True
 
                 #sjekk om det er st?rre eller mindre enn etc.
                 #sjekk om det er et tall

@@ -1958,6 +1958,98 @@
           ]
         }
       }
+    },
+    {
+      "rutinenavn": "EDEL_utført_gjødsling_forTESTING",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=3 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
+      "endringer": {
+        "endring_bestand": {
+          "generelle_endringer": {
+            "attributtliste": [
+              {
+                "felt": "!ALDER!",
+                "endring": "Funksjon",
+                "verdi": "!ALDER! + ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                "log_beskrivelse": "ALDER satt til %%"
+              },
+              {
+                "felt": "!MERK!",
+                "endring": "Funksjon",
+                "verdi": "!MERK! cc {_Gjødslet_$NOW_YEAR$}",
+                "log_beskrivelse": "!MERK! satt til %%"
+              }
+            ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!HOGSTKLASSE!==3",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!HOGSTKLASSE!==4",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!FREMSKREVET_AAR! < $NOW_YEAR$",
+              "attributtliste": [
+                {
+                  "felt": "!FREMSKREVET_AAR!",
+                  "endring": "Funksjon",
+                  "verdi": "$NOW_YEAR$",
+                  "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+                }
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": [
+            ]
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "()settGjTiltak()",
+              "tiltaksliste": [
+                {
+                  "type": 610,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Gjødsling"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   ],
   "tabeller": [
