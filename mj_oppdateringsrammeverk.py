@@ -343,8 +343,9 @@ if ant_seleksjon != None:
                                         row[1] = 0
 
                                     #fremskriver foreslåtte aktive tiltak
-                                    if row[0] == 1 and row[1] == 1:
+                                    if row[0] == 1 and row[1] != 0:
 
+                                        #row[1] = row[1] #FIXME arcpy setter defaultverdi hvis ikke annet er angitt, i tilfellet state settes 1, selv om den opprinnelig sto som <null>
                                         row[2] = row[2] + fremskrivesAar
 
                                     cursor.updateRow(row)
@@ -411,8 +412,8 @@ if ant_seleksjon != None:
             #EKS: " 'HOVEDNR' : Bestandnr x er ajourført med utført 'Tiltak' i teig x.
 
             del cur_bestand
-edit.stopOperation()
-edit.stopEditing(True)
+            edit.stopOperation()
+            edit.stopEditing(True)
 
 
 ##    for r in rutiner:
