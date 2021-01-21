@@ -447,8 +447,8 @@ if ant_seleksjon != None:
                         LoggingTesting.logger(hovednr, bestandsnummer, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
                     
             del cur_bestand
-edit.stopOperation()
-edit.stopEditing(True)
+            edit.stopOperation()
+            edit.stopEditing(True)
 
 
 ##    for r in rutiner:
