@@ -2,6 +2,7 @@
   "oppdateringsrutiner": [
     {
       "rutinenavn": "EDEL_utført_flatehogst",
+      "tiltaksnavn": "flatehogst",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
@@ -1961,6 +1962,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_gjødsling_forTESTING",
+      "tiltaksnavn": "gjødsling",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=3 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {

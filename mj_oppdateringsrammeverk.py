@@ -8,6 +8,7 @@ import os
 import mj_evaluering_oppdatering as evaluering_oppdatering
 import mj_oppdateringsrutine_metoder
 import copy
+import LoggingTesting
 
 runAsTool = True
 
@@ -21,6 +22,8 @@ if runAsTool:
     flyttFremTiltak = False
     flyttTiltakAar = 10
     settGjTiltak = arcpy.GetParameter(6)
+    skrivLoggFil = True
+    folder = arcpy.GetParameterAsText(7)
 
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
@@ -126,6 +129,7 @@ dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutineNavn$"
 
 bestandLYR = 'BESTAND'
 tiltakLYR = 'TILTAK'
+eiendomLYR = 'EIENDOM'
 
 desc = arcpy.Describe(bestandLYR)
 path = desc.path
@@ -406,10 +410,42 @@ if ant_seleksjon != None:
 
                         arcpy.Delete_management(os.path.join("in_memory","Temp_TILTAK"))
 
-            #TODO Lag funksjon for å skrive "e-post-tekst"
-            #Henter teignr via bestandets eiendomsid, så eier via Hovednummer
-            #EKS: " 'HOVEDNR' : Bestandnr x er ajourført med utført 'Tiltak' i teig x.
+                    #LOGGING
+                    if os.path.isdir(folder): #Hvis filsti er lagt inn i loggfil-inputfeltet, skrives logg
+                        eierTABELL = os.path.join(gdb, u'SKOGEIER')
+                        hovednr = ""
+                        teignr = ""
+                        teignavn = ""
+                        fornavn = ""
+                        etternavn = ""
+                        epost = ""
+                        # Finn bestandsvariabler
+                        bestandsnummer = dict_external['!BEST_NR!']
+                        bestandsID = dict_external['!BESTAND_ID!']
+                        tiltak = valgt_rutine['tiltaksnavn']
 
+                        # Finn eiendomvariabler
+                        arcpy.SelectLayerByLocation_management(eiendomLYR, "contains", geo, '', 'NEW_SELECTION')
+                        valgtEiendom = arcpy.da.SearchCursor(eiendomLYR, ( 'HOVEDNR', "TEIG_NR", 'TEIGNAVN'))
+
+                        for teig in valgtEiendom:
+                            hovednr = teig[0]
+                            teignr = teig[1]
+                            teignavn = teig[2]
+
+                        hovedNrSQL = "HOVEDNR" + " = '" + str(hovednr) + "'"
+                        arcpy.SelectLayerByAttribute_management(eiendomLYR, "CLEAR_SELECTION")
+
+                        # Finn skogeiervariabler
+                        with arcpy.da.SearchCursor(eierTABELL, ('HOVEDNR', 'FORNAVN', 'ETTERNAVN', 'EPOST'),
+                                                   where_clause=hovedNrSQL) as cursor:
+                            for row in cursor:
+                                fornavn = row[1]
+                                etternavn = row[2]
+                                epost = row[3]
+
+                        LoggingTesting.logger(hovednr, bestandsnummer, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
+                    
             del cur_bestand
 edit.stopOperation()
 edit.stopEditing(True)
