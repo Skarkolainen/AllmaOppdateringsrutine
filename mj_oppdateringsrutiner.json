@@ -334,6 +334,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_planting/_flatehogst_og_planting",
+      "tiltaksnavn": "planting",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
@@ -684,6 +685,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_frøtrestilling",
+      "tiltaksnavn": "frøtrestilling",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=4 && ( !BONTRESLAG! == 1 || !BONTRESLAG! == 2 )",
       "endringer": {
         "endring_bestand": {
@@ -1090,6 +1092,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_tynning",
+      "tiltaksnavn": "Tynning",
       "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3 && !BEREGNINGSTYPE! == 0",
       "endringer": {
         "endring_bestand": {
@@ -1469,6 +1472,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_ungskogpleie_forTESTING",
+      "tiltaksnavn": "ungskogpleie",
       "forutsetninger": "(($NOW_YEAR$-!FREMSKREVET_AAR!)+!ALDER! < @AlderNesteHogstklasse@) && !HOGSTKLASSE! == 2",
       "endringer": {
         "endring_bestand": {

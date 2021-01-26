@@ -444,7 +444,7 @@ if ant_seleksjon != None:
                                 etternavn = row[2]
                                 epost = row[3]
 
-                        LoggingTesting.logger(hovednr, bestandsnummer, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
+                        mj_oppdateringsrutine_metoder.logger(hovednr, bestandsnummer, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
                     
             del cur_bestand
             edit.stopOperation()

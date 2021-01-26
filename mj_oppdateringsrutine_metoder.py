@@ -2,14 +2,14 @@
 
 # Metoder for spesialtilfeller
 import arcpy
+import os
 import re
+import codecs
+import datetime
 
 #gjTiltak = [{u'!Salesopp!': 0, u'!BESTAND_ID!': None, u'!SHAPE_Length!': 70.84597363054542, u'!ORDER_ID!': None, u'!AREALANDEL!': 0, u'!TYPE!': 240, u'!AARSTALL!': 2020, u'!STATE!': 1, u'!OBJECTID!': 1558656, u'!TILTAK_ID!': None, u'!PRIORITET!': 1, u'!KOMMENTAR!': None, u'!EIENDOM_ID!': 1091327, u'!SHAPE!': (307955.8510161943, 6573523.4723439645), u'!STATUS!': 2, u'!TAKSATOR_2!': None, u'!REG_AV!': u'SSK', u'!SHAPE_Area!': 322.62535189278424, u'!GlobalID!': u'{FA711739-7627-42D4-AB1B-7CDE8BF93F9F}', u'!HOVEDNR!': None, u'!ENDRET_AV!': u'SSK'},
 #            {u'!Salesopp!': 0,u'!BESTAND_ID!': None, u'!SHAPE_Length!': 70.84597363054542, u'!ORDER_ID!': None, u'!AREALANDEL!': 0, u'!TYPE!': 1, u'!AARSTALL!': 2023, u'!STATE!': 1, u'!OBJECTID!': 1558666, u'!TILTAK_ID!': None, u'!PRIORITET!': 1, u'!KOMMENTAR!': None, u'!EIENDOM_ID!': 1091327, u'!SHAPE!': (307955.8510161943, 6573523.4723439645), u'!STATUS!': 2, u'!TAKSATOR_2!': None, u'!REG_AV!': u'SSK', u'!SHAPE_Area!': 322.62535189278424, u'!GlobalID!': u'{F6ABCDFB-562D-49A0-AE71-0EE6AD5D3C99}', u'!HOVEDNR!': None, u'!ENDRET_AV!': u'SSK'}
 #            ]
-
-
-
 
 def finnTreAntall(tiltaket):
 
@@ -91,7 +91,6 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
     return (tiltakFinnes, tiltaket)
 
 
-
 def settGjTiltak(dict_internal, gjennomforteTiltak):
     if dict_internal["$RutineNavn$"] == u'EDEL_utført_flatehogst':
         return tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
@@ -109,7 +108,6 @@ def settGjTiltak(dict_internal, gjennomforteTiltak):
         return True # Tiltak skal ikke lages
 
 
-
 def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tabeller) : #omskriv så denne kan fjernes
     if metodeNavn == 'settGjTiltak':
         if dict_internal['$SettGjTiltak$'] is True:
@@ -120,4 +118,52 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
 
     else: return False
 
+
+def logger(hovednr, bestandsnr, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder):
+    variable = vars()
+    for k, v in variable.iteritems():
+        if isinstance(v, unicode):
+            v = unicode.strip(v)
+
+        if v == '' or v == None:
+            variable[k] = '<' + k.upper() + '>'
+            #pr(variable[k])
+
+
+    # Formuler setning
+
+    setning = ''
+    if variable['bestandsnr'] == '<BESTANDSNR>':
+        setning = u'{0};{1} {2};{3};Gjennomført {4} er ajourført på din eiendom på teig {6}'
+    else:
+        setning = u'{0};{1} {2};{3};Gjennomført {4} er ajourført på din eiendom i bestand nr {5} på teig {6}'
+
+    if variable['teignavn'] != '<TEIGNAVN>':
+        #pr("teignavn ulik <TEIGNAVN>")
+        #pr("teignavn: " + variable['teignavn'])
+        setning = setning + u' ({7})'
+
+    setning = setning.format(variable['hovednr'], variable['fornavn'], variable['etternavn'], variable['epost'],
+                             variable['tiltak'], variable['bestandsnr'], variable['teignr'], unicode.upper(unicode(variable['teignavn'])))
+
+    setning = setning + '\n'
+    #pr( setning)
+    # Opprett fil og skriv logg.
+    nu = datetime.datetime.now()
+    filnavn = u"AllmaAjourfLogg_" + nu.strftime('%d-%m-%y') + '.txt'
+
+    filsti = os.path.join(folder,filnavn)
+
+    nyFil = os.path.exists(filsti)
+
+
+
+
+    file = codecs.open(filsti,'a', encoding='utf-8')
+
+    if not nyFil:
+        file.write(u'Første linje\n')
+
+    file.write(setning)
+    file.close()
 
