@@ -422,6 +422,7 @@ if ant_seleksjon != None:
                         # Finn bestandsvariabler
                         bestandsnummer = dict_external['!BEST_NR!']
                         bestandsID = dict_external['!BESTAND_ID!']
+                        bestandOid = oid_verdi
                         tiltak = valgt_rutine['tiltaksnavn']
 
                         # Finn eiendomvariabler
@@ -444,7 +445,7 @@ if ant_seleksjon != None:
                                 etternavn = row[2]
                                 epost = row[3]
 
-                        mj_oppdateringsrutine_metoder.logger(hovednr, bestandsnummer, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
+                        mj_oppdateringsrutine_metoder.logger(hovednr, bestandsnummer, bestandsID, bestandOid, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
                     
             del cur_bestand
             edit.stopOperation()

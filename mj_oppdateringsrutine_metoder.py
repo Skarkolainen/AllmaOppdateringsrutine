@@ -119,7 +119,7 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
     else: return False
 
 
-def logger(hovednr, bestandsnr, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder):
+def logger(hovednr, bestandsnr, bestandsID, bestandOID, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder):
     variable = vars()
     for k, v in variable.iteritems():
         if isinstance(v, unicode):
@@ -134,16 +134,16 @@ def logger(hovednr, bestandsnr, teignr, teignavn, fornavn, etternavn, epost, til
 
     setning = ''
     if variable['bestandsnr'] == '<BESTANDSNR>':
-        setning = u'{0};{1} {2};{3};Gjennomført {4} er ajourført på din eiendom på teig {6}'
+        setning = u'{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom på teig {7}'
     else:
-        setning = u'{0};{1} {2};{3};Gjennomført {4} er ajourført på din eiendom i bestand nr {5} på teig {6}'
+        setning = u'{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom i bestand nr {7} på teig {8}'
 
     if variable['teignavn'] != '<TEIGNAVN>':
         #pr("teignavn ulik <TEIGNAVN>")
         #pr("teignavn: " + variable['teignavn'])
         setning = setning + u' ({7})'
 
-    setning = setning.format(variable['hovednr'], variable['fornavn'], variable['etternavn'], variable['epost'],
+    setning = setning.format(variable['hovednr'], variable['bestandsID'],variable['bestandOID'], variable['fornavn'], variable['etternavn'], variable['epost'],
                              variable['tiltak'], variable['bestandsnr'], variable['teignr'], unicode.upper(unicode(variable['teignavn'])))
 
     setning = setning + '\n'
@@ -156,13 +156,10 @@ def logger(hovednr, bestandsnr, teignr, teignavn, fornavn, etternavn, epost, til
 
     nyFil = os.path.exists(filsti)
 
-
-
-
     file = codecs.open(filsti,'a', encoding='utf-8')
 
     if not nyFil:
-        file.write(u'Første linje\n')
+        file.write(u'HOVEDNR;BESTANDSID;BESTANDSOID;NAVN;EPOST;SETNING\n')
 
     file.write(setning)
     file.close()
