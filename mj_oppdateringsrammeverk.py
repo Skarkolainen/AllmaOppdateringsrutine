@@ -8,7 +8,6 @@ import os
 import mj_evaluering_oppdatering as evaluering_oppdatering
 import mj_oppdateringsrutine_metoder
 import copy
-import LoggingTesting
 
 runAsTool = True
 
@@ -19,11 +18,13 @@ if runAsTool:
     hogstmaaned = int(arcpy.GetParameterAsText(3))
     gdb = arcpy.GetParameterAsText(4)
     slettTiltak = arcpy.GetParameter(5)
-    flyttFremTiltak = False
-    flyttTiltakAar = 10
     settGjTiltak = arcpy.GetParameter(6)
-    skrivLoggFil = True
-    folder = arcpy.GetParameterAsText(7)
+    ForutsettTiltakGeometri = arcpy.GetParameter(7) # Hvis sann, forutsetter at bestandet har et gjennomført tiltak som matcher valgt rutine, med identisk geometri
+    folder = arcpy.GetParameterAsText(8) #Skriver loggfil hvis feltet er fylt inn med gyldig sti
+
+
+    flyttFremTiltak = False # Benyttes kun i gjødslingsrutina, setter True hvis den er valgt.
+    flyttTiltakAar = 10 # Benyttes kun i gjødslingsrutina
 
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
@@ -49,9 +50,10 @@ def hentVerdierBestand(fcBestand,objectid):
     with arcpy.da.SearchCursor(fcBestand,'*',where_clause=oid_query) as cur_best1:
         fields = cur_best1.fields
         for r in cur_best1:
-            rec_teller += 1
-            for field in fields:
-                retur_dictionary["!" + field +"!"] = r[cur_best1.fields.index(field)]
+            if r[0] == objectid:
+                rec_teller +=1
+                for field in fields:
+                    retur_dictionary["!" + field +"!"] = r[cur_best1.fields.index(field)]
     if rec_teller==1:
         return retur_dictionary
     else:
@@ -170,6 +172,12 @@ if ant_seleksjon != None:
                 geo = best_row[1]
                 oid_verdi = best_row[0]
                 dict_external = hentVerdierBestand(bestandLYR,oid_verdi)
+                pr ("########\n bestands OID: " + str(oid_verdi))
+
+                # if dict_external == None:
+                #     continue
+
+
     ##    dict_external[u'!MARKSLAG!']=best_row[1]
     ##    dict_external[u'!BONTRESLAG!']=best_row[2]
     ##    dict_external[u'!HOGSTKLASSE!']=5           ####EKSEPM
@@ -177,11 +185,46 @@ if ant_seleksjon != None:
     ##    dict_external[u'!BER_VOLUMTOT!']=5
     ##    dict_external[u'!ALDER!']=5
 
-                arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
+                #arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
+
+                #Kontroller om bestandets utforming er identisk med gjennomført tiltak
+
+
+
+                geometriOk = False
+                if ForutsettTiltakGeometri:
+                    #finn geoometri på gjennomført tiltak
+                    arcpy.SelectLayerByLocation_management(tiltakLYR, "ARE_IDENTICAL_TO", geo, '', 'NEW_SELECTION')
+
+                    #finn tiltaksgruppe, sjekk om gj.ført tiltak er i samme gruppe
+
+                    gjennomforteTiltaker = []
+
+                    with arcpy.da.SearchCursor(tiltakLYR, ["STATUS", "STATE",'TYPE',"OBJECTID"]) as cursor:
+                        for row in cursor:
+                            if row[0] == 2 and row[1] != 0 :
+                                gjennomforteTiltaker.append(hentVerdierBestand(tiltakLYR, row[3]))
+
+                    pr ("GJ.f tiltak: " + str(gjennomforteTiltaker))
+
+                    if gjennomforteTiltaker and len(gjennomforteTiltaker) > 0:
+                        tiltakOK = mj_oppdateringsrutine_metoder.tiltakFinnes(valgt_rutine['tiltaksnavn'], gjennomforteTiltaker)
+                        if tiltakOK :
+                            geometriOk = True
+
+                    arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
+                else:
+                    geometriOk = True
+
+
+
+
+
 
                 #Kontroller om rutinen kan brukes:
                 init_forutsetninger_sjekk = False
-                if valgt_rutine.has_key(u'forutsetninger'):
+                if valgt_rutine.has_key(u'forutsetninger') and geometriOk:
                     init_forutsetninger=False
                     init_forutsetninger = valgt_rutine[u'forutsetninger']
                     uttrykk_forutsetninger = evaluering_oppdatering.Uttrykk(init_forutsetninger,dict_internal,dict_external, None, tabeller)
@@ -194,11 +237,19 @@ if ant_seleksjon != None:
                             else:
                                 init_forutsetninger_sjekk = False
                                 pr("Bestandet innfrir IKKE folgende grunnleggende betingelser: " + uttrykk_forutsetninger_eval[2])
+                                if os.path.isdir(folder):
+                                    mj_oppdateringsrutine_metoder.logger('init_forutsetninger',dict_external['!HOVEDNR!'],
+                                                                         dict_external['!BEST_NR!'],dict_external['!BESTAND_ID!'], oid_verdi,None,None,None,None,None,None,folder)
 
-                else:
+                elif(geometriOk):
                     init_forutsetninger_sjekk = True
                     pr(u"Ingen grunnleggende betingelser for rutinen.")
-
+                else:
+                    pr(u"Bestandet mangler riktig gjennomført tiltak, eller utformingen på tiltaket er ulik bestandet.")
+                    if os.path.isdir(folder):
+                        mj_oppdateringsrutine_metoder.logger('tiltak_geometri', dict_external['!HOVEDNR!'],
+                                                             dict_external['!BEST_NR!'], dict_external['!BESTAND_ID!'],
+                                                             oid_verdi, None, None, None, None, None, None, folder)
 
                 if init_forutsetninger_sjekk:
 
@@ -347,7 +398,7 @@ if ant_seleksjon != None:
                                         row[1] = 0
 
                                     #fremskriver foreslåtte aktive tiltak
-                                    if row[0] == 1 and row[1] == 1:
+                                    if row[0] == 1 and row[1] != 0:
 
                                         row[2] = row[2] + fremskrivesAar
 
@@ -445,7 +496,8 @@ if ant_seleksjon != None:
                                 etternavn = row[2]
                                 epost = row[3]
 
-                        mj_oppdateringsrutine_metoder.logger(hovednr, bestandsnummer, bestandsID, bestandOid, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
+                        mj_oppdateringsrutine_metoder.logger(None,hovednr, bestandsnummer, bestandsID,
+                                                             bestandOid, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder)
                     
             del cur_bestand
             edit.stopOperation()

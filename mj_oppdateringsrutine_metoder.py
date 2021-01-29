@@ -86,7 +86,9 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
         for tiltak in gjennomforteTiltak:
             if tiltak['!TYPE!'] == type:
                 tiltaket = tiltak
+
                 tiltakFinnes = True
+                tiltaksKategori = type
 
     return (tiltakFinnes, tiltaket)
 
@@ -119,7 +121,7 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
     else: return False
 
 
-def logger(hovednr, bestandsnr, bestandsID, bestandOID, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder):
+def logger(feil, hovednr, bestandsnr, bestandsID, bestandOID, teignr, teignavn, fornavn, etternavn, epost, tiltak, folder):
     variable = vars()
     for k, v in variable.iteritems():
         if isinstance(v, unicode):
@@ -132,16 +134,24 @@ def logger(hovednr, bestandsnr, bestandsID, bestandOID, teignr, teignavn, fornav
 
     # Formuler setning
 
+
+
     setning = ''
-    if variable['bestandsnr'] == '<BESTANDSNR>':
-        setning = u'{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom på teig {7}'
+    if feil == 'init_forutsetninger':
+        setning = u'FEIL;{0};{1};{2};{3} {4};{5};Bestandet innfrir IKKE grunnleggende betingelser, må ajourføres manuelt'
+    elif feil == 'tiltak_geometri':
+        setning = u'FEIL;{0};{1};{2};{3} {4};{5};Bestandet mangler gjennomført tiltak som matcher rutine og/eller bestandets geometri, må ajourføres manuelt'
+    elif variable['bestandsnr'] == '<BESTANDSNR>':
+        setning = u'{6};{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom på teig {7}'
     else:
-        setning = u'{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom i bestand nr {7} på teig {8}'
+        setning = u'{6};{0};{1};{2};{3} {4};{5};Gjennomført {6} er ajourført på din eiendom i bestand nr {7} på teig {8}'
 
     if variable['teignavn'] != '<TEIGNAVN>':
         #pr("teignavn ulik <TEIGNAVN>")
         #pr("teignavn: " + variable['teignavn'])
-        setning = setning + u' ({7})'
+        setning = setning + u' ({9})'
+
+
 
     setning = setning.format(variable['hovednr'], variable['bestandsID'],variable['bestandOID'], variable['fornavn'], variable['etternavn'], variable['epost'],
                              variable['tiltak'], variable['bestandsnr'], variable['teignr'], unicode.upper(unicode(variable['teignavn'])))
@@ -159,7 +169,7 @@ def logger(hovednr, bestandsnr, bestandsID, bestandOID, teignr, teignavn, fornav
     file = codecs.open(filsti,'a', encoding='utf-8')
 
     if not nyFil:
-        file.write(u'HOVEDNR;BESTANDSID;BESTANDSOID;NAVN;EPOST;SETNING\n')
+        file.write(u'TILTAK;HOVEDNR;BESTANDSID;BESTANDSOID;NAVN;EPOST;SETNING\n')
 
     file.write(setning)
     file.close()
