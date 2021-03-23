@@ -929,7 +929,7 @@
                 {
                   "type": 120,
                   "prioritet": 2,
-                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+2:$NOW_YEAR$+3",
+                  "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$:$NOW_YEAR$+1",
                   "status": 1,
                   "arealandel": 100,
                   "kommentar": "Markberedning"
