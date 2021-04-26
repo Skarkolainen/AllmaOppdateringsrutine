@@ -463,7 +463,8 @@ if ant_seleksjon != None:
 
                     #LOGGING
                     if os.path.isdir(folder): #Hvis filsti er lagt inn i loggfil-inputfeltet, skrives logg
-                        eierTABELL = os.path.join(gdb, u'SKOGEIER')
+                        #FIXME må håndteres for lokal kjøring
+                        eierTABELL = os.path.join(gdb, u'mjosen.DBO.SKOGEIER')
                         hovednr = ""
                         teignr = ""
                         teignavn = ""

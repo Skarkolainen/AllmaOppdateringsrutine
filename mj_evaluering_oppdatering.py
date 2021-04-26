@@ -634,7 +634,7 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
     tabellnavn = velgTabell(tabellnavn,bestandet,gjTiltaksliste )
     bestandsEgenskaper = copy.deepcopy(bestandet)
     for key,val in bestandsEgenskaper.items():
-        if key == '!MERK!':
+        if key == '!MERK!' or key == '!INFO_TIL_TAKSATOR!':
             # hopp over merknad, oppstår problem med æøå
             continue
 

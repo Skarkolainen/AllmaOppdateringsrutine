@@ -55,16 +55,16 @@ if ant_seleksjon != None:
 
     with arcpy.da.UpdateCursor(tiltakLYR, ('OID@', 'SHAPE@', '*')) as cur_tiltak:
     # cur_bestand = arcpy.UpdateCursor(bestandLYR,fields=('OID@','SHAPE@','*'))
-    for best_row in cur_tiltak:
-        geo = best_row[1]
-        oid_verdi = best_row[0]
-        # Sjekk om det er rutine for tiltaket;hvis ja sjekk om bestandet geometri er lik bestandet, ellers hopp over.
+        for best_row in cur_tiltak:
+            geo = best_row[1]
+            oid_verdi = best_row[0]
+            # Sjekk om det er rutine for tiltaket;hvis ja sjekk om bestandet geometri er lik bestandet, ellers hopp over.
 
-        # Hent bestandet, send bestandsegenskaper til dict_external
+            # Hent bestandet, send bestandsegenskaper til dict_external
 
-        dict_external = rverk.hentVerdierBestand(bestandLYR, oid_verdi)
+            dict_external = rverk.hentVerdierBestand(bestandLYR, oid_verdi)
 
-        rverk.pr("########\n bestands OID: " + str(oid_verdi))
+            rverk.pr("########\n bestands OID: " + str(oid_verdi))
 
 	# Geometri lik bestandet, kjør vanlig oppdatering, sjekk av grunnleggende forutsetninger.
 	# Årstall hentes fra tiltaket.
