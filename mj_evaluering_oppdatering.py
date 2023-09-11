@@ -3,7 +3,7 @@ import re
 import json
 import os
 import copy
-import arcpy
+#import arcpy
 import mj_oppdateringsrutine_metoder
 hogstaar = 2019
 hogstmaaned = 3
@@ -648,7 +648,7 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
 
     if tabellnavn == 'Hogstklasser':
         nyAlder = bestandet[u'!ALDER!'] + dict_internal['$NOW_YEAR$'] - bestandet[u'!FREMSKREVET_AAR!']
-        arcpy.AddMessage("NYALDER" + str(nyAlder))
+        #arcpy.AddMessage("NYALDER" + str(nyAlder))
         for table in tables:
             if table['tabellnavn'] == tabellnavn:
                 hogstklasseTabell = table
