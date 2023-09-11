@@ -637,6 +637,12 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
         if key == '!MERK!':
             # hopp over merknad, oppstår problem med æøå
             continue
+        if key == '!TAKSATOR_2!':
+            # hopp over taksator2, oppstår problem med æøå
+            continue
+        if key == '!INFO_TIL_TAKSATOR!':
+            # hopp over INFO_TIL_TAKSATOR, oppstår problem med æøå
+            continue
 
         bestandsEgenskaper[key] = '{}'.format(bestandsEgenskaper[key])
 

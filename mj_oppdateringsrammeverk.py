@@ -10,6 +10,7 @@ import mj_oppdateringsrutine_metoder
 import copy
 
 runAsTool = True
+arcpy.SetLogHistory(False)
 
 if runAsTool:
     filnavn_konfig = arcpy.GetParameterAsText(0)
@@ -21,6 +22,9 @@ if runAsTool:
     flyttFremTiltak = False
     flyttTiltakAar = 10
     settGjTiltak = arcpy.GetParameter(6)
+    hensyn_eksisterende_tiltak = False
+    #hensyn_eksisterende_tiltak = arcpy.GetParameter(7)
+    #korriger_tiltak_geometri = arcpy.GetParameter(8)
 
 else:
     filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
@@ -166,12 +170,6 @@ if ant_seleksjon != None:
                 geo = best_row[1]
                 oid_verdi = best_row[0]
                 dict_external = hentVerdierBestand(bestandLYR,oid_verdi)
-    ##    dict_external[u'!MARKSLAG!']=best_row[1]
-    ##    dict_external[u'!BONTRESLAG!']=best_row[2]
-    ##    dict_external[u'!HOGSTKLASSE!']=5           ####EKSEPM
-    ##    dict_external[u'!BER_VOLUDAA!']=5
-    ##    dict_external[u'!BER_VOLUMTOT!']=5
-    ##    dict_external[u'!ALDER!']=5
 
                 arcpy.Delete_management(os.path.join("in_memory", "Temp_TILTAK"))
 
@@ -295,7 +293,7 @@ if ant_seleksjon != None:
 
 
                     # Tiltak
-                    
+
                     #SLETT GAMLE FORESLÅTTE TILTAK
 
                     if slettTiltak:
@@ -393,6 +391,9 @@ if ant_seleksjon != None:
                                                 if ber_uttrykk[0]:
                                                     tilt[att] = ber_uttrykk[1]
 
+                                        #Sjekk om det finnes planlagte tiltak lik det som nå skal foreslås i bestandet allerede, i så fall la være å sette inn tiltak.
+                                        if hensyn_eksisterende_tiltak:
+                                            l_t = sjekk_lignende_tiltak(tiltak_type=tilt['type'], aarstall=tilt['aarstall'])
                                         #a = lag_tiltak(layer_tiltak,gen_tiltak['type'],gen_tiltak['prioritet'],1,gen_tiltak['aarstall'],"",gen_tiltak['arealandel'],geo)
                                         pr("Lager betinget tiltak i bestand OID: " + str(oid_verdi) + " : " + betingelse + " " +tilt['kommentar'])
                                         a = lag_tiltak(os.path.join("in_memory","Temp_TILTAK"),tilt['type'],tilt['prioritet'],tilt['status'],tilt['aarstall'],"",tilt['arealandel'],geo,hovednummer=dict_external_write['!HOVEDNR!'],bestandid=dict_external_write['!BESTAND_ID!'],eiendomid=dict_external_write['!EIENDOM_ID!'])
