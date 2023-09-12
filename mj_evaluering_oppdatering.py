@@ -3,7 +3,7 @@ import re
 import json
 import os
 import copy
-#import arcpy
+import arcpy
 import mj_oppdateringsrutine_metoder
 hogstaar = 2019
 hogstmaaned = 3
@@ -351,6 +351,23 @@ def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, gj_Ti
             elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
                 return dict_external_verdier[u'!TREANT_DAA!']
 
+        elif tabellnavn == 'TreantallEtterForyngelse_Ikke_Markberedt' or tabellnavn == 'TreantallEtterForyngelse_Markberedt':
+
+            tiltakFinnes = mj_oppdateringsrutine_metoder.tiltakFinnes('Planting', gj_Tiltak)
+            # Forutsetter at gjennomført ungskogpleietiltak finnes.
+            if tiltakFinnes[0]:
+                treAntall =  mj_oppdateringsrutine_metoder.finnTreAntall(tiltakFinnes[1])
+
+                if treAntall: #Treantall ble funnet i kommentarfelt, dette benyttes
+                    return treAntall
+                #Treantall ble ikke funnet i tiltaket, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
+                elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
+                    return dict_external_verdier[u'!TREANT_DAA!']
+
+            # Ikke funnet gjennomført tiltak, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
+            elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
+                return dict_external_verdier[u'!TREANT_DAA!']
+
         #finn riktig tabell
         for table in tabeller:
             if table['tabellnavn'] == tabellnavn:
@@ -648,7 +665,7 @@ def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutine
 
     if tabellnavn == 'Hogstklasser':
         nyAlder = bestandet[u'!ALDER!'] + dict_internal['$NOW_YEAR$'] - bestandet[u'!FREMSKREVET_AAR!']
-        #arcpy.AddMessage("NYALDER" + str(nyAlder))
+        arcpy.AddMessage("NYALDER" + str(nyAlder))
         for table in tables:
             if table['tabellnavn'] == tabellnavn:
                 hogstklasseTabell = table
