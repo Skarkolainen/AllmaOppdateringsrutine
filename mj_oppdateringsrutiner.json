@@ -692,12 +692,12 @@
               {
                 "felt": "!REG_VOLUMDAA!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
               },
               {
                 "felt": "!REG_VOLUMTOT!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
               },
               {
                 "felt": "!BEREGNINGSTYPE!",
@@ -1042,12 +1042,12 @@
               {
                 "felt": "!REG_VOLUMDAA!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
               },
               {
                 "felt": "!REG_VOLUMTOT!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
               },
               {
                 "felt": "!BEREGNINGSTYPE!",
@@ -1392,12 +1392,12 @@
               {
                 "felt": "!REG_VOLUMDAA!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
               },
               {
                 "felt": "!REG_VOLUMTOT!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
               },
               {
                 "felt": "!BEREGNINGSTYPE!",
@@ -1744,12 +1744,12 @@
               {
                 "felt": "!REG_VOLUMDAA!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
               },
               {
                 "felt": "!REG_VOLUMTOT!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
               },
               {
                 "felt": "!BEREGNINGSTYPE!",
@@ -2097,12 +2097,12 @@
                 "felt": "!REG_VOLUMDAA!",
                 "endring": "Tabell",
                 "verdi": "FrotrestillingREGVOLDAA;!MARKSLAG!",
-                "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
               },
               {
                 "felt": "!REG_VOLUMTOT!",
                 "endring": "Blank",
-                "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
               },
               {
                 "felt": "!BEREGNINGSTYPE!",
@@ -2616,12 +2616,12 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Blank",
-                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Blank",
-                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
             },
@@ -2710,12 +2710,12 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Blank",
-                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Blank",
-                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
             },
@@ -2754,13 +2754,13 @@
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
                   "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.7 : 0",
-                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
                   "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.7 : 0",
-                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
             },
@@ -2792,12 +2792,45 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Blank",
-                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==5",
+              "attributtliste": [
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! * 0.75",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
                   "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.75 : 0",
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Funksjon",
+                  "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.75 : 0",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
             },
