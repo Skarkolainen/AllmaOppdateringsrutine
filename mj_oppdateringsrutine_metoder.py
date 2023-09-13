@@ -95,7 +95,7 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
 def settGjTiltak(dict_internal, gjennomforteTiltak):
     if dict_internal["$RutineNavn$"] == u'EDEL_utført_flatehogst':
         return tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
-    elif dict_internal["$RutineNavn$"] == u'EDEL_utført_planting/_flatehogst_og_planting':
+    elif dict_internal["$RutineNavn$"][:20] == u'EDEL_utført_planting':
         return tiltakFinnes('Planting', gjennomforteTiltak)[0]
     elif dict_internal["$RutineNavn$"] == u'EDEL_utført_frøtrestilling':
         return tiltakFinnes(u'Frøtrestilling', gjennomforteTiltak)[0]
