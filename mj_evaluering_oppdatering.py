@@ -360,13 +360,10 @@ def isTableVariable(setning, dict_internal_verdier, dict_external_verdier, gj_Ti
 
                 if treAntall: #Treantall ble funnet i kommentarfelt, dette benyttes
                     return treAntall
-                #Treantall ble ikke funnet i tiltaket, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
-                elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
-                    return dict_external_verdier[u'!TREANT_DAA!']
 
-            # Ikke funnet gjennomført tiltak, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
-            elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
-                return dict_external_verdier[u'!TREANT_DAA!']
+
+        #Treantall ble ikke funnet i tiltaket, fortsetter med tabelloppslag
+
 
         #finn riktig tabell
         for table in tabeller:
