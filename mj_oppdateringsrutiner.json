@@ -2486,7 +2486,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_tynning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3 && !BEREGNINGSTYPE! == 0",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -2622,6 +2622,51 @@
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Blank",
                   "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==3",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! * 0.65",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Funksjon",
+                  "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.65 : 0",
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Funksjon",
+                  "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.65 : 0",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
             },
