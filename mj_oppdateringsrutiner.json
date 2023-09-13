@@ -2486,7 +2486,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_tynning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -2970,7 +2970,7 @@
               ]
             },
             {
-              "betingelser": "!HOGSTKLASSE! == 4 && (!MARKSLAG! >= 11 && !MARKSLAG! <= 17  || !MARKSLAG! == 20 && !BONTRESLAG! == 1)",
+              "betingelser": "!BONTRESLAG! < 3 && !HOGSTKLASSE! == 4 && (!MARKSLAG! >= 11 && !MARKSLAG! <= 17  || !MARKSLAG! == 20 && !BONTRESLAG! == 1)",
               "tiltaksliste": [
                 {
                   "type": 610,
