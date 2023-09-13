@@ -755,14 +755,14 @@
               },
               {
                 "felt": "!TREANT_DAA!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
@@ -1105,14 +1105,14 @@
               },
               {
                 "felt": "!TREANT_DAA!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Ikke_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Ikke_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Ikke_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Ikke_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
@@ -1455,14 +1455,14 @@
               },
               {
                 "felt": "!TREANT_DAA!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
@@ -1807,14 +1807,14 @@
               },
               {
                 "felt": "!TREANT_DAA!",
-                "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Ikke_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "endring": "Funksjon",
+                "verdi": "@TreantallEtterForyngelse_Ikke_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA satt til %%"
               },
               {
                 "felt": "!TREANT_DAA_FOER!",
                 "endring": "Tabell",
-                "verdi": "TreantallEtterForyngelse_Ikke_Markberedt;!BONTRESLAG!;!MARKSLAG!",
+                "verdi": "@TreantallEtterForyngelse_Ikke_Markberedt@",
                 "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
               },
               {
@@ -3644,6 +3644,7 @@
     {
       "tabellnavn": "TreantallEtterForyngelse_Markberedt",
       "Beskrivelse": "Anbefalt tetthet ved planting (!BONTRESLAG!,!MARKSLAG!)",
+	  "oppslagskode": "!BONTRESLAG!;!MARKSLAG!",
       "1": {
         "6": 90,
         "8": 90,
@@ -3669,6 +3670,7 @@
     {
       "tabellnavn": "TreantallEtterForyngelse_Ikke_Markberedt",
       "Beskrivelse": "Anbefalt tetthet ved planting uten markberedning (!BONTRESLAG!,!MARKSLAG!)",
+	  "oppslagskode": "!BONTRESLAG!;!MARKSLAG!",
       "1": {
         "6": 100,
         "8": 100,
