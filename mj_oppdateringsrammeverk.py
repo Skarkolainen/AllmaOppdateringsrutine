@@ -78,9 +78,14 @@ def finnRutinenummer(filnavn,rutinenavn):
     else:
         return None
 
-def pr(text):
-    arcpy.AddMessage(unicode(text))
-    print unicode(text)
+def pr(text, status=""):
+    if status == "warning":
+        arcpy.AddWarning(unicode(text))
+    elif status == "error":
+        arcpy.AddError(unicode(text))
+    else:
+        arcpy.AddMessage(unicode(text))
+    print (unicode(text))
 
 
 def GetSelectionCount(layer):
