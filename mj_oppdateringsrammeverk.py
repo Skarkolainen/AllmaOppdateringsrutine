@@ -78,10 +78,10 @@ def finnRutinenummer(filnavn,rutinenavn):
     else:
         return None
 
-def pr(text, status=""):
-    if status == "warning":
+def pr(text, severity=""):
+    if severity == "warning":
         arcpy.AddWarning(unicode(text))
-    elif status == "error":
+    elif severity == "error":
         arcpy.AddError(unicode(text))
     else:
         arcpy.AddMessage(unicode(text))
@@ -153,6 +153,7 @@ if runAsTool==False:
 ant_seleksjon = GetSelectionCount(bestandLYR)
 if ant_seleksjon != None:
     aa = 1
+    innfriddeIkkeGrunnl = []
 
     #cur_bestand = arcpy.da.SearchCursor(bestand_fc,('BESTAND_ID','MARKSLAG','BONTRESLAG','OID@','SHAPE@'),where_clause="BESTAND_ID IN "+str(tuple(BESTAND_IDer)))
 
@@ -193,6 +194,7 @@ if ant_seleksjon != None:
                             else:
                                 init_forutsetninger_sjekk = False
                                 pr("Bestandet innfrir IKKE folgende grunnleggende betingelser: " + uttrykk_forutsetninger_eval[2])
+                                innfriddeIkkeGrunnl.append(oid_verdi)
 
                 else:
                     init_forutsetninger_sjekk = True
@@ -421,6 +423,13 @@ if ant_seleksjon != None:
             edit.stopOperation()
             edit.stopEditing(True)
 
+    if innfriddeIkkeGrunnl.count > 0:
+        pr(u"\nFolgende bestand innfridde ikke grunnleggende betingelser for valgt rutine (OBJECTID):","warning")
+        oider = ""
+        for i in innfriddeIkkeGrunnl:
+            oider+="{}, ".format(i)
+        pr(oider, "error")
+        pr("\n")
 
 ##    for r in rutiner:
 ##        print r[u'rutinenavn']
