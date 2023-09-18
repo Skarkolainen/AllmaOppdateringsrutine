@@ -237,7 +237,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 500,
@@ -560,7 +560,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 500,
@@ -910,7 +910,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1260,7 +1260,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1612,7 +1612,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1964,7 +1964,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -2288,7 +2288,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 520,
@@ -2944,7 +2944,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 410,
@@ -3424,7 +3424,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 260,
@@ -3555,7 +3555,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "()settGjTiltak()",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 610,
