@@ -121,3 +121,22 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
     else: return False
 
 
+def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
+    if settGjTiltak:
+        tiltaketFinnes = False
+        if rutinenavn == u'EDEL_utført_flatehogst':
+            tiltaketFinnes = tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
+        elif rutinenavn[:20] == u'EDEL_utført_planting':
+            tiltaketFinnes = tiltakFinnes('Planting', gjennomforteTiltak)[0]
+        elif rutinenavn == u'EDEL_utført_frøtrestilling':
+            tiltaketFinnes = tiltakFinnes(u'Frøtrestilling', gjennomforteTiltak)[0]
+        elif rutinenavn == u'EDEL_utført_tynning':
+            tiltaketFinnes = tiltakFinnes('Tynning', gjennomforteTiltak)[0]
+        elif rutinenavn == u'EDEL_utført_ungskogpleie_forTESTING':
+            tiltaketFinnes = tiltakFinnes('Ungskogpleie', gjennomforteTiltak)[0]
+        elif rutinenavn == u'EDEL_utført_gjødsling_forTESTING':
+            tiltaketFinnes = tiltakFinnes('Gjodsling', gjennomforteTiltak)[0]
+
+        return not tiltaketFinnes
+
+    return False  # Tiltak skal ikke lages
