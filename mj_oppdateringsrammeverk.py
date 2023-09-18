@@ -5,11 +5,11 @@
 import json
 import arcpy
 import os
-import mj_evaluering_oppdatering as evaluering_oppdatering
-import mj_oppdateringsrutine_metoder
+import mj_evaluering_oppdatering_2 as evaluering_oppdatering
+import mj_oppdateringsrutine_metoder as metoder
 import copy
 
-runAsTool = True
+runAsTool = len(arcpy.GetParameterAsText(0))>0
 arcpy.SetLogHistory(False)
 
 if runAsTool:
@@ -27,12 +27,17 @@ if runAsTool:
     #korriger_tiltak_geometri = arcpy.GetParameter(8)
 
 else:
-    filnavn_konfig = u'c:\\AllmaToolbox\\Scripts\\oppdateringsrutiner.json'
-    navn_rutine = u'EDEL_sluttavvirkning'
-    hogstaar = 2020
+    filnavn_konfig = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\scripts\\mj_oppdateringsrutiner.json'
+    #navn_rutine = u'EDEL_utfÃ¸rt_planting/_flatehogst_og_planting_med_markberedning'
+    navn_rutine = u'EDEL_utfort_flatehogst'
+    hogstaar = 2023
     hogstmaaned = 3
+    settGjTiltak = True
+    slettTiltak = False
+    flyttFremTiltak = False
+    hensyn_eksisterende_tiltak = False
 
-    gdb = u'C:\\allma_effekt\\utsjekk_eidskog_13sept2019.gdb'
+    gdb = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\NO2_2023_1_2.gdb'
     #gdb = u'C:\\allma_effekt\\a.gdb'
     arcpy.env.workspace = gdb
 
@@ -131,7 +136,7 @@ def lag_tiltak(fc_tiltak_ut,t_type,t_prio,t_status,t_aar,t_kommentar,t_arealande
 
 
 
-dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutineNavn$":navn_rutine,"$SettGjTiltak$":settGjTiltak}
+dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutiNavn$": "'"+navn_rutine+"'","$SettGjTiltak$":settGjTiltak}
 
 bestandLYR = 'BESTAND'
 tiltakLYR = 'TILTAK'
@@ -148,7 +153,7 @@ if runAsTool==False:
     arcpy.MakeFeatureLayer_management(tiltak_fc,tiltakLYR)
 
 if runAsTool==False:
-    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (909968181,909968209,909968139)")
+    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (2485221)")
 
 ant_seleksjon = GetSelectionCount(bestandLYR)
 if ant_seleksjon != None:
@@ -423,7 +428,7 @@ if ant_seleksjon != None:
             edit.stopOperation()
             edit.stopEditing(True)
 
-    if innfriddeIkkeGrunnl.count > 0:
+    if len(innfriddeIkkeGrunnl) > 0:
         pr(u"\nFolgende bestand innfridde ikke grunnleggende betingelser for valgt rutine (OBJECTID):","warning")
         oider = ""
         for i in innfriddeIkkeGrunnl:
