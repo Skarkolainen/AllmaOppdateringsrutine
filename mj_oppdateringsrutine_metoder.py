@@ -75,6 +75,12 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
             265,
             401
         },
+        "Forhandsrydding":{
+            400,
+            401,
+            402,
+            403
+        },
         "Gjodsling": {
             610
         }
@@ -124,18 +130,21 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
 def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
     if settGjTiltak:
         tiltaketFinnes = False
-        if rutinenavn == u'EDEL_utført_flatehogst':
+        if rutinenavn == 'EDEL_utført_flatehogst':
             tiltaketFinnes = tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
         elif rutinenavn[:20] == u'EDEL_utført_planting':
             tiltaketFinnes = tiltakFinnes('Planting', gjennomforteTiltak)[0]
-        elif rutinenavn == u'EDEL_utført_frøtrestilling':
+        elif rutinenavn == 'EDEL_utført_frøtrestilling':
             tiltaketFinnes = tiltakFinnes(u'Frøtrestilling', gjennomforteTiltak)[0]
-        elif rutinenavn == u'EDEL_utført_tynning':
+        elif rutinenavn == 'EDEL_utført_tynning':
             tiltaketFinnes = tiltakFinnes('Tynning', gjennomforteTiltak)[0]
-        elif rutinenavn == u'EDEL_utført_ungskogpleie_forTESTING':
+        elif rutinenavn == 'EDEL_utført_ungskogpleie':
             tiltaketFinnes = tiltakFinnes('Ungskogpleie', gjennomforteTiltak)[0]
-        elif rutinenavn == u'EDEL_utført_gjødsling_forTESTING':
+        elif rutinenavn == 'EDEL_utført_gjødsling':
             tiltaketFinnes = tiltakFinnes('Gjodsling', gjennomforteTiltak)[0]
+        elif rutinenavn == 'EDEL_utført_forhåndsrydding_før_tynning':
+            tiltaketFinnes = tiltakFinnes('Forhandsrydding', gjennomforteTiltak)[0]
+
 
         return not tiltaketFinnes
 

@@ -29,7 +29,7 @@ if runAsTool:
 else:
     filnavn_konfig = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\scripts\\mj_oppdateringsrutiner.json'
     #navn_rutine = u'EDEL_utfÃ¸rt_planting/_flatehogst_og_planting_med_markberedning'
-    navn_rutine = u'EDEL_utfort_flatehogst'
+    navn_rutine = u'EDEL_utført_flatehogst'
     hogstaar = 2023
     hogstmaaned = 3
     settGjTiltak = True
@@ -135,8 +135,8 @@ def lag_tiltak(fc_tiltak_ut,t_type,t_prio,t_status,t_aar,t_kommentar,t_arealande
 
 
 
+dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutiNavn$": navn_rutine,"$SettGjTiltak$":settGjTiltak}
 
-dict_internal = {"$NOW_YEAR$":hogstaar,"$NOW_MONTH$":hogstmaaned, "$RutiNavn$": "'"+navn_rutine+"'","$SettGjTiltak$":settGjTiltak}
 
 bestandLYR = 'BESTAND'
 tiltakLYR = 'TILTAK'
@@ -153,7 +153,7 @@ if runAsTool==False:
     arcpy.MakeFeatureLayer_management(tiltak_fc,tiltakLYR)
 
 if runAsTool==False:
-    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (2485221)")
+    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (2485061 )")
 
 ant_seleksjon = GetSelectionCount(bestandLYR)
 if ant_seleksjon != None:
