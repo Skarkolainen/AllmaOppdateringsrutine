@@ -1,10 +1,10 @@
 #coding=utf-8
 import re
-#import mj_evaluering_oppdatering as evaluering_oppdatering_1
+import mj_evaluering_oppdatering as evaluering_oppdatering_1
 import mj_oppdateringsrutine_metoder as metoder
 
-#def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutiner ):
-#    return evaluering_oppdatering_1.tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutiner)
+def tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutiner ):
+    return evaluering_oppdatering_1.tabellOppslag(bestandet, dict_internal, oppslagskode, gjTiltaksliste, rutiner)
 
 def replace_tableLookups(setning, dict_internal_verdier, dict_external_verdier, gj_Tiltak, tabeller):
 
@@ -82,21 +82,12 @@ def replace_tableLookups(setning, dict_internal_verdier, dict_external_verdier, 
     result = re.sub(pattern, lookup, setning)
     return result
 
-def evaluateExpression(expression):
-    try:
-
-        result = eval(expression)
-
-        return result
-    except SyntaxError:
-        raise ValueError("\n Invalid expression syntax:\n {} \n".format(expression))
-    except Exception as e:
-        raise ValueError("Error evaluating the expression: {}".format(e))
 
 def replace_variables_in_string(input_string, variable_dict, enclosingChar):
 
     #pattern = r'!(\w+)!'
-    pattern = re.compile(r'{0}(.*?){0}'.format(re.escape(enclosingChar)))
+    #pattern = re.compile(r'{0}(.*?){0}'.format(re.escape(enclosingChar)), re.UNICODE)
+    pattern = r'{0}(.*?){0}'.format(re.escape(enclosingChar))
 
     def replace_variable(match):
         # Extract the variable name from the match
@@ -106,12 +97,12 @@ def replace_variables_in_string(input_string, variable_dict, enclosingChar):
 
         if variable_name != empty and variable_name not in variable_dict:
             raise ValueError("Variable '{}' not found in the dictionary.".format(variable_name))
-
-        return str(variable_dict.get(variable_name, match.group(0)))
+        res = variable_dict.get(variable_name, match.group(0))
+        return unicode(res)
         #return variable_dict[variable_name]
 
     #  re.sub to replace all matched variables in the input string
-    result_string = re.sub(pattern, replace_variable, input_string)
+    result_string = re.sub(pattern, replace_variable, input_string, flags=re.UNICODE )
 
     return result_string
 
@@ -120,10 +111,14 @@ def reArrangeTernaryExpression(input_string):
     ## onTrue if condition else onFalse
     if input_string.count("?") > 1:
         raise NotImplementedError("Rearrangement of more than one ternary is not implemented. Rewrite expression to Python syntax.")
+    try:
+        oldTernary = input_string.strip()
+        condition, rest = oldTernary.split('?')
+        onTrue, onFalse = rest.split(':')
 
-    oldTernary = input_string.strip()
-    condition, rest = oldTernary.split('?')
-    onTrue, onFalse = rest.split(':')
+    except Exception as e:
+        raise ValueError("Error in rearranging ternary({}) : {}".format(input_string, e))
+
 
     pythonTernary = "({}) if ({}) else ({})".format(onTrue, condition, onFalse)
     return pythonTernary
@@ -146,7 +141,7 @@ def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
         setning = replace_tableLookups(setning, dict_internal, dict_external, gj_tiltak, tabeller)
 
     # Contains ternary expression
-    if setning.count("?") > 0:
+    if setning.count("?") > 0 and setning.count(":") > 0:
         setning = reArrangeTernaryExpression(setning)
 
     setning = (setning.replace('&&',' and ')
@@ -155,9 +150,16 @@ def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
 
     #print setning
 
-    result = evaluateExpression(setning)
+    result = None
+    try:
+
+        result = eval(setning)
+    except SyntaxError:
+        raise ValueError("\n Invalid expression syntax:\n {} \n".format(setning))
+    #except Exception as e:
+    #    raise ValueError("Error evaluating the expression({}) : {}".format(setning, e))
     #print("resultat: {}".format(result))
-    return (Result != None, result, setning )
+    return (result != None, result, setning )
 
 def evaluerTre(value):
     return value
