@@ -20,14 +20,14 @@ def replace_tableLookups(setning, dict_internal_verdier, dict_external_verdier, 
                 treAntall =  metoder.finnTreAntall(tiltakFinnes[1])
 
                 if treAntall: #Treantall ble funnet i kommentarfelt, dette benyttes
-                    return treAntall
+                    return str(treAntall)
                 #Treantall ble ikke funnet i tiltaket, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
                 elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
-                    return dict_external_verdier[u'!TREANT_DAA!']
+                    return str(dict_external_verdier[u'!TREANT_DAA!'])
 
             # Ikke funnet gjennomført tiltak, benytter treantall/daa hvis den er større enn null og mindre enn treantallFØR
             elif dict_external_verdier[u'!TREANT_DAA!'] > 0 and dict_external_verdier[u'!TREANT_DAA!'] < dict_external_verdier[u'!TREANT_DAA_FOER!']:
-                return dict_external_verdier[u'!TREANT_DAA!']
+                return str(dict_external_verdier[u'!TREANT_DAA!'])
 
         elif tabellnavn == 'TreantallEtterForyngelse_Ikke_Markberedt' or tabellnavn == 'TreantallEtterForyngelse_Markberedt':
 
@@ -37,7 +37,7 @@ def replace_tableLookups(setning, dict_internal_verdier, dict_external_verdier, 
                 treAntall =  metoder.finnTreAntall(tiltakFinnes[1])
 
                 if treAntall: #Treantall ble funnet i kommentarfelt, dette benyttes
-                    return treAntall
+                    return str(treAntall)
 
 
         #Treantall ble ikke funnet i tiltaket, fortsetter med tabelloppslag
