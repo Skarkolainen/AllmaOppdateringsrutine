@@ -2987,6 +2987,272 @@
       }
     },
     {
+      "rutinenavn": "EDEL_utført_forhåndsrydding_før_tynning",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! > 2 && !BEREGNINGSTYPE! == 0",
+      "endringer": {
+        "endring_bestand": {
+          "generelle_endringer": {
+            "attributtliste": [
+              {
+                "felt": "!ALDER!",
+                "endring": "Funksjon",
+                "verdi": "!ALDER! + ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                "log_beskrivelse": "ALDER satt til %%"
+              },
+              {
+                  "felt": "!BER_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!BER_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "BER_VOLUMTOT satt til %%"
+                },
+              {
+                "felt": "!TREANT_DAA_FOER!",
+                "endring": "Blank",
+                "log_beskrivelse": "TREANT_DAA_FOER satt til %%"
+              },
+              {
+                "felt": "!HOYDEBAR!",
+                "endring": "Blank",
+                "log_beskrivelse": "HOYDEBAR satt til %%"
+              },
+              {
+                "felt": "!HOYDELAUV!",
+                "endring": "Blank",
+                "log_beskrivelse": "HOYDELAUV satt til %%"
+              },
+              {
+                "felt": "!SJIKTNING!",
+                "endring": "Absolutt verdi",
+                "verdi": 0,
+                "log_beskrivelse": "SJIKTNING satt til %%"
+              },
+              {
+                "felt": "!MIDDELDIAMETER!",
+                "endring": "Blank",
+                "log_beskrivelse": "MIDDELDIAMETER satt til %%"
+              },
+              {
+                "felt": "!ANT_PR_M3!",
+                "endring": "Blank",
+                "log_beskrivelse": "ANT_PR_M3 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_4 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_4!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_5 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_5!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "TRESLAG_6 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_6!",
+                "endring": "Blank",
+                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
+              }
+            ]
+          },
+          "betingede_endringer": [
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.85",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "round (!TREANT_DAA! * 0.80 / 10.0) * 10",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
+                  "felt": "!DIM_U_15!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! - !DIM_15_25! - !DIM_O_25! if (!TREANT_DAA! - !DIM_15_25! - !DIM_O_25!) > 0 else 0",
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==4",
+              "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! )",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "round (!TREANT_DAA! * 0.9 / 10.0) * 10",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
+                  "felt": "!DIM_U_15!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! - !DIM_15_25! - !DIM_O_25! if (!TREANT_DAA! - !DIM_15_25! - !DIM_O_25!) > 0 else 0",
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
+              "attributtliste": [
+                {
+                  "felt": "!GRUNNFLATE!",
+                  "endring": "Funksjon",
+                  "verdi": "!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! )",
+                  "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!TREANT_DAA!",
+                  "endring": "Funksjon",
+                  "verdi": "round (!TREANT_DAA! * 0.95 / 5.0) * 5",
+                  "log_beskrivelse": "TREANT_DAA satt til %%"
+                },
+                {
+                  "felt": "!DIM_U_15!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!DIM_15_25!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! - !DIM_O_25! if (!TREANT_DAA! - !DIM_O_25!) > 0 else 0",
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!DIM_O_25!",
+                  "endring": "Funksjon",
+                  "verdi": "!TREANT_DAA! - !DIM_15_25! if (!TREANT_DAA! - !DIM_15_25!) > 0 else 0",
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMDAA!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+                },
+                {
+                  "felt": "!REG_VOLUMTOT!",
+                  "endring": "Blank",
+                  "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+                }
+              ]
+            },
+            {
+              "betingelser": "!FREMSKREVET_AAR! < $NOW_YEAR$",
+              "attributtliste": [
+                {
+                  "felt": "!FREMSKREVET_AAR!",
+                  "endring": "Funksjon",
+                  "verdi": "$NOW_YEAR$",
+                  "log_beskrivelse": "FREMSKREVET_AAR satt til %%"
+                }
+              ]
+            }
+          ]
+        },
+        "nye_tiltak": {
+          "generelle_tiltak": {
+            "tiltaksliste": [
+              {
+                "type": 410,
+                "prioritet": 2,
+                "aarstall": "$NOW_YEAR$+1",
+                "status": 1,
+                "arealandel": 100,
+                "kommentar": "Tynning"
+              }
+            ]
+          },
+          "betingede_tiltak": [
+            {
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, $RutiNavn$, gj_tiltak)",
+              "tiltaksliste": [
+                {
+                  "type": 402,
+                  "prioritet": 2,
+                  "aarstall": "$NOW_YEAR$",
+                  "status": 2,
+                  "arealandel": 100,
+                  "kommentar": "Forhåndsrydding før tynning"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
       "rutinenavn": "EDEL_utført_ungskogpleie",
       "forutsetninger": "(($NOW_YEAR$-!FREMSKREVET_AAR!)+!ALDER! < @AlderNesteHogstklasse@) && !HOGSTKLASSE! == 2",
       "endringer": {
