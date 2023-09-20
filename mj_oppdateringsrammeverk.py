@@ -58,10 +58,13 @@ def hentVerdierBestand(fcBestand,objectid):
             rec_teller += 1
             for field in fields:
                 retur_dictionary["!" + field +"!"] = r[cur_best1.fields.index(field)]
+
     if rec_teller==1:
         return retur_dictionary
     else:
-        return None
+        error = "Count of cur_best1 != 1 ( {} )".format(oid_query)
+        pr(error, "error")
+        raise ValueError(error)
 
 def finnRutinenummer(filnavn,rutinenavn):
     rutineteller=None
