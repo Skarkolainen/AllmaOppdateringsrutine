@@ -123,6 +123,12 @@ def reArrangeTernaryExpression(input_string):
     pythonTernary = "({}) if ({}) else ({})".format(onTrue, condition, onFalse)
     return pythonTernary
 
+def toInt(value):
+    try:
+        return int(value)
+    except:
+        return 0
+
 def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
     #print "uttrykk: {}".format(setning)
 
@@ -146,7 +152,7 @@ def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
 
     setning = (setning.replace('&&',' and ')
                .replace('||', ' or ')
-               .replace('ne','!='))
+               )
 
     #print setning
 
