@@ -2609,30 +2609,18 @@
           },
           "betingede_endringer": [
             {
-              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
               "attributtliste": [
-                {
-                  "felt": "!HOGSTKLASSE!",
-                  "endring": "Tabell",
-                  "verdi": "Hogstklasser;",
-                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
-                },
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) *  0.65",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
-                },
-                {
-                  "felt": "!HOYDE!",
-                  "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
-                  "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.65",
+                  "verdi": "!TREANT_DAA! * 0.75",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2658,24 +2646,12 @@
               ]
             },
             {
-              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==3",
+              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==5",
               "attributtliste": [
-                {
-                  "felt": "!HOGSTKLASSE!",
-                  "endring": "Tabell",
-                  "verdi": "Hogstklasser;",
-                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
-                },
-                {
-                  "felt": "!HOYDE!",
-                  "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0 ",
-                  "log_beskrivelse": "HOYDE satt til %%"
-                },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.65 if !TREANT_DAA! > 0 else 0",
+                  "verdi": "!TREANT_DAA! * 0.75 if !TREANT_DAA! > 0 else 0",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2691,13 +2667,13 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
-                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMDAA! > 0 else None",
+                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMDAA! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
-                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMTOT! > 0 else None",
+                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMTOT! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
@@ -2797,18 +2773,30 @@
               ]
             },
             {
-              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
               "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) *  0.65",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.75",
+                  "verdi": "!TREANT_DAA! * 0.65",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2834,12 +2822,24 @@
               ]
             },
             {
-              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==5",
+              "betingelser": "!BEREGNINGSTYPE! == 9 && !HOGSTKLASSE!==3",
               "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0 ",
+                  "log_beskrivelse": "HOYDE satt til %%"
+                },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.75 if !TREANT_DAA! > 0 else 0",
+                  "verdi": "!TREANT_DAA! * 0.65 if !TREANT_DAA! > 0 else 0",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2855,13 +2855,13 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
-                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMDAA! > 0 else None",
+                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMDAA! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
-                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMTOT! > 0 else None",
+                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMTOT! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
@@ -3106,36 +3106,36 @@
           },
           "betingede_endringer": [
             {
-              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
               "attributtliste": [
-                {
-                  "felt": "!HOGSTKLASSE!",
-                  "endring": "Tabell",
-                  "verdi": "Hogstklasser;",
-                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
-                },
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.85",
+                  "verdi": "!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! )",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
-                },
-                {
-                  "felt": "!HOYDE!",
-                  "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
-                  "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "round (!TREANT_DAA! * 0.80 / 10.0) * 10",
+                  "verdi": "round (!TREANT_DAA! * 0.95 / 5.0) * 5",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
                   "felt": "!DIM_U_15!",
+                  "endring": "Absolutt verdi",
+                  "verdi": 0,
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!DIM_15_25!",
                   "endring": "Funksjon",
-                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_U_15!) + toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
+                  "log_beskrivelse": "DIM_U_15 satt til %%"
+                },
+                {
+                  "felt": "!DIM_O_25!",
+                  "endring": "Funksjon",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
@@ -3196,36 +3196,36 @@
               ]
             },
             {
-              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==5",
+              "betingelser": "!BEREGNINGSTYPE! == 0 && !HOGSTKLASSE!==3",
               "attributtliste": [
+                {
+                  "felt": "!HOGSTKLASSE!",
+                  "endring": "Tabell",
+                  "verdi": "Hogstklasser;",
+                  "log_beskrivelse": "HOGSTKLASSE satt til %%"
+                },
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! )",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.85",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
+                },
+                {
+                  "felt": "!HOYDE!",
+                  "endring": "Funksjon",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "round (!TREANT_DAA! * 0.95 / 5.0) * 5",
+                  "verdi": "round (!TREANT_DAA! * 0.80 / 10.0) * 10",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
                   "felt": "!DIM_U_15!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 0,
-                  "log_beskrivelse": "DIM_U_15 satt til %%"
-                },
-                {
-                  "felt": "!DIM_15_25!",
                   "endring": "Funksjon",
-                  "verdi": "(!TREANT_DAA! - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
-                  "log_beskrivelse": "DIM_U_15 satt til %%"
-                },
-                {
-                  "felt": "!DIM_O_25!",
-                  "endring": "Funksjon",
-                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_U_15!) + toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
@@ -3240,6 +3240,7 @@
                 }
               ]
             },
+
             {
               "betingelser": "!FREMSKREVET_AAR! < $NOW_YEAR$",
               "attributtliste": [
