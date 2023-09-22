@@ -661,6 +661,78 @@
         "endring_bestand": {
           "generelle_endringer": {
             "attributtliste": [
+                            {
+                "felt": "!REG_VOLUMDAA!",
+                "endring": "Funksjon",
+                "verdi": "!REG_VOLUMDAA! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
+              },
+              {
+                "felt": "!REG_VOLUMTOT!",
+                "endring": "Funksjon",
+                "verdi": "!REG_VOLUMTOT! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
+              },
+              {
+                "felt": "!BEREGNINGSTYPE!",
+                "endring": "Funksjon",
+                "verdi": "!BEREGNINGSTYPE! if !HOGSTKLASSE! == 1 else 0",
+                "log_beskrivelse": "BEREGNINGSTYPE satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_G!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_G! if !HOGSTKLASSE! == 1 else 0",
+                "log_beskrivelse": "VOLUMPROS_G satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_F!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_F! if !HOGSTKLASSE! == 1 else 0",
+                "log_beskrivelse": "VOLUMPROS_F satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_L!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_L! if !HOGSTKLASSE! == 1 else 0",
+                "log_beskrivelse": "VOLUMPROS_L satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_4!",
+                "endring": "Funksjon",
+                "verdi": "!TRESLAG_4! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "TRESLAG_4 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_4!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_4! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_5!",
+                "endring": "Funksjon",
+                "verdi": "!TRESLAG_5! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "TRESLAG_5 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_5!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_5! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
+              },
+              {
+                "felt": "!TRESLAG_6!",
+                "endring": "Funksjon",
+                "verdi": "!TRESLAG_6! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "TRESLAG_6 satt til %%"
+              },
+              {
+                "felt": "!VOLUMPROS_6!",
+                "endring": "Funksjon",
+                "verdi": "!VOLUMPROS_6! if !HOGSTKLASSE! == 1 else None",
+                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
+              },
               {
                 "felt": "!HOGSTKLASSE!",
                 "endring": "Absolutt verdi",
@@ -688,70 +760,6 @@
                 "felt": "!BER_VOLUMTOT!",
                 "endring": "Blank",
                 "log_beskrivelse": "BER_VOLUMTOT satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMDAA!",
-                "endring": "Blank",
-                "log_beskrivelse": "REG_VOLUMDAA satt til %%"
-              },
-              {
-                "felt": "!REG_VOLUMTOT!",
-                "endring": "Blank",
-                "log_beskrivelse": "REG_VOLUMTOT satt til %%"
-              },
-              {
-                "felt": "!BEREGNINGSTYPE!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "BEREGNINGSTYPE satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_G!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_G satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_F!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_F satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_L!",
-                "endring": "Absolutt verdi",
-                "verdi": 0,
-                "log_beskrivelse": "VOLUMPROS_L satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_4!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_4 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_4!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_4 satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_5!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_5 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_5!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_5 satt til %%"
-              },
-              {
-                "felt": "!TRESLAG_6!",
-                "endring": "Blank",
-                "log_beskrivelse": "TRESLAG_6 satt til %%"
-              },
-              {
-                "felt": "!VOLUMPROS_6!",
-                "endring": "Blank",
-                "log_beskrivelse": "VOLUMPROS_6 satt til %%"
               },
               {
                 "felt": "!TREANT_DAA!",
@@ -2637,7 +2645,7 @@
                 {
                   "felt": "!HOYDE!",
                   "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0 ",
                   "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
