@@ -3103,7 +3103,7 @@
                 {
                   "felt": "!DIM_U_15!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! - !DIM_15_25! - !DIM_O_25! if (!TREANT_DAA! - !DIM_15_25! - !DIM_O_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_U_15!) + toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
@@ -3148,7 +3148,7 @@
                 {
                   "felt": "!DIM_U_15!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! - !DIM_15_25! - !DIM_O_25! if (!TREANT_DAA! - !DIM_15_25! - !DIM_O_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_U_15!) + toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
@@ -3187,13 +3187,13 @@
                 {
                   "felt": "!DIM_15_25!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! - !DIM_O_25! if (!TREANT_DAA! - !DIM_O_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_O_25!) if (!TREANT_DAA! - toInt(!DIM_O_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
                   "felt": "!DIM_O_25!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! - !DIM_15_25! if (!TREANT_DAA! - !DIM_15_25!) > 0 else 0",
+                  "verdi": "(!TREANT_DAA! - toInt(!DIM_15_25!) if (!TREANT_DAA! - toInt(!DIM_15_25!) ) > 0 else 0 ) if toInt(!DIM_15_25!) + toInt(!DIM_O_25!) > 0 else 0",
                   "log_beskrivelse": "DIM_U_15 satt til %%"
                 },
                 {
