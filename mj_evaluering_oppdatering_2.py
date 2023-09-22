@@ -165,7 +165,7 @@ def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
     #except Exception as e:
     #    raise ValueError("Error evaluating the expression({}) : {}".format(setning, e))
     #print("resultat: {}".format(result))
-    return (result != None, result, setning )
+    return (True, result, setning )
 
 def evaluerTre(value):
     return value
