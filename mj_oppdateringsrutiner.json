@@ -2620,7 +2620,7 @@
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "!GRUNNFLATE! * 0.65",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) *  0.65",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
                 },
                 {
@@ -2691,13 +2691,13 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.65 : 0",
+                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMDAA! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.65 : 0",
+                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.65 if !REG_VOLUMTOT! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
@@ -2714,7 +2714,7 @@
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "!GRUNNFLATE! * 0.70",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.70",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
                 },
                 {
@@ -2785,13 +2785,13 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.7 : 0",
+                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.7 if !REG_VOLUMDAA! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.7 : 0",
+                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.7 if !REG_VOLUMTOT! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
@@ -2802,7 +2802,7 @@
                 {
                   "felt": "!GRUNNFLATE!",
                   "endring": "Funksjon",
-                  "verdi": "!GRUNNFLATE! * 0.75",
+                  "verdi": "(!GRUNNFLATE! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75",
                   "log_beskrivelse": "GRUNNFLATE satt til %%"
                 },
                 {
@@ -2855,13 +2855,13 @@
                 {
                   "felt": "!REG_VOLUMDAA!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMDAA! > 0 ? !REG_VOLUMDAA! * 0.75 : 0",
+                  "verdi": "(!REG_VOLUMDAA! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMDAA! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMDAA satt til %%"
                 },
                 {
                   "felt": "!REG_VOLUMTOT!",
                   "endring": "Funksjon",
-                  "verdi": "!REG_VOLUMTOT! > 0 ? !REG_VOLUMTOT! * 0.75 : 0",
+                  "verdi": "(!REG_VOLUMTOT! * (1 + !TILVEKSTPROS!/100.0) ** ($NOW_YEAR$ - !FREMSKREVET_AAR! ) ) * 0.75 if !REG_VOLUMTOT! > 0 else None",
                   "log_beskrivelse": "REG_VOLUMTOT satt til %%"
                 }
               ]
