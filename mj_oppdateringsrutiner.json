@@ -2637,13 +2637,13 @@
                 {
                   "felt": "!HOYDE!",
                   "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0",
                   "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.65",
+                  "verdi": "!TREANT_DAA! * 0.65 if !TREANT_DAA! > 0 else 0",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2731,13 +2731,13 @@
                 {
                   "felt": "!HOYDE!",
                   "endring": "Funksjon",
-                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!)",
+                  "verdi": "!HOYDE! + 0.2 * ( $NOW_YEAR$ - !FREMSKREVET_AAR!) if !HOYDE! > 0 else 0",
                   "log_beskrivelse": "HOYDE satt til %%"
                 },
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.70",
+                  "verdi": "!TREANT_DAA! * 0.70 if !TREANT_DAA! > 0 else 0",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
@@ -2807,7 +2807,7 @@
                 {
                   "felt": "!TREANT_DAA!",
                   "endring": "Funksjon",
-                  "verdi": "!TREANT_DAA! * 0.75",
+                  "verdi": "!TREANT_DAA! * 0.75 if !TREANT_DAA! > 0 else 0",
                   "log_beskrivelse": "TREANT_DAA satt til %%"
                 },
                 {
