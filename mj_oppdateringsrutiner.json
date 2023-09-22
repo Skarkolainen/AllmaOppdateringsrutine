@@ -2,7 +2,7 @@
   "oppdateringsrutiner": [
     {
       "rutinenavn": "EDEL_utført_flatehogst",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=3 && !BONTRESLAG! ne 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE!>=3 && !BONTRESLAG! != 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -333,7 +333,7 @@
     },
 	{
       "rutinenavn": "EDEL_utført_markberedning ved flatehogst",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! ne 2 && !BONTRESLAG! ne 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30 && !HOGSTKLASSE! != 2 && !BONTRESLAG! != 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -3327,7 +3327,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! <= 10",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! <= 10",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_F_G!",
@@ -3350,7 +3350,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3391,7 +3391,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_F! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_F! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3426,7 +3426,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! > 10 && !ANTALLPROS_L! < 60 && !ANTALLPROS_G! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_F!",
@@ -3461,7 +3461,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! >= 10 && !ANTALLPROS_F! >= 10",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3502,7 +3502,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_F! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_F! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3537,7 +3537,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 60 && !ANTALLPROS_L! < 80 && !ANTALLPROS_G! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_F!",
@@ -3572,7 +3572,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! >= 5 && !ANTALLPROS_F! >= 5",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! >= 5 && !ANTALLPROS_F! >= 5",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3613,7 +3613,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_F! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_F! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_G!",
@@ -3648,7 +3648,7 @@
               ]
             },
             {
-              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! ne 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! == 0",
+              "betingelser": "!ANTALLPROS_F_G! + !ANTALLPROS_F_F! + !ANTALLPROS_F_L! != 100 && !ANTALLPROS_L! >= 80 && !ANTALLPROS_L! < 100 && !ANTALLPROS_G! == 0",
               "attributtliste": [
                 {
                   "felt": "!ANTALLPROS_F!",
