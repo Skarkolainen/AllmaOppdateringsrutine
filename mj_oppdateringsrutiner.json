@@ -656,7 +656,7 @@
     },
 	{
       "rutinenavn": "EDEL_utført_planting/_flatehogst_og_planting_med_markberedning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && !HOGSTKLASSE! != 2 && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1014,7 +1014,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_planting/_flatehogst_og_planting_uten_markberedning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && !HOGSTKLASSE! != 2 && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1372,7 +1372,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_planting_treslagsblanding/_flatehogst_og_planting_med_markberedning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && !HOGSTKLASSE! != 2 && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
@@ -1732,7 +1732,7 @@
     },
     {
       "rutinenavn": "EDEL_utført_planting_treslagsblanding/_flatehogst_og_planting_uten_markberedning",
-      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && (!HOGSTKLASSE! > 3 || !HOGSTKLASSE! <2) && !BONTRESLAG! < 3",
+      "forutsetninger": "!MARKSLAG!>0 && !MARKSLAG!<30  && !HOGSTKLASSE! != 2 && !BONTRESLAG! < 3",
       "endringer": {
         "endring_bestand": {
           "generelle_endringer": {
