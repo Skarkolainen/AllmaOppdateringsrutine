@@ -2148,7 +2148,7 @@
                 {
                   "type": 260,
                   "prioritet": 2,
-                  "aarstall": "$NOW_YEAR$ + 6 - !ALDER! if $NOW_MONTH$<7? else $NOW_YEAR$+7 - !ALDER!",
+                  "aarstall": "$NOW_YEAR$ + 6 - !ALDER! if $NOW_MONTH$<7 else $NOW_YEAR$+7 - !ALDER!",
                   "status": 1,
                   "arealandel": 100,
                   "kommentar": "Ungskogpleie"
@@ -2161,7 +2161,7 @@
                 {
                   "type": 205,
                   "prioritet": 2,
-                  "aarstall": "$NOW_YEAR$ + 8 - !ALDER! if $NOW_MONTH$<7? else $NOW_YEAR$+9 - !ALDER!",
+                  "aarstall": "$NOW_YEAR$ + 8 - !ALDER! if $NOW_MONTH$<7 else $NOW_YEAR$+9 - !ALDER!",
                   "status": 1,
                   "arealandel": 100,
                   "kommentar": "Ettersyn, evnt. ungskogpleie"
@@ -2174,7 +2174,7 @@
                 {
                   "type": 205,
                   "prioritet": 2,
-                  "aarstall": "$NOW_YEAR$ + 15 - !ALDER! if $NOW_MONTH$<7? else $NOW_YEAR$ + 16 - !ALDER!",
+                  "aarstall": "$NOW_YEAR$ + 15 - !ALDER! if $NOW_MONTH$<7 else $NOW_YEAR$ + 16 - !ALDER!",
                   "status": 1,
                   "arealandel": 100,
                   "kommentar": "Ettersyn, evnt. ungskogpleie"
