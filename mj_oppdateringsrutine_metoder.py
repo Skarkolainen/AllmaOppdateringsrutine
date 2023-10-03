@@ -70,7 +70,7 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
             157,
             597
         },
-        u"Frøtrestilling": {
+        "Frotrestilling": {
             520
         },
         "Tynning": {
@@ -96,6 +96,10 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
         },
         "Gjodsling": {
             610
+        }
+        ,
+        "Suppleringsplanting": {
+            200
         }
     }
     tiltakstyper = dictKategori[kategori]
@@ -148,7 +152,7 @@ def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
         elif rutinenavn[:20] == u'EDEL_utført_planting':
             tiltaketFinnes = tiltakFinnes('Planting', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_frøtrestilling':
-            tiltaketFinnes = tiltakFinnes(u'Frøtrestilling', gjennomforteTiltak)[0]
+            tiltaketFinnes = tiltakFinnes('Frotrestilling', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_tynning':
             tiltaketFinnes = tiltakFinnes('Tynning', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_ungskogpleie':
@@ -157,7 +161,8 @@ def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
             tiltaketFinnes = tiltakFinnes('Gjodsling', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_forhåndsrydding_før_tynning':
             tiltaketFinnes = tiltakFinnes('Forhandsrydding', gjennomforteTiltak)[0]
-
+        elif rutinenavn == 'EDEL_utført_suppleringsplanting':
+            tiltaketFinnes = tiltakFinnes('Suppleringsplanting', gjennomforteTiltak)[0]
 
         return not tiltaketFinnes
 
