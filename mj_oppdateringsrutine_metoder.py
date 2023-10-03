@@ -91,15 +91,17 @@ def tiltakFinnes(kategori, gjennomforteTiltak ):
         "Forhandsrydding":{
             400,
             401,
-            402,
-            403
+            402
         },
         "Gjodsling": {
             610
-        }
-        ,
+        },
         "Suppleringsplanting": {
             200
+        },
+        "Markberedning": {
+            120,
+            122
         }
     }
     tiltakstyper = dictKategori[kategori]
@@ -147,11 +149,11 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
 def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
     if settGjTiltak:
         tiltaketFinnes = False
-        if rutinenavn == 'EDEL_utført_flatehogst':
+        if rutinenavn == 'Flatehogst':
             tiltaketFinnes = tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
         elif rutinenavn[:20] == u'EDEL_utført_planting':
             tiltaketFinnes = tiltakFinnes('Planting', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_frøtrestilling':
+        elif rutinenavn == 'Frotrestilling':
             tiltaketFinnes = tiltakFinnes('Frotrestilling', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_tynning':
             tiltaketFinnes = tiltakFinnes('Tynning', gjennomforteTiltak)[0]
@@ -159,10 +161,12 @@ def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
             tiltaketFinnes = tiltakFinnes('Ungskogpleie', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_gjødsling':
             tiltaketFinnes = tiltakFinnes('Gjodsling', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_forhåndsrydding_før_tynning':
+        elif rutinenavn[:27] == 'EDEL_utført_forhåndsrydding':
             tiltaketFinnes = tiltakFinnes('Forhandsrydding', gjennomforteTiltak)[0]
         elif rutinenavn == 'EDEL_utført_suppleringsplanting':
             tiltaketFinnes = tiltakFinnes('Suppleringsplanting', gjennomforteTiltak)[0]
+        elif rutinenavn == 'Markberedning':
+            tiltaketFinnes = tiltakFinnes('Markberedning', gjennomforteTiltak)[0]
 
         return not tiltaketFinnes
 
