@@ -152,6 +152,7 @@ def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
 
     setning = (setning.replace('&&',' and ')
                .replace('||', ' or ')
+               .replace('None', '0') # En del verdier som det testes mot i bestandet er null/ None, men brukes forventer int..
                )
 
     #print setning
