@@ -1594,40 +1594,7 @@
               }
             ]
           },
-          "betingede_endringer": [
-            {
-              "betingelser": "!BONTRESLAG! == 1",
-              "attributtliste": [
-                {
-                  "felt": "!ANTALLPROS_F_G!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F_F!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
-                }
-              ]
-            },
-            {
-              "betingelser": "!BONTRESLAG! == 2",
-              "attributtliste": [
-                {
-                  "felt": "!ANTALLPROS_F_G!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F_F!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
-                }
-              ]
-            }
-          ]
+          "betingede_endringer": []
         },
         "nye_tiltak": {
           "generelle_tiltak": {
@@ -1954,40 +1921,7 @@
               }
             ]
           },
-          "betingede_endringer": [
-            {
-              "betingelser": "!BONTRESLAG! == 1",
-              "attributtliste": [
-                {
-                  "felt": "!ANTALLPROS_F_G!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F_F!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
-                }
-              ]
-            },
-            {
-              "betingelser": "!BONTRESLAG! == 2",
-              "attributtliste": [
-                {
-                  "felt": "!ANTALLPROS_F_G!",
-                  "endring": "Blank",
-                  "log_beskrivelse": "ANTALLPROS_F_G satt til %%"
-                },
-                {
-                  "felt": "!ANTALLPROS_F_F!",
-                  "endring": "Absolutt verdi",
-                  "verdi": 100,
-                  "log_beskrivelse": "ANTALLPROS_F_F satt til %%"
-                }
-              ]
-            }
-          ]
+          "betingede_endringer": []
         },
         "nye_tiltak": {
           "generelle_tiltak": {
