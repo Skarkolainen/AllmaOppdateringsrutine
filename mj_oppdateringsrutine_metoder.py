@@ -18,31 +18,44 @@ def finnTreAntall(tiltaket):
         return False
 
     print tekst
+
+    pattern = r'\b\d{3}\b'
+    matches = re.findall(pattern, tekst)
+
+    lastInt = int(matches[-1])
+
+    if lastInt >= 70 and lastInt <= 300:
+        return lastInt
+
+    return False
+
+
+    ### Gammel måte under, sjekker mot spesifikk benevning i tillegg til siffer..
     #tekst = unicode(tekst, "utf-8")
-    tekst = tekst.replace(" ", "")
-    tekst = tekst.lower()
+    #tekst = tekst.replace(" ", "")
+    #tekst = tekst.lower()
     # tekst = tekst.replace("æ", "ae")
 
-    regex = re.compile(
-        ur'(\d{2,4})(trærpr.dekar|trær/daa|trær/da|/daa|ant/daa|three/daa|trees/da|trees/daa|/dekar|traer/da|/da|ant/da|three/da|prda|prdaa|trærpr/daa|trærpr/da|stk/dekar|stk/daa|stk/da|pr.da|cutto)',
-        re.I)
-    regex2 = re.compile(ur'(tetthet|tethet|tettet|after|aftercutting|aftercut|e.reg|etterreg)(\d{2,4})', re.I)
-    mo1 = regex.findall(tekst)
-    mo2 = regex2.findall(tekst)
+    #regex = re.compile(
+    #    ur'(\d{2,4})(trærpr.dekar|trær/daa|trær/da|/daa|ant/daa|three/daa|trees/da|trees/daa|/dekar|traer/da|/da|ant/da|three/da|prda|prdaa|trærpr/daa|trærpr/da|stk/dekar|stk/daa|stk/da|pr.da|cutto)',
+    #    re.I)
+    #regex2 = re.compile(ur'(tetthet|tethet|tettet|after|aftercutting|aftercut|e.reg|etterreg)(\d{2,4})', re.I)
+    #mo1 = regex.findall(tekst)
+    #mo2 = regex2.findall(tekst)
 
-    treAntall = []
+    #treAntall = []
 
-    if len(mo1) == 1:
-        treAntall.append(mo1[0][0])
-    if len(mo2) == 1:
-        treAntall.append(mo2[0][1])
-
-    if len(treAntall) == 1:
-        treAntall=int(treAntall[0])
-        if treAntall >= 70 and treAntall <= 300:
-            return treAntall
-    else:
-        return False
+    #if len(mo1) == 1:
+    #    treAntall.append(mo1[0][0])
+    #if len(mo2) == 1:
+    #    treAntall.append(mo2[0][1])
+    #
+    #if len(treAntall) == 1:
+    #    treAntall=int(treAntall[0])
+    #    if treAntall >= 70 and treAntall <= 300:
+    #        return treAntall
+    #else:
+    #    return False
 
 
 def tiltakFinnes(kategori, gjennomforteTiltak ):
