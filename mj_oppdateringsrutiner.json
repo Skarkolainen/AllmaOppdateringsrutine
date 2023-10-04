@@ -931,7 +931,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Planting', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1289,7 +1289,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Planting', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1616,7 +1616,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Planting', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -1943,7 +1943,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Planting', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 150,
@@ -2091,7 +2091,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Suppleringsplanting', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 200,
@@ -3478,7 +3478,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Tynning', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 410,
@@ -3771,7 +3771,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Forhandsrydding', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 402,
@@ -4029,7 +4029,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Forhandsrydding', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 400,
@@ -4483,7 +4483,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Ungskogpleie', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 260,
@@ -4614,7 +4614,7 @@
           },
           "betingede_tiltak": [
             {
-              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, '$RutiNavn$', gj_tiltak)",
+              "betingelser": "metoder.settGjTiltak_2($SettGjTiltak$, 'Gjodsling', gj_tiltak)",
               "tiltaksliste": [
                 {
                   "type": 610,

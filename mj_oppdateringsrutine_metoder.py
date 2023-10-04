@@ -148,26 +148,6 @@ def metode(metodeNavn,dict_internal,dict_external_write, gjennomforteTiltak, tab
 
 def settGjTiltak_2(settGjTiltak, rutinenavn, gjennomforteTiltak):
     if settGjTiltak:
-        tiltaketFinnes = False
-        if rutinenavn == 'Flatehogst':
-            tiltaketFinnes = tiltakFinnes('Flatehogst', gjennomforteTiltak)[0]
-        elif rutinenavn[:20] == u'EDEL_utført_planting':
-            tiltaketFinnes = tiltakFinnes('Planting', gjennomforteTiltak)[0]
-        elif rutinenavn == 'Frotrestilling':
-            tiltaketFinnes = tiltakFinnes('Frotrestilling', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_tynning':
-            tiltaketFinnes = tiltakFinnes('Tynning', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_ungskogpleie':
-            tiltaketFinnes = tiltakFinnes('Ungskogpleie', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_gjødsling':
-            tiltaketFinnes = tiltakFinnes('Gjodsling', gjennomforteTiltak)[0]
-        elif rutinenavn[:27] == 'EDEL_utført_forhåndsrydding':
-            tiltaketFinnes = tiltakFinnes('Forhandsrydding', gjennomforteTiltak)[0]
-        elif rutinenavn == 'EDEL_utført_suppleringsplanting':
-            tiltaketFinnes = tiltakFinnes('Suppleringsplanting', gjennomforteTiltak)[0]
-        elif rutinenavn == 'Markberedning':
-            tiltaketFinnes = tiltakFinnes('Markberedning', gjennomforteTiltak)[0]
-
-        return not tiltaketFinnes
+        return not tiltakFinnes(rutinenavn, gjennomforteTiltak)[0]
 
     return False  # Tiltak skal ikke lages
