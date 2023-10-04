@@ -22,7 +22,7 @@ def finnTreAntall(tiltaket):
     pattern = r'\b\d{3}\b'
     matches = re.findall(pattern, tekst)
 
-    lastInt = int(matches[-1])
+    lastInt = int(matches[-1])if matches else False
 
     if lastInt >= 70 and lastInt <= 300:
         return lastInt
