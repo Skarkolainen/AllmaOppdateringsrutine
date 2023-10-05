@@ -2468,7 +2468,7 @@
                   "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+15:$NOW_YEAR$+16",
                   "status": 1,
                   "arealandel": 100,
-                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                  "kommentar": "Ettersyn, evt. ungskogpleie"
                 }
               ]
             },
@@ -2513,7 +2513,7 @@
                   "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+11:$NOW_YEAR$+12",
                   "status": 1,
                   "arealandel": 100,
-                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                  "kommentar": "Ettersyn, evt. ungskogpleie"
                 }
               ]
             },
@@ -2899,7 +2899,7 @@
                   "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+15:$NOW_YEAR$+16",
                   "status": 1,
                   "arealandel": 100,
-                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                  "kommentar": "Ettersyn, evt. ungskogpleie"
                 }
               ]
             },
@@ -2936,7 +2936,7 @@
                   "aarstall": "$NOW_MONTH$<7?$NOW_YEAR$+11:$NOW_YEAR$+12",
                   "status": 1,
                   "arealandel": 100,
-                  "kommentar": "Ettersyn - evt. ungskogpleie"
+                  "kommentar": "Ettersyn, evt. ungskogpleie"
                 }
               ]
             },
@@ -4554,7 +4554,7 @@
               {
                 "felt": "!MERK!",
                 "endring": "Funksjon",
-                "verdi": "!MERK! cc {_Gjødslet_$NOW_YEAR$}",
+                "verdi": "u'!MERK! ' + u'Gjødslet $NOW_YEAR$'",
                 "log_beskrivelse": "!MERK! satt til %%"
               }
             ]
