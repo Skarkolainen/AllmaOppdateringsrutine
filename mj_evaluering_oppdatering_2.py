@@ -87,6 +87,7 @@ def replace_variables_in_string(input_string, variable_dict, enclosingChar):
 
     #pattern = r'!(\w+)!'
     #pattern = re.compile(r'{0}(.*?){0}'.format(re.escape(enclosingChar)), re.UNICODE)
+
     pattern = r'{0}([^={0}\s]*){0}'.format(re.escape(enclosingChar))
 
     def replace_variable(match):
@@ -131,6 +132,7 @@ def toInt(value):
 
 def Uttrykk(setning, dict_internal, dict_external, gj_tiltak, tabeller ):
     #print "uttrykk: {}".format(setning)
+    #setning = unicode(setning, 'utf-8')
 
     # Contains external variable
     if setning.count("!") > 1:

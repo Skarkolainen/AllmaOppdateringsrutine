@@ -8,6 +8,9 @@ import os
 import mj_evaluering_oppdatering_2 as evaluering_oppdatering
 import mj_oppdateringsrutine_metoder as metoder
 import copy
+#import sys
+#sys.path.append(u'G:\\AllmaToolbox\\Scripts\\mj_tiltaksrydd')
+#import behandle_tiltak
 
 runAsTool = len(arcpy.GetParameterAsText(0))>0
 arcpy.SetLogHistory(False)
@@ -23,6 +26,8 @@ if runAsTool:
     flyttTiltakAar = 10
     settGjTiltak = arcpy.GetParameter(6)
     hensyn_eksisterende_tiltak = False
+    #ryddTiltak = arcpy.GetParameter(7)
+    ryddTiltak = arcpy.GetParameter(7)
     #hensyn_eksisterende_tiltak = arcpy.GetParameter(7)
     #korriger_tiltak_geometri = arcpy.GetParameter(8)
 
@@ -30,14 +35,15 @@ else:
     filnavn_konfig = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\scripts\\mj_oppdateringsrutiner.json'
     #navn_rutine = u'EDEL_utfÃ¸rt_planting/_flatehogst_og_planting_med_markberedning'
     navn_rutine = u'EDEL_utført_flatehogst'
-    hogstaar = 2023
+    hogstaar = 2024
     hogstmaaned = 3
     settGjTiltak = True
     slettTiltak = False
     flyttFremTiltak = False
     hensyn_eksisterende_tiltak = False
+    ryddTiltak = False
 
-    gdb = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\NO2_2023_1_2.gdb'
+    gdb = u'G:\\MJOSEN\\Arbeidsmappe\\Simen\\ajourforing\\2023\\AjourfTest2.gdb'
     #gdb = u'C:\\allma_effekt\\a.gdb'
     arcpy.env.workspace = gdb
 
@@ -59,12 +65,12 @@ def hentVerdierBestand(fcBestand,objectid):
             for field in fields:
                 retur_dictionary["!" + field +"!"] = r[cur_best1.fields.index(field)]
 
-    if rec_teller==1:
-        return retur_dictionary
-    else:
-        error = "Count of cur_best1 != 1 ( {} )".format(oid_query)
-        pr(error, "error")
-        raise ValueError(error)
+            if rec_teller==1:
+                return retur_dictionary
+            else:
+                error = "Count of cur_best1 != 1 ( {} )".format(oid_query)
+                pr(error, "error")
+                raise ValueError(error)
 
 def finnRutinenummer(filnavn,rutinenavn):
     rutineteller=None
@@ -156,13 +162,13 @@ if runAsTool==False:
     arcpy.MakeFeatureLayer_management(tiltak_fc,tiltakLYR)
 
 if runAsTool==False:
-    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (2485061 )")
+    arcpy.SelectLayerByAttribute_management(bestandLYR,"NEW_SELECTION","BESTAND_ID IN (542334 )")
 
 ant_seleksjon = GetSelectionCount(bestandLYR)
 if ant_seleksjon != None:
     aa = 1
     innfriddeIkkeGrunnl = []
-
+    innfriddeGrunnl = []
     #cur_bestand = arcpy.da.SearchCursor(bestand_fc,('BESTAND_ID','MARKSLAG','BONTRESLAG','OID@','SHAPE@'),where_clause="BESTAND_ID IN "+str(tuple(BESTAND_IDer)))
 
     valg_rutinenummer = finnRutinenummer(filnavn_konfig,navn_rutine)
@@ -199,6 +205,7 @@ if ant_seleksjon != None:
                             if uttrykk_forutsetninger_eval[1]:
                                 init_forutsetninger_sjekk = True
                                 pr("Bestandet innfrir folgende grunnleggende betingelser: " + uttrykk_forutsetninger_eval[2])
+                                innfriddeGrunnl.append(dict_external['!BESTAND_ID!'])
                             else:
                                 init_forutsetninger_sjekk = False
                                 pr("Bestandet innfrir IKKE folgende grunnleggende betingelser: " + uttrykk_forutsetninger_eval[2])
@@ -428,6 +435,34 @@ if ant_seleksjon != None:
             #EKS: " 'HOVEDNR' : Bestandnr x er ajourført med utført 'Tiltak' i teig x.
 
             del cur_bestand
+
+
+            # Kjør ryddescript på tiltak- kun bestand som er ajourført..
+            if len(innfriddeGrunnl) > 0 and ryddTiltak:
+                sql = "BESTAND_ID IN ({})".format(", ".join(map(str, innfriddeGrunnl)))
+                # bygg sql og kall ryddescript, sett deleted på tiltakene man får i retur...
+                duplikater = behandle_tiltak.behandle_tiltakslag(tiltakLYR, sql)
+
+                if duplikater and len(duplikater) > 0:
+                    arcpy.SelectLayerByAttribute_management(tiltakLYR,"NEW_SELECTION","OBJECTID IN ({})".format(", ".join(map(str, duplikater))))
+
+                    behandlet = []
+                    with arcpy.da.UpdateCursor(tiltakLYR, ["OBJECTID", "BESTAND_ID", "STATUS", "TYPE", "AARSTALL", "ORDER_ID", "STATE"]) as cursor:
+                        for row in cursor:
+                            row[6] = 0
+                            cursor.updateRow(row)
+                            behandlet.append([row[1],row[2],row[3], row[4]])
+
+                    arcpy.SelectLayerByAttribute_management(tiltakLYR, "CLEAR_SELECTION")
+
+                    pr(u"Det er fjernet duplikater/ ulogiske tiltak i folgende bestand:")
+                    for i in behandlet:
+                        pr(u"BESTANDID: {0} - Tiltak fjernet: {1} {2} {3}".format(i[0], i[2], i[1], i[3]))
+
+                    pr(u"( BestandIder: " + u', '.join([str(sub_array[0]) for sub_array in behandlet]) + u" )")
+                else:
+                    pr(u"Ingen duplikater eller ulogiske tiltak funnet.")
+
             edit.stopOperation()
             edit.stopEditing(True)
 
@@ -438,6 +473,12 @@ if ant_seleksjon != None:
             oider+="{}, ".format(i)
         pr(oider, "error")
         pr("\n")
+
+
+
+
+
+    #
 
 ##    for r in rutiner:
 ##        print r[u'rutinenavn']
